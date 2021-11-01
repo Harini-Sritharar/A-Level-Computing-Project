@@ -1,5 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/screens/profile_screen.dart';
+// import "package:nea_prototype_1\lib\screens\profile_screen.dart";
 
 class LoginScreen extends StatefulWidget {
   // LoginScreen({Key? key, required this.title}) : super(key: key);
@@ -10,11 +12,12 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-
-  get title => null;
+  final myController = TextEditingController();
+  //get title => null;
   @override
   Widget build(BuildContext context) {
     final nameField = TextField(
+      controller: myController,
       obscureText: false,
       style: style,
       decoration: InputDecoration(
@@ -39,14 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final loginButton = (String msg) => Material(
+    final loginButton = (String msg, void Function() linkScreen) => Material(
         elevation: 5.0,
         borderRadius: BorderRadius.circular(30.0),
         color: Colors.deepPurple[600], // color of login button
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-            onPressed: () {},
+            onPressed: linkScreen,
             child: Text(msg,
                 textAlign: TextAlign.center,
                 style: style.copyWith(
@@ -55,7 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: Colors.deepPurple[400],
         appBar: AppBar(
             backgroundColor: Colors.deepPurple[300],
-            automaticallyImplyLeading: false),
+            //automaticallyImplyLeading: false
+            ),
         body: Center(
             child: Container(
           child: Padding(
@@ -64,12 +68,14 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                //SizedBox(height:45.0),
                 nameField,
                 SizedBox(height: 45.0),
                 passwordField,
                 SizedBox(height: 45.0),
-                loginButton("Login")
+                loginButton("Login",() {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen(name: myController.text)));
+              })
               ],
             ),
           ),
