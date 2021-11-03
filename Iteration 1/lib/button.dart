@@ -12,7 +12,7 @@ class GenericButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(30.0),
         color: Color(0xFF26A69A), // color of login button
         child: MaterialButton(
-          //minWidth: MediaQuery.of(context).size.width,
+          minWidth: MediaQuery.of(context).size.width,
           padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           onPressed: linkScreen,
           child: Text(

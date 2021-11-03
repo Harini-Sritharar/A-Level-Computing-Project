@@ -15,7 +15,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
      backgroundColor: Colors.white,
      appBar: AppBar(
        //title: Text("Hi " + widget.name + " !"),
-       title: Text("Hi Harini!"),
+       title: Text(widget.name + "'s Profile"),
+       //title: Text("Hi Harini!"),
        centerTitle: true,
        automaticallyImplyLeading: false,
      ),

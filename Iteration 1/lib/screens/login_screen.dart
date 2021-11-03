@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final myController = TextEditingController();
   //get title => null;
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     final passwordField = TextField(
-      obscureText: true,
+      obscureText: isObscure,
       style: style,
       decoration: InputDecoration(
           fillColor: Colors.deepPurple[100],
@@ -39,7 +40,17 @@ class _LoginScreenState extends State<LoginScreen> {
           labelText: "Password",
           hintText: "Enter your password here",
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          suffixIcon:IconButton(
+            icon: Icon(
+              isObscure ? Icons.visibility:
+              Icons.visibility_off),
+              onPressed: (){
+                setState(() {
+                  isObscure = !isObscure;
+              });
+            },
+            ))  ,  
     );
     return Scaffold(
         backgroundColor: Colors.deepPurple[400],
