@@ -10,6 +10,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final myController = TextEditingController();
   @override
@@ -32,17 +33,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
           border:
               OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
     );
-    final passwordField = TextField(
-      obscureText: true,
+   final passwordField = TextField(
+      obscureText: isObscure,
       style: style,
       decoration: InputDecoration(
           fillColor: Colors.deepOrange[100],
           filled: true,
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          labelText: "Create a Password",
+          labelText: "Password",
           hintText: "Enter your password here",
           border:
-              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+              OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          suffixIcon:IconButton(
+            icon: Icon(
+              isObscure ? Icons.visibility:
+              Icons.visibility_off),
+              onPressed: (){
+                setState(() {
+                  isObscure = !isObscure;
+              });
+            },
+            ))  ,  
     );
     return Scaffold(
         backgroundColor: Colors.deepOrange[400],
