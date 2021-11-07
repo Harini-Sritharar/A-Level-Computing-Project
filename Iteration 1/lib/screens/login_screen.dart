@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
           //automaticallyImplyLeading: false
         ),
         body: Center(
-            child: Container(
+          child: Container(
           child: Padding(
             padding: const EdgeInsets.all(36.0),
             child: Column(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/button.dart';
+import 'package:nea_prototype_1/screens/profile_screen.dart';
 //import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.name}) : super(key: key);
@@ -18,5 +20,31 @@ class _HomeScreenState extends State<HomeScreen> {
        //title: Text("Hi Harini!"),
        centerTitle: true,
        automaticallyImplyLeading: true,
-   ));
+   ),
+   body: Center(
+     child: Container(
+       child: Column(
+        children: <Widget>[
+          GenericButton("Profile", () {
+            Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (context) => ProfileScreen(name: widget.name,))); 
+          }
+      ),
+      //     GenericButton("Leaderboard", () {
+      //       Navigator.push(context,
+      //                 MaterialPageRoute(
+      //                     builder: (context) => Leaderboard())); 
+      //     }
+      // )
+         ],
+       )
+       )
+ 
+   ) ,
+   );
+   
   }}
+
+class Leaderboard {
+}
