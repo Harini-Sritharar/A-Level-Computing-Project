@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/profile_screen.dart';
+import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/button.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 45.0),
                 GenericButton("Sign Up",() {
                   Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen(name: myController.text)));
+                  MaterialPageRoute(builder: (context) => HomeScreen(name: myController.text)));
                 })
               ],
             ),

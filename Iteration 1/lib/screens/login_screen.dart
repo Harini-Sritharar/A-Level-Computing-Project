@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/profile_screen.dart';
-//import 'package:nea_prototype_1/username.dart';
+import 'package:nea_prototype_1/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   // LoginScreen({Key? key, required this.title}) : super(key: key);
@@ -76,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              ProfileScreen(name: myController.text)));
+                              HomeScreen(name: myController.text)));
                 })
               ],
             ),

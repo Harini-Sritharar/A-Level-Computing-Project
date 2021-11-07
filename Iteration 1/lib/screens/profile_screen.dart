@@ -18,7 +18,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
        title: Text(widget.name + "'s Profile"),
        //title: Text("Hi Harini!"),
        centerTitle: true,
-       automaticallyImplyLeading: false,
+       automaticallyImplyLeading: true,
      ),
      body: Center(
        child: Column(
