@@ -31,12 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (context) => ProfileScreen(name: widget.name,))); 
           }
       ),
-      //     GenericButton("Leaderboard", () {
-      //       Navigator.push(context,
-      //                 MaterialPageRoute(
-      //                     builder: (context) => Leaderboard())); 
-      //     }
-      // )
+          GenericButton("Leaderboard", (){}),
+          GenericButton("Pre Set", (){}),
+          GenericButton("For You", (){})
+          // () {
+          //   Navigator.push(context,
+          //             MaterialPageRoute(
+          //                 builder: (context) => Leaderboard())); 
+          
          ],
        )
        )

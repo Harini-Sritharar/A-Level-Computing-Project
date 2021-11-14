@@ -21,8 +21,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
        automaticallyImplyLeading: true,
      ),
      body: Center(
-       child: Column(
-        children: <Widget>[
+        child: Column(
+          children: <Widget>[
           CircleAvatar(
             backgroundColor: Colors.transparent,
             minRadius: 50.0,

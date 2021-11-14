@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/button.dart';
+//import 'package:nea_prototype_1/screens/profile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   // LoginScreen({Key? key, required this.title}) : super(key: key);
@@ -72,7 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //SizedBox(height:45.0),
                 nameField,
                 SizedBox(height: 45.0),
-                passwordField,
+                passwordField, 
                 SizedBox(height: 45.0),
                 GenericButton("Sign Up",() {
                   Navigator.push(context,
