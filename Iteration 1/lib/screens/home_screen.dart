@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
+import 'package:nea_prototype_1/screens/quiz_questions_screen.dart';
 //import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.name}) : super(key: key);
@@ -24,15 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
    body: Center(
      child: Container(
        child: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          //SizedBox(height: 50.0),
           GenericButton("Profile", () {
             Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (context) => ProfileScreen(name: widget.name,))); 
-          }
-      ),
+                          builder: (context) => ProfileScreen(name: widget.name,))); }),
+          SizedBox(height: 35.0),
           GenericButton("Leaderboard", (){}),
-          GenericButton("Pre Set", (){}),
+          SizedBox(height: 35.0),
+          GenericButton("Pre Set", (){
+            Navigator.push(context,
+                      MaterialPageRoute(
+                          builder: (context) => QuizScreen())); }),
+          SizedBox(height: 35.0),
           GenericButton("For You", (){})
           // () {
           //   Navigator.push(context,

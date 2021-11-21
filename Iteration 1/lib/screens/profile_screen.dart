@@ -31,6 +31,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //backgroundImage: NetworkImage(),
                 //NetworkImage('https://avatars0.githubusercontent.com/u/28812093?s=460&u=06471c90e03cfd8ce2855d217d157c93060da490&v=4')
             ),
+            Text("Name: " + widget.name, textScaleFactor: 1.5,),
+
             ],
        ),),
    );

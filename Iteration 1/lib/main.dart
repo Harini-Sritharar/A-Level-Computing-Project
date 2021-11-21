@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:nea_prototype_1/screens/quiz_questions_screen.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 
 void main() {
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(title: 'Revision Quiz App'),
+      //home: WelcomeScreen(title: 'Revision Quiz App'),
+      home: WelcomeScreen(title: "Flutter Quiz App"),
     );
   }
 }
