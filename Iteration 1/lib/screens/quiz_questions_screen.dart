@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-//import '../button.dart';
-
+import '../button.dart';
 
 class QuizScreen extends StatefulWidget {
   @override
@@ -51,19 +50,8 @@ _backq() {
         child: Text(_questions[_indexQuestion])),
         for (var answer in _answers[_indexQuestion]) Text(answer),
         //function next
-          TextButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white10)),
-            child:Text("Next"),
-            onPressed: _nextq,
-            ),
-          TextButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white10)),
-            child:Text("Back"),
-            onPressed: _backq,
-            )
-          // ignore: unnecessary_statements
-          //GenericButton("Back",(){_backq;})
-
+          QuizButton("Back", _backq),
+          QuizButton("Next", _nextq)
       ],
     );
   }
