@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../button.dart';
+//import '../button.dart';
 
 
 class QuizScreen extends StatefulWidget {
@@ -27,32 +27,40 @@ class _QuizScreenState extends State<QuizScreen> {
         // Is the last question
       }
     });
-  // }
-  //   _backq() {
-  //   setState(() {
-  //     var lastIndex = _questions.length - 1;
-  //     if (_indexQuestion < lastIndex) {
-  //       _indexQuestion--;
-  //     } else {
-  //       // Is the last question
-  //     }
-  //   });
    }
 
+_backq() {
+    setState(() {
+      //var lastIndex = _questions.length - 1;
+      if (_indexQuestion >= 1) {
+        _indexQuestion--;
+      } else {
+        // Is the last question
+      }
+    });
+   }
   @override
   Widget build(BuildContext context) {
      AppBar(
       automaticallyImplyLeading: true,
     );
     return Column(
-
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(        
         child: Text(_questions[_indexQuestion])),
         for (var answer in _answers[_indexQuestion]) Text(answer),
-          // ignore: unnecessary_statements
-          GenericButton("Next",(){_nextq;}),
+        //function next
+          TextButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white10)),
+            child:Text("Next"),
+            onPressed: _nextq,
+            ),
+          TextButton(
+            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white10)),
+            child:Text("Back"),
+            onPressed: _backq,
+            )
           // ignore: unnecessary_statements
           //GenericButton("Back",(){_backq;})
 
