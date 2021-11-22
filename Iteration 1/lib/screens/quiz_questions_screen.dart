@@ -7,25 +7,42 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  bool checkboxListTile = false;
+  bool _checkboxListTile = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text( "What is dy/dx of cos x?"),
+        centerTitle: true,
       ),
       body:(
-      CheckboxListTile(
+        Column(
+          children: [
+        CheckboxListTile(
+          controlAffinity: ListTileControlAffinity.leading,
+          title: Text("sin x"),
+          value: _checkboxListTile,
+          onChanged: (value){
+            setState(() {
+            _checkboxListTile =! _checkboxListTile;
+            });
+          }
+       ),
+        CheckboxListTile(
         controlAffinity: ListTileControlAffinity.leading,
-        title: Text("sin x"),
-        value: checkboxListTile,
+        title: Text("cos x"),
+        value: _checkboxListTile,
         onChanged: (value){
           setState(() {
-            checkboxListTile = !checkboxListTile;
+            _checkboxListTile =! _checkboxListTile;
           });
         },
       )
+          ]
+
+
        )
+      )
     );
   }
 }
