@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:nea_prototype_1/screens/quiz_questions_screen.dart';
+//import 'package:nea_prototype_1/screens/quiz_questions_screen.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 
 void main() {
@@ -17,6 +18,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: WelcomeScreen(title: 'Revision Quiz App'),
       home: WelcomeScreen(title: "Flutter Quiz App"),
+      //home: QuizScreen( ["cos x","sin x", "-sin x","sec x"], "What is dy/dx of cos x?"),
+
     );
   }
 }

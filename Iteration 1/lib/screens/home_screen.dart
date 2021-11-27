@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
-import 'package:nea_prototype_1/screens/quiz_questions_screen.dart';
+import 'package:nea_prototype_1/screens/quiz_screen_function.dart';
 //import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.name}) : super(key: key);
@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
           GenericButton("Pre Set", (){
             Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (context) => QuizScreen())); }),
+                          builder: (context) => QuizScreen( ["cos x","sin x", "-sin x","sec x"], "What is dy/dx of cos x?"))); }),
           SizedBox(height: 35.0),
           GenericButton("For You", (){})
           // () {
