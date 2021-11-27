@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
+import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
-import 'package:nea_prototype_1/screens/quiz_screen_function.dart';
-//import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.name}) : super(key: key);
-  //final String greeting;
   final String name;
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -16,9 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
    return Scaffold(
      backgroundColor: Colors.white,
      appBar: AppBar(
-       //title: Text("Hi " + widget.name + " !"),
        title: Text(widget.name + "'s Home Page"),
-       //title: Text("Hi Harini!"),
        centerTitle: true,
        automaticallyImplyLeading: true,
    ),
@@ -38,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           GenericButton("Pre Set", (){
             Navigator.push(context,
                       MaterialPageRoute(
-                          builder: (context) => QuizScreen( ["cos x","sin x", "-sin x","sec x"], "What is dy/dx of cos x?"))); }),
+                          builder: (context) => PresetMenu()));}),
           SizedBox(height: 35.0),
           GenericButton("For You", (){})
           // () {
