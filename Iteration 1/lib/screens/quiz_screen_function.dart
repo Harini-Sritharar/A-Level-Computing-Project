@@ -6,8 +6,9 @@ class QuizScreen extends StatefulWidget {
   final numOfOptions = 4;
   late final List<bool> _checkBoxSelected;
   final void Function() setNextQuestion;
+  final void Function() returnPreviousQuestion;
   final QuestionInfo questionInfo;
-  QuizScreen(this.questionInfo, this.setNextQuestion) {
+  QuizScreen(this.questionInfo, this.setNextQuestion,this.returnPreviousQuestion) {
      _checkBoxSelected = List.filled(numOfOptions, false);
    }
   @override
@@ -19,8 +20,9 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
   return Scaffold(
       appBar: AppBar(
-        title: Text(widget.questionInfo.question),
-        centerTitle: true),
+        title: Text(widget.questionInfo.question)
+        //, style: TextStyle(fontSize: 13.5)
+        ),
       body: (Column(
         children: [
         for (var i = 0; i < widget.numOfOptions; i++)
@@ -33,23 +35,9 @@ class _QuizScreenState extends State<QuizScreen> {
                   widget._checkBoxSelected[i] =! widget._checkBoxSelected[i];
                 });
               }),
-               QuizButton("Next", (){widget.setNextQuestion();})
+               QuizButton("Next", (){widget.setNextQuestion();}),
+               QuizButton("Back", (){widget.returnPreviousQuestion();})
       ])),
-          // Navigator.push(
-          //           context,
-          //           MaterialPageRoute(
-          //               builder: (context) =>
-          //                   HomeScreen(name: "Harini")));})
-        // CheckboxListTile(
-        // controlAffinity: ListTileControlAffinity.leading,
-        // title: Text("cos x"),
-        // value: _checkboxListTile,
-        // onChanged: (value){
-        //   setState(() {
-        //     _checkboxListTile =! _checkboxListTile;
-        //   });
-        // },
-        // )
   );
 }
 }

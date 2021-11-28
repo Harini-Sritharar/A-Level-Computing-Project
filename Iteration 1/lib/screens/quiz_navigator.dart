@@ -19,7 +19,7 @@ class _QuizNavigatorState extends State<QuizNavigator> {
   void initState() {
     super.initState();
     for (int i = 0; i < widget.questionsAndOptions.length; i++) {
-      questions.add(QuizScreen(widget.questionsAndOptions[i], setNextQuestion));
+      questions.add(QuizScreen(widget.questionsAndOptions[i],setNextQuestion,returnPreviousQuestion));
     }
   }
 
@@ -27,6 +27,14 @@ class _QuizNavigatorState extends State<QuizNavigator> {
     setState(() {
       if (currentQ < questions.length - 1) {
         currentQ++;
+      }
+    });
+  }
+
+    void returnPreviousQuestion() {
+    setState(() {
+      if (currentQ != 0) {
+        currentQ--;
       }
     });
   }

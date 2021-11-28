@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/quiz_navigator.dart';
-import 'package:nea_prototype_1/screens/quiz_screen_function.dart';
-
 import '../questionInfo.dart';
 
 class PresetMenu extends StatelessWidget {
@@ -23,7 +21,7 @@ class PresetMenu extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               GenericButton(
-                "Differentiation",
+                "Trigonometry Differentiation",
                 () {
                   Navigator.push(
                     context,
@@ -35,16 +33,46 @@ class PresetMenu extends StatelessWidget {
                             ["cos x", "sin x", "-sin x", "sec x"],
                           ),
                           QuestionInfo(
-                            "Differentiate 5 cosx - 1",
-                            ["r x", "sin x", "-sin x", "1 x"],
+                            "What is dy/dx of sin x?",
+                            ["cosec x", "tan x", "-cos x", "cos x"],
                           ),
                           QuestionInfo(
-                            "bob",
-                            ["r x", "2 x", "-sin x", "4 x"],
+                            "What is dy/dx of tan x?",
+                            ["sec^2 x", "cosec^2 x", "cot x", "-sec x"],
                           ),
                           QuestionInfo(
-                            "stebe",
-                            ["cos x", "6 x", "7 x", "sec x"],
+                            "What is dy/dx of sec x?",
+                            ["tan x", "cos x sin x", "sec x tan x", "cos x"],
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+              GenericButton(
+                "Probability A2",
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuizNavigator(
+                        [
+                          QuestionInfo(
+                            "If events A and B are independent: P(A and B)= ?",
+                            ["P(A)", "P(B)", "P(A) * P(B)", "P(A) + P(B)"],
+                          ),
+                          QuestionInfo(
+                            "If events A and B are independent: P(A|B) = ?",
+                            ["P(A) / P(B)", "P(B)", "P(A)", "P(A) * P(B)"],
+                          ),
+                          QuestionInfo(
+                            "If events A and B are mutually exclusive: P(A and B)= ?",
+                            ["P(A) * P(B)", "0", "P(A) + P(B)", "1"],
+                          ),
+                          QuestionInfo(
+                            "If events A and B are mutually exclusive: P(A or B)= ?",
+                            ["P(A) + P(B)", "P(A)", "P(B)", "P(A) - P(B)"],
                           ),
                         ],
                       ),
