@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(
                           builder: (context) => PresetMenu()));}),
           SizedBox(height: 35.0),
-          GenericButton("For You", (){})
+          GenericButton("By You", (){})
           // () {
           //   Navigator.push(context,
           //             MaterialPageRoute(

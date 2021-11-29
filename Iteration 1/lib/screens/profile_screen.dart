@@ -10,6 +10,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    final String initial = widget.name[0];
    //name = myController.text;
    return Scaffold(
      backgroundColor: Colors.white,
@@ -23,15 +24,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
      body: Center(
         child: Column(
           children: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.transparent,
-            minRadius: 50.0,
-            child: CircleAvatar()
-              //Text("H") ,
-              //backgroundImage: NetworkImage(),
-                //NetworkImage('https://avatars0.githubusercontent.com/u/28812093?s=460&u=06471c90e03cfd8ce2855d217d157c93060da490&v=4')
-            ),
-            Text("Name: " + widget.name, textScaleFactor: 1.5,),
+            SizedBox(height:45.0),
+            CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.purple[100],
+              child: Text(initial,textScaleFactor: 2,) ,
+              ),
+              SizedBox(height:45.0),
+              Text("Name: " + widget.name, textScaleFactor: 1.5,),
 
             ],
        ),),
