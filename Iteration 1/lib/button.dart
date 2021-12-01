@@ -15,12 +15,11 @@ class GenericButton extends StatelessWidget {
             style: style.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          autofocus: true,
+          autofocus: true, 
       style: ButtonStyle(
         minimumSize: MaterialStateProperty.all(const Size(200,40)),
       ),
       );
-
   }
 }
 class QuizButton extends StatelessWidget{

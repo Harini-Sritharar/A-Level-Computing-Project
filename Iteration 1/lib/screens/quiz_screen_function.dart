@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/questionInfo.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:auto_size_text/auto_size_text.dart';
 
 class QuizScreen extends StatefulWidget {
   final numOfOptions = 4;
@@ -20,8 +22,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
   return Scaffold(
       appBar: AppBar(
-        title: Text(widget.questionInfo.question)
-        //, style: TextStyle(fontSize: 13.5)
+        title: AutoSizeText(widget.questionInfo.question, maxLines: 1,)
         ),
       body: (Column(
         children: [
