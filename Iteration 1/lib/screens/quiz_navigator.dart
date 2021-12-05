@@ -13,6 +13,8 @@ class QuizNavigator extends StatefulWidget {
 
 class _QuizNavigatorState extends State<QuizNavigator> {
   int currentQ = 0;
+  bool endOfQuiz = false;
+  bool answerSelected = false;
   List<QuizScreen> questions = [];
 
   @override
@@ -31,7 +33,7 @@ class _QuizNavigatorState extends State<QuizNavigator> {
     });
   }
 
-    void returnPreviousQuestion() {
+  void returnPreviousQuestion() {
     setState(() {
       if (currentQ != 0) {
         currentQ--;
@@ -39,6 +41,20 @@ class _QuizNavigatorState extends State<QuizNavigator> {
     });
   }
 
+  void checkQuizEnd() {
+     if (currentQ + 1  == questions.length){
+        endOfQuiz = true;
+    }
+  }
+  // }
+  // void questionAnswered() {
+  //     setState(() {
+  //       answerSelected = true;
+  //       if (widget.questionsAndOptions = true){
+
+  //       }
+  //     });
+  // }
   Widget build(BuildContext context) {
     return questions[currentQ];
   }
