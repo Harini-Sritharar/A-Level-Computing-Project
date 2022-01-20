@@ -8,7 +8,6 @@ class QuizNavigator extends StatefulWidget {
   QuizNavigator(this.questionsAndOptions);
   @override
   _QuizNavigatorState createState() => _QuizNavigatorState();
-
 }
 
 class _QuizNavigatorState extends State<QuizNavigator> {
@@ -40,21 +39,14 @@ class _QuizNavigatorState extends State<QuizNavigator> {
       }
     });
   }
-
+  
   void checkQuizEnd() {
      if (currentQ + 1  == questions.length){
         endOfQuiz = true;
+        
     }
   }
-  // }
-  // void questionAnswered() {
-  //     setState(() {
-  //       answerSelected = true;
-  //       if (widget.questionsAndOptions = true){
 
-  //       }
-  //     });
-  // }
   Widget build(BuildContext context) {
     return questions[currentQ];
   }

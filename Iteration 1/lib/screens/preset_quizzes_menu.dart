@@ -30,19 +30,19 @@ class PresetMenu extends StatelessWidget {
                         [
                           QuestionInfo(
                             "What is dy/dx of cos x?",
-                            [("cos x"), "sin x", "-sin x", "sec x"], [false,false,true,false],
+                            ["cos x", "sin x", "-sin x", "sec x"], 2 
                           ),
                           QuestionInfo(
                             "What is dy/dx of sin x?",
-                            ["cosec x", "tan x", "-cos x", "cos x"],[false,false,true,false],
+                            ["cosec x", "tan x", "-cos x", "cos x"], 3
                           ),
                           QuestionInfo(
                             "What is dy/dx of tan x?",
-                            ["sec^2 x", "cosec^2 x", "cot x", "-sec x"],[false,false,true,false],
+                            ["sec^2 x", "cosec^2 x", "cot x", "-sec x"], 0
                           ),
                           QuestionInfo(
                             "What is dy/dx of sec x?",
-                            ["tan x", "cos x sin x", "sec x tan x", "cos x"],[false,false,true,false],
+                            ["tan x", "cos x sin x", "sec x tan x", "cos x"], 2
                           ),
                         ],
                       ),
