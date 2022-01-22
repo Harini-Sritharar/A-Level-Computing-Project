@@ -24,6 +24,9 @@ dependencies:
   flutter:
     sdk: flutter
   auto_size_text: ^3.0.0
+  # this allows handling of SvGs for Android,iOS and Web
+  websafe_svg: ^1.1.4
+  get: ^3.24.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -46,7 +49,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  #assets:
+  # assets:
+  # - lib/assets
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

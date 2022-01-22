@@ -50,36 +50,36 @@ class PresetMenu extends StatelessWidget {
                   );
                 },
               ),
-              // GenericButton(
-              //   "Probability A2",
-              //   () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => QuizNavigator(
-              //           [
-              //             QuestionInfo(
-              //               "If events A and B are independent: P(A and B)= ?",
-              //               ["P(A)", "P(B)", "P(A) * P(B)", "P(A) + P(B)"],
-              //             ),
-              //             QuestionInfo(
-              //               "If events A and B are independent: P(A|B) = ?",
-              //               ["P(A) / P(B)", "P(B)", "P(A)", "P(A) * P(B)"],
-              //             ),
-              //             QuestionInfo(
-              //               "If events A and B are mutually exclusive: P(A and B)= ?",
-              //               ["P(A) * P(B)", "0", "P(A) + P(B)", "1"],
-              //             ),
-              //             QuestionInfo(
-              //               "If events A and B are mutually exclusive: P(A or B)= ?",
-              //               ["P(A) + P(B)", "P(A)", "P(B)", "P(A) - P(B)"],
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     );
-              //   },
-              // )
+              GenericButton(
+                "Probability A2",
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QuizNavigator(
+                        [
+                          QuestionInfo(
+                            "If events A and B are independent: P(A and B)= ?",
+                            ["P(A)", "P(B)", "P(A) + P(B)","P(A) * P(B)"], 3
+                          ),
+                          QuestionInfo(
+                            "If events A and B are independent: P(A|B) = ?",
+                            ["P(A) / P(B)", "P(B)", "P(A)", "P(A) * P(B)"], 2
+                          ),
+                          QuestionInfo(
+                            "If events A and B are mutually exclusive: P(A and B)= ?",
+                            ["P(A) * P(B)", "0", "P(A) + P(B)", "1"], 1
+                          ),
+                          QuestionInfo(
+                            "If events A and B are mutually exclusive: P(A or B)= ?",
+                            ["P(A) + P(B)", "P(A)", "P(B)", "P(A) - P(B)"], 0 
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),

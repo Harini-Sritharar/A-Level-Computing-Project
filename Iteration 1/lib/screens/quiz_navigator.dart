@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/quiz_screen_function.dart';
 import '../questionInfo.dart';
 
@@ -20,7 +21,7 @@ class _QuizNavigatorState extends State<QuizNavigator> {
   void initState() {
     super.initState();
     for (int i = 0; i < widget.questionsAndOptions.length; i++) {
-      questions.add(QuizScreen(widget.questionsAndOptions[i],setNextQuestion,returnPreviousQuestion));
+      questions.add(QuizScreen(widget.questionsAndOptions[i],setNextQuestion,returnPreviousQuestion,checkQuizEnd));
     }
   }
 
