@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(title: 'Revision Quiz App'),
+      home: WelcomeScreen(),
     );
   }
 }

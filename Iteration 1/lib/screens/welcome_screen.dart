@@ -5,8 +5,8 @@ import 'package:nea_prototype_1/screens/signUp_screen.dart';
 import 'home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({Key? key, required this.title}) : super(key: key);
-  final String title;
+  //WelcomeScreen({Key? key, required this.title}) : super(key: key);
+  //final String title;
 
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
@@ -32,9 +32,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: <Widget>[
               TextFormField(
                 controller: myController,
-                validator: (val){return val!.isEmpty ? "Enter Username" : null;},
+                //validator: (val){return val!.isEmpty ? "Enter Username" : null;},
                 decoration: InputDecoration(
-                  hintText: "Username"
+                  hintText: "Email"
                 ),
                 onChanged: (val){
                   username = val;
@@ -43,7 +43,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(height: 20),
               TextFormField(
                 obscureText: isObscure,
-                validator: (val){return val!.isEmpty ? "Enter Password" : null;},
+                //validator: (val){return val!.isEmpty ? "Enter Password" : null;},
                 decoration: InputDecoration(
                   hintText: "Password",
                   suffixIcon:IconButton(
@@ -73,16 +73,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ],
               )
-              //SizedBox(height: 50),
-              // GenericButton("Login", () {
-              //   Navigator.push(context,
-              //       MaterialPageRoute(builder: (context) => LoginScreen()));
-              // }),
-              // SizedBox(height: 35.0),
-              // GenericButton("Sign Up", () {
-              //   Navigator.push(context,
-              //       MaterialPageRoute(builder: (context) => SignUpScreen()));
-              // })
             ],
           ),
       ),
