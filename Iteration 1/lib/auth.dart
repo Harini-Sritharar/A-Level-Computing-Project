@@ -2,17 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nea_prototype_1/user_model.dart';
 
 class AuthService{
-  FirebaseAuth _auth = FirebaseAuth.instance;
 
-  User _userFromFirebaseUser(FirebaseUser user){
-    return user != null ? User(userId: user.userId): null;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  MyUser? _userFromFirebaseUser(FirebaseUser user){
+    return user != null ? MyUser(uid: user.uid) : null;
   }
   // logs into existing account
-  Future loginEmailAndPassword(String email,String password) async{
-    
+  Future signInEmailAndPassword(String email,String password) async{
     try{
-      AuthResult authResult = await _auth.loginWithEmailAndPassword
-      (email: email, password:password);
+      AuthResult authResult = await _auth.signInWithEmailAndPassword
+      (email: email, password: password);
+    
       FirebaseUser firebaseUser = authResult.user;
       return _userFromFirebaseUser(firebaseUser);
     }
@@ -31,5 +32,15 @@ class AuthService{
     catch (e){
       print(e.toString());
     }
+   }
+   // signing out
+   Future signOut() async{
+     try{
+       return await _auth.signOut();
+     }
+     catch(e){
+       print(e.toString());
+       return null;
+     }
    }
 }

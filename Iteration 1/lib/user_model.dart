@@ -1,7 +1,5 @@
-//import 'package:firebase_auth/firebase_auth.dart';
-
-class User{
-    String userId;
-  User(this.userId);
+class MyUser{
+  final String uid;
+  MyUser({required this.uid});
 }
 
