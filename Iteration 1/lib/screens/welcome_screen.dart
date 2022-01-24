@@ -60,7 +60,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(height: 35),
                 GenericButton("Login", () {
                   Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen(name: myController.text)));}),
-                              SizedBox(height: 35),
+              SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
