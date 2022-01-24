@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+//import 'package:get/get.dart';
 import 'package:nea_prototype_1/screens/quiz_screen_function.dart';
 import '../questionInfo.dart';
 
@@ -13,6 +14,7 @@ class QuizNavigator extends StatefulWidget {
 
 class _QuizNavigatorState extends State<QuizNavigator> {
   int currentQ = 0;
+  //int points = 0;
   bool endOfQuiz = false;
   bool answerSelected = false;
   List<QuizScreen> questions = [];
@@ -30,6 +32,9 @@ class _QuizNavigatorState extends State<QuizNavigator> {
       if (currentQ < questions.length - 1) {
         currentQ++;
       }
+      else{
+        endOfQuiz = true;
+      }
     });
   }
 
@@ -41,9 +46,10 @@ class _QuizNavigatorState extends State<QuizNavigator> {
     });
   }
   
-  void checkQuizEnd() {
+   checkQuizEnd() {
      if (currentQ + 1  == questions.length){
         endOfQuiz = true;
+        return endOfQuiz;
         
     }
   }

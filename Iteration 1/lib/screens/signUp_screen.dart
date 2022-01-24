@@ -15,10 +15,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final myController = TextEditingController();
   @override
-  // void dispose(){
-  //   myController.dispose();
-  //   super.dispose();
-  // }
+
   @override
   Widget build(BuildContext context) {
     final nameField = TextField(

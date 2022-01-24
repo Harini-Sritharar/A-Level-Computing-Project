@@ -8,12 +8,10 @@ class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-
 class _LoginScreenState extends State<LoginScreen> {
   bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final myController = TextEditingController();
-  //get title => null;
   @override
   Widget build(BuildContext context) {
     final nameField = TextField(

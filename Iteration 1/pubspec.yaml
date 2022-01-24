@@ -25,8 +25,16 @@ dependencies:
     sdk: flutter
   auto_size_text: ^3.0.0
   # this allows handling of SvGs for Android,iOS and Web
-  websafe_svg: ^1.1.4
-  get: ^3.24.0
+  #websafe_svg: ^1.1.4
+  #get: ^3.24.0
+  cached_network_image: ^2.0.0
+  cloud_firestore: ^0.13.3
+  firebase_auth: ^0.15.2
+  provider: ^3.2.0
+  shared_preferences: ^0.5.6+3
+  random_string: ^2.0.1
+
+
 
 
   # The following adds the Cupertino Icons font to your application.

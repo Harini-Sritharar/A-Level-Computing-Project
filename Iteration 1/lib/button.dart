@@ -17,7 +17,11 @@ class GenericButton extends StatelessWidget {
           ),
           autofocus: true, 
       style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(const Size(200,40)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0)
+        )),
+        minimumSize: MaterialStateProperty.all(const Size(250,60)),
       ),
       );
   }
