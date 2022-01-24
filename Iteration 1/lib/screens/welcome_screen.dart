@@ -13,8 +13,14 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  //final _formKey = GlobalKey<FormState>();
-  late String username, password;
+  final _formKey = GlobalKey<FormState>();
+  late String email, password;
+
+  signIn(){
+    if (_formKey.currentState!.validate()) {
+
+    }
+  }
   bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   @override
@@ -31,19 +37,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
-                controller: myController,
-                //validator: (val){return val!.isEmpty ? "Enter Username" : null;},
+                //controller: myController,
+                validator: (val) {return val!.isEmpty ? "Enter Email" : null;},
                 decoration: InputDecoration(
                   hintText: "Email"
                 ),
                 onChanged: (val){
-                  username = val;
+                  email = val;
                 },
               ),
               SizedBox(height: 20),
               TextFormField(
                 obscureText: isObscure,
-                //validator: (val){return val!.isEmpty ? "Enter Password" : null;},
+                validator: (val) {return val!.isEmpty ? "Enter Password" : null;},
                 decoration: InputDecoration(
                   hintText: "Password",
                   suffixIcon:IconButton(
@@ -58,8 +64,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
               SizedBox(height: 35),
-                GenericButton("Login", () {
-                  Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen(name: myController.text)));}),
+
+              GestureDetector(
+                onTap: () {
+                  signIn();
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.teal,
+                    borderRadius: BorderRadius.circular(30) 
+                  ),
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width - 40,
+                  child: Text("Login"),
+                )
+                  // child: GenericButton("Login", () {
+                  //   Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen(name: myController.text)));}),
+                ),
               SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

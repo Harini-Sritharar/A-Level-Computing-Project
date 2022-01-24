@@ -50,6 +50,7 @@ class PresetMenu extends StatelessWidget {
                   );
                 },
               ),
+              SizedBox(height: 35),
               GenericButton(
                 "Probability A2",
                 () {
