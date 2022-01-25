@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/auth.dart';
 import 'package:nea_prototype_1/screens/signUp_screen.dart';
 import 'home_screen.dart';
 
@@ -12,10 +13,24 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   late String email, password;
+  AuthService authService = new AuthService();
 
-  signIn(id){
+  bool _isLoading = false;
+  signIn(id) async{
     if (_formKey.currentState!.validate()) {
-      Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
+      setState(() {
+        _isLoading = true;
+      });
+      await authService.signInEmailAndPassword(email, password).then((val){
+        if (val != null){
+          setState(() {
+            _isLoading = false;
+          });
+      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
+        }
+      });
+
+    
     }
   }
   bool isObscure = true;
@@ -25,7 +40,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final myController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.cyan[600],
-      body: Form(
+      body: _isLoading ? Container(
+        child: Center(
+          child: CircularProgressIndicator(),)
+      ): Form(
         key: _formKey,
       child:Container(
         margin: EdgeInsets.symmetric(horizontal: 25),
@@ -99,6 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ),
       ),
         ),
-    ));
+    )
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/auth.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 //import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
@@ -14,13 +15,31 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String username, password;
+  late String name,email,password;
+  AuthService authService = new AuthService();
+  bool _isLoading = false;
+
   bool isObscure = true;
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final myController = TextEditingController();
-  signIn(id){
+
+  signUp() async{
     if (_formKey.currentState!.validate()) {
-      Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
+      setState(() {
+        _isLoading = true;
+      });
+
+      await authService.signUpWithEmailAndPassword(email, password).then((value){
+        if (value != null){
+          setState(() {
+            //_isLoading = false;
+          });
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: name ),));
+          
+        }
+      });
+
+
+
     }
   }
   @override
@@ -28,7 +47,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final myController = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.cyan[600],
-        body: Form(
+        body: _isLoading? Container(
+          child: Center(child: CircularProgressIndicator(),),
+        ) : Form(
           key: _formKey,
             child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 25),
@@ -42,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: (val){return val!.isEmpty ? "Enter Name" : null;},
                         decoration: InputDecoration(hintText: "Name"),
                         onChanged: (val) {
-                          username = val;
+                          name = val;
                         },
                       ),
                       SizedBox(height: 20),
@@ -51,7 +72,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: (val){return val!.isEmpty ? "Enter Username" : null;},
                         decoration: InputDecoration(hintText: "Email"),
                         onChanged: (val) {
-                          username = val;
+                          email = val;
                         },
                       ),
                       SizedBox(height: 20),
@@ -77,7 +98,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(height: 35),
                       GestureDetector(
                           onTap: () {
-                            signIn(myController.text);
+                            signUp();
                           },
                           child: Container(
                             padding: EdgeInsets.symmetric(vertical: 20),
