@@ -16,9 +16,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   late String email, password;
 
-  signIn(){
+  signIn(id){
     if (_formKey.currentState!.validate()) {
-
+      Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
     }
   }
   bool isObscure = true;
@@ -29,6 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       backgroundColor: Colors.cyan[600],
       body: Form(
+        key: _formKey,
       child:Container(
         margin: EdgeInsets.symmetric(horizontal: 25),
         child: Center(
@@ -37,7 +38,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               TextFormField(
-                //controller: myController,
+                controller: myController,
                 validator: (val) {return val!.isEmpty ? "Enter Email" : null;},
                 decoration: InputDecoration(
                   hintText: "Email"
@@ -49,7 +50,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(height: 20),
               TextFormField(
                 obscureText: isObscure,
-                validator: (val) {return val!.isEmpty ? "Enter Password" : null;},
+                validator: (val) {
+                  if (val == null || val.isEmpty){
+                    return "Enter password";
+                  }
+                  return null;},
                 decoration: InputDecoration(
                   hintText: "Password",
                   suffixIcon:IconButton(
@@ -64,10 +69,25 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
               SizedBox(height: 35),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(vertical:50),
+              //   child: ElevatedButton(
+              //     onPressed: (){
+              //       signIn();
 
+              //     }, 
+              //     child: Text("Login"),
+              //   )
+              // ),
+              // GenericButton("Login", (){
+              //   signIn();
+              //   Navigator.push(context, MaterialPageRoute(
+              //             builder: (context) => HomeScreen(name: myController.text),));
+              // }),
               GestureDetector(
                 onTap: () {
-                  signIn();
+                  signIn(myController.text);
+
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 20),
@@ -78,10 +98,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width - 40,
                   child: Text("Login"),
-                )
-                  // child: GenericButton("Login", () {
-                  //   Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen(name: myController.text)));}),
-                ),
+              )),
+              //     // child: GenericButton("Login", () {
+              //     //   Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen(name: myController.text)));}),
+              //   ),
+          
               SizedBox(height: 35),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
