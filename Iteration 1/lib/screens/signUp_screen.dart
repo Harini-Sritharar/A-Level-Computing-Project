@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
-import 'package:nea_prototype_1/button.dart';
+//import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 //import 'package:nea_prototype_1/screens/profile_screen.dart';
 
@@ -13,16 +13,23 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>();
   late String username, password;
   bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   final myController = TextEditingController();
+  signIn(id){
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final myController = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.cyan[600],
         body: Form(
+          key: _formKey,
             child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 25),
                 child: Center(
@@ -32,7 +39,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: <Widget>[
                       TextFormField(
                         controller: myController,
-                        //validator: (val){return val!.isEmpty ? "Enter Username" : null;},
+                        validator: (val){return val!.isEmpty ? "Enter Name" : null;},
                         decoration: InputDecoration(hintText: "Name"),
                         onChanged: (val) {
                           username = val;
@@ -41,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(height: 20),
                       TextFormField(
                         //controller: myController,
-                        //validator: (val){return val!.isEmpty ? "Enter Username" : null;},
+                        validator: (val){return val!.isEmpty ? "Enter Username" : null;},
                         decoration: InputDecoration(hintText: "Email"),
                         onChanged: (val) {
                           username = val;
@@ -50,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(height: 20),
                       TextFormField(
                         obscureText: isObscure,
-                        //validator: (val){return val!.isEmpty ? "Enter Password" : null;},
+                        validator: (val){return val!.isEmpty ? "Enter Password" : null;},
                         decoration: InputDecoration(
                             hintText: "Password",
                             suffixIcon: IconButton(
@@ -68,13 +75,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       SizedBox(height: 35),
-                      GenericButton("Sign Up", () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    HomeScreen(name: myController.text)));
-                      }),
+                      GestureDetector(
+                          onTap: () {
+                            signIn(myController.text);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            decoration: BoxDecoration(
+                                color: Colors.teal,
+                                borderRadius: BorderRadius.circular(30)),
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width - 40,
+                            child: Text("Sign Up"),
+                          )),
+                      // GenericButton("Sign Up", () {
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) =>
+                      //               HomeScreen(name: myController.text)));
+                      // }),
                       SizedBox(height: 35),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

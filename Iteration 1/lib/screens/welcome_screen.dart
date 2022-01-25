@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/signUp_screen.dart';
-
 import 'home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   //WelcomeScreen({Key? key, required this.title}) : super(key: key);
   //final String title;
-
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -69,21 +66,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 },
               ),
               SizedBox(height: 35),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(vertical:50),
-              //   child: ElevatedButton(
-              //     onPressed: (){
-              //       signIn();
-
-              //     }, 
-              //     child: Text("Login"),
-              //   )
-              // ),
-              // GenericButton("Login", (){
-              //   signIn();
-              //   Navigator.push(context, MaterialPageRoute(
-              //             builder: (context) => HomeScreen(name: myController.text),));
-              // }),
               GestureDetector(
                 onTap: () {
                   signIn(myController.text);
@@ -99,9 +81,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: MediaQuery.of(context).size.width - 40,
                   child: Text("Login"),
               )),
-              //     // child: GenericButton("Login", () {
-              //     //   Navigator.push(context,MaterialPageRoute(builder: (context) =>HomeScreen(name: myController.text)));}),
-              //   ),
           
               SizedBox(height: 35),
               Row(
