@@ -1,3 +1,4 @@
+//@dart=2.10
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 

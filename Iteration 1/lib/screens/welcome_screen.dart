@@ -26,11 +26,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           setState(() {
             _isLoading = false;
           });
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
         }
       });
-
-    
     }
   }
   bool isObscure = true;
@@ -40,11 +38,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final myController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.cyan[600],
+      // when loading the Progress Indicator will run, after loading, it wil go to form
       body: _isLoading ? Container(
         child: Center(
           child: CircularProgressIndicator(),)
       ): Form(
-        key: _formKey,
+      key: _formKey,
       child:Container(
         margin: EdgeInsets.symmetric(horizontal: 25),
         child: Center(
