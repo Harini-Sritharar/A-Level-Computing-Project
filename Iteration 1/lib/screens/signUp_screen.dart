@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/auth.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 //import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
+import 'package:nea_prototype_1/services/auth.dart';
 //import 'package:nea_prototype_1/screens/profile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {

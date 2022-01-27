@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
+import 'package:nea_prototype_1/screens/create_quiz.dart';
 import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
 class HomeScreen extends StatefulWidget {
@@ -12,6 +13,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
    return Scaffold(
+     floatingActionButton: FloatingActionButton(
+       onPressed: (){Navigator.push(context,MaterialPageRoute(builder: (context) => CreateQuiz()));},
+       //backgroundColor: Colors.green,
+       child: const Icon(Icons.add)),
      backgroundColor: Colors.white,
      appBar: AppBar(
        title: Text(widget.name + "'s Home Page"),
@@ -48,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
        )
  
    ) ,
+
    );
    
   }}

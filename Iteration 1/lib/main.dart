@@ -1,6 +1,7 @@
 //@dart=2.10
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/home_screen.dart';
+//import 'package:nea_prototype_1/screens/welcome_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      home: HomeScreen(name: "Harini"),
     );
   }
 }

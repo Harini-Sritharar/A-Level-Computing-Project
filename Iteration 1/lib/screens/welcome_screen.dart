@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/auth.dart';
 import 'package:nea_prototype_1/screens/signUp_screen.dart';
+import 'package:nea_prototype_1/services/auth.dart';
 import 'home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  //WelcomeScreen({Key? key, required this.title}) : super(key: key);
-  //final String title;
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
@@ -38,7 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final myController = TextEditingController();
     return Scaffold(
       backgroundColor: Colors.cyan[600],
-      // when loading the Progress Indicator will run, after loading, it wil go to form
+      // when loading the Progress Indicator will run, after loading, it wil go to the form
       body: _isLoading ? Container(
         child: Center(
           child: CircularProgressIndicator(),)
