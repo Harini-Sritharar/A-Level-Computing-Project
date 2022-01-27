@@ -36,6 +36,11 @@ class QuizButton extends StatelessWidget{
       child: Text(txt),
       style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white10)),
       onPressed : a,
+      
     );
 }
 }
+
+// class TealButton extends StatelessWidget{
+
+// }

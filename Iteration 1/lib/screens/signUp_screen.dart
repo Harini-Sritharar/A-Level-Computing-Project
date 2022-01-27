@@ -3,6 +3,8 @@ import 'package:nea_prototype_1/screens/home_screen.dart';
 //import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
+
+import '../button.dart';
 //import 'package:nea_prototype_1/screens/profile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -93,26 +95,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         },
                       ),
                       SizedBox(height: 35),
-                      GestureDetector(
-                          onTap: () {
-                            signUp();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 20),
-                            decoration: BoxDecoration(
-                                color: Colors.teal,
-                                borderRadius: BorderRadius.circular(30)),
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width - 40,
-                            child: Text("Sign Up"),
-                          )),
-                      // GenericButton("Sign Up", () {
-                      //   Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) =>
-                      //               HomeScreen(name: myController.text)));
-                      // }),
+                      // GestureDetector(
+                      //     onTap: () {
+                      //       signUp();
+                      //     },
+                      //     child: Container(
+                      //       padding: EdgeInsets.symmetric(vertical: 20),
+                      //       decoration: BoxDecoration(
+                      //           color: Colors.teal,
+                      //           borderRadius: BorderRadius.circular(30)),
+                      //       alignment: Alignment.center,
+                      //       width: MediaQuery.of(context).size.width - 40,
+                      //       child: Text("Sign Up"),
+                      //     )),
+                      GenericButton("Sign Up", signUp()),
                       SizedBox(height: 35),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
