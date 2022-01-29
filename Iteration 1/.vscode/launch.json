@@ -7,7 +7,8 @@
         {
             "name": "Iteration 1",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": ["--no-sound-null-safety"]
         },
         {
             "name": "Iteration 1 (profile mode)",

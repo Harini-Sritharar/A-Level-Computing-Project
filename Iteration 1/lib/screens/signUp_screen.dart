@@ -5,6 +5,7 @@ import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 
 import '../button.dart';
+import '../helperFunctions.dart';
 //import 'package:nea_prototype_1/screens/profile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,7 +26,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final myController = TextEditingController();
 
   signUp() async{
-    if (_formKey.currentState!.validate()) {
+    var a = (_formKey.currentState);
+    if (a!.validate()) {
       setState(() {
         _isLoading = true;
       });
@@ -35,6 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {
             //_isLoading = false;
           });
+          HelperFunctions.saveUserLoggedIn(isLoggedIn: true);
           Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: name ),));
           
         }

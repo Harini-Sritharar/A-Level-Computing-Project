@@ -14,7 +14,7 @@ class DatabaseService{
     }
 
   Future <void> addQuData(Map <String, dynamic> questionData, String quizID) async{
-    await Firestore.instance.collection("Quiz").document(quizID).collection("qna")
+    await Firestore.instance.collection("Quiz").document(quizID).collection("q")
     .add(questionData).catchError((e){
       print(e);
     });

@@ -15,7 +15,7 @@ class _CreateQuizState extends State<CreateQuiz> {
   bool _isLoading = false;
   DatabaseService databaseService = new DatabaseService();
 
-  createNewQuiz() async {
+  void createNewQuiz() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -68,9 +68,9 @@ class _CreateQuizState extends State<CreateQuiz> {
                           },
                         ),
                         SizedBox(height: 20),
-                        Spacer(),  
-                        GenericButton("Create",() {
-                            createNewQuiz();
+                        Spacer(),
+                        GenericButton("Create", () {
+                          createNewQuiz();
                         }),
                         SizedBox(height: 20),
                       ],

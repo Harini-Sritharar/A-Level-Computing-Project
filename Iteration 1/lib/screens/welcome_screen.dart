@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/helperFunctions.dart';
 import 'package:nea_prototype_1/screens/signUp_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'home_screen.dart';
@@ -17,13 +18,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   signIn(id) async{
     if (_formKey.currentState!.validate()) {
       setState(() {
-        _isLoading = true;
+        //_isLoading = true;
       });
       await authService.signInEmailAndPassword(email, password).then((val){
         if (val != null){
           setState(() {
-            _isLoading = false;
+            //_isLoading = false;
           });
+          HelperFunctions.saveUserLoggedIn(isLoggedIn: true);
           Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: id ),));
         }
       });
@@ -35,12 +37,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final myController = TextEditingController();
     return Scaffold(
-      backgroundColor: Colors.cyan[600],
+      backgroundColor: Colors.purple[600],
       // when loading the Progress Indicator will run, after loading, it wil go to the form
-      body: _isLoading ? Container(
-        child: Center(
-          child: CircularProgressIndicator(),)
-      ): Form(
+      body: 
+      // _isLoading ? Container(
+      //   child: Center(
+      //     child: CircularProgressIndicator(),)
+      // ): 
+      Form(
       key: _formKey,
       child:Container(
         margin: EdgeInsets.symmetric(horizontal: 25),
@@ -98,18 +102,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               )),
           
               SizedBox(height: 35),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("No account yet?  "),
-                  GestureDetector(
-                    onTap: (){Navigator.pushReplacement(context,MaterialPageRoute(
-                          builder: (context) => SignUpScreen()));},
-                    child: Text("Sign Up",
-                    style: TextStyle(decoration: TextDecoration.underline),),
-                  ),
-                ],
-              )
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text("No account yet?  "),
+              //     GestureDetector(
+              //       onTap: (){Navigator.pushReplacement(context,MaterialPageRoute(
+              //             builder: (context) => SignUpScreen()));},
+              //       child: Text("Sign Up",
+              //       style: TextStyle(decoration: TextDecoration.underline),),
+              //     ),
+              //   ],
+              // )
             ],
           ),
       ),
