@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+    //var a = ();
+
 
 class AuthService{
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
+final FirebaseAuth _auth = FirebaseAuth.instance;
   MyUser? _userFromFirebaseUser(FirebaseUser user){
     return user != null ? MyUser(uid: user.uid) : null;
   }
@@ -16,13 +17,11 @@ class AuthService{
     try{
       AuthResult authResult = await _auth.signInWithEmailAndPassword
       (email: email, password: password);
-    
       FirebaseUser firebaseUser = authResult.user;
       return _userFromFirebaseUser(firebaseUser);
     }
     catch (e){
       print(e.toString());
-      AlertDialog(title: Text("Invalid credentials"),);
     }
   }
   // creates a new account
@@ -33,6 +32,7 @@ class AuthService{
       FirebaseUser firebaseUser = authResult.user;
       print("User Added");
       return _userFromFirebaseUser(firebaseUser);
+    // need to add user to the database here 
 
     }
     catch (e){

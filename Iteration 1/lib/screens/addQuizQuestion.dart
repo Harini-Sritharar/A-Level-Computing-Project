@@ -3,6 +3,7 @@ import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
 import '../button.dart';
+import '../main.dart';
 
 class AddQuizQuestion extends StatefulWidget {
   final String quizID;
@@ -15,7 +16,6 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
   final _formKey = GlobalKey<FormState>();
   late String q, ans1, ans2, ans3, ans4;
   bool _isLoading = false;
-  DatabaseService databaseService = new DatabaseService();
 
   void uploadQuestionData() async {
     if (_formKey.currentState!.validate()) {

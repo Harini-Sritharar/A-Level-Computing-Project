@@ -1,9 +1,13 @@
 //@dart=2.10
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
+import 'package:nea_prototype_1/services/database.dart';
 
 AuthService authService = new AuthService();
+DatabaseService databaseService = new DatabaseService();
+
 void main() {
   runApp(MyApp());
 }

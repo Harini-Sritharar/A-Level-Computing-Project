@@ -14,7 +14,7 @@ class QuizNavigator extends StatefulWidget {
 
 class _QuizNavigatorState extends State<QuizNavigator> {
   int currentQ = 0;
-  //int points = 0;
+  int points = 0;
   bool endOfQuiz = false;
   bool answerSelected = false;
   List<QuizScreen> questions = [];
@@ -23,16 +23,20 @@ class _QuizNavigatorState extends State<QuizNavigator> {
   void initState() {
     super.initState();
     for (int i = 0; i < widget.questionsAndOptions.length; i++) {
-      questions.add(QuizScreen(widget.questionsAndOptions[i],setNextQuestion,returnPreviousQuestion,checkQuizEnd));
+      questions.add(QuizScreen(widget.questionsAndOptions[i], setNextQuestion,
+          returnPreviousQuestion, checkQuizEnd, addPoints));
     }
+  }
+
+  void addPoints(int newPoints) {
+    points += newPoints;
   }
 
   void setNextQuestion() {
     setState(() {
       if (currentQ < questions.length - 1) {
         currentQ++;
-      }
-      else{
+      } else {
         endOfQuiz = true;
       }
     });
@@ -45,13 +49,9 @@ class _QuizNavigatorState extends State<QuizNavigator> {
       }
     });
   }
-  
-   checkQuizEnd() {
-     if (currentQ + 1  == questions.length){
-        endOfQuiz = true;
-        return endOfQuiz;
-        
-    }
+
+  checkQuizEnd() {
+    return (currentQ + 1 == questions.length);
   }
 
   Widget build(BuildContext context) {

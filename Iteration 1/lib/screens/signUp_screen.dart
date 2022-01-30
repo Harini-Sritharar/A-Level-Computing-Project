@@ -1,52 +1,79 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
-//import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
-
+import 'package:nea_prototype_1/services/database.dart';
+import 'package:random_string/random_string.dart';
 import '../button.dart';
 import '../main.dart';
-//import 'package:nea_prototype_1/screens/profile_screen.dart';
-
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
-
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String name, email, password;
+  late String name, email,yrGroup,position, password;
   bool _isLoading = false;
 
   bool isObscure = true;
   final myController = TextEditingController();
 
   void signUp() async {
-    var a = (_formKey.currentState);
-    if (a!.validate()) {
+    var classID = randomAlphaNumeric(10);
+    if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
-
-      await authService
-          .signUpWithEmailAndPassword(email, password)
-          .then((value) {
-        if (value != null) {
-          setState(() {
-            //_isLoading = false;
-          });
-          AuthService.saveUserLoggedIn(isLoggedIn: true);
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(name: name),
-              ));
-        }
-      });
+      await authService.signUpWithEmailAndPassword(email, password).then(
+        (value) async {
+          if (value != null)  {
+            setState(() {
+              _isLoading = false;
+            });
+            AuthService.saveUserLoggedIn(isLoggedIn: true);
+            final FirebaseUser user = await auth.currentUser();
+            final uid = user.uid;
+            Map<String, dynamic> userData = {
+              "name": name,
+              "uid": uid,
+              "email": email,
+              "yearGroup": yrGroup,
+              "position": position,
+              "classId": classID,
+            };
+            databaseService.addUserData(userData);
+            //uploadUserData();
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(name: name),
+                ));
+          }
+        },
+      );
     }
   }
+
+  // void uploadUserData() async {
+  //     final FirebaseUser user = await auth.currentUser();
+  //     final uid = user.uid;
+  //     var classID = randomAlphaNumeric(10);
+  //    if (_formKey.currentState!.validate()) {
+  //     Map<String, dynamic> userData = {
+  //         "name": name,
+  //         "uid": uid,
+  //         "email": email,
+  //         "yearGroup": yrGroup,
+  //         "position": position,
+  //         "classId": classID,
+  //       };
+  //     await databaseService.addUserData(userData);
+  //     }
+  //   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +109,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           TextFormField(
                             //controller: myController,
                             validator: (val) {
-                              return val!.isEmpty ? "Enter Username" : null;
+                              return val!.isEmpty ? "Enter Email" : null;
                             },
                             decoration: InputDecoration(hintText: "Email"),
                             onChanged: (val) {
                               email = val;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          TextFormField(
+                            validator: (val) {
+                              return val!.isEmpty ? "Enter Year Group" : null;
+                            },
+                            decoration: InputDecoration(hintText: "Year Group"),
+                            onChanged: (val) {
+                              yrGroup = val;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          TextFormField(
+                            validator: (val) {
+                              return val!.isEmpty ? "Enter Position" : null;
+                            },
+                            decoration: InputDecoration(hintText: "Teacher or Student?"),
+                            onChanged: (val) {
+                              position = val;
                             },
                           ),
                           SizedBox(height: 20),
