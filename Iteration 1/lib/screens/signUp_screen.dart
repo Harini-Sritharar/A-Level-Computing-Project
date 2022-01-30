@@ -5,12 +5,11 @@ import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 
 import '../button.dart';
-import '../helperFunctions.dart';
+import '../main.dart';
 //import 'package:nea_prototype_1/screens/profile_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
-  // LoginScreen({Key? key, required this.title}) : super(key: key);
-  // final String title;
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -18,121 +17,137 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String name,email,password;
-  AuthService authService = new AuthService();
+  late String name, email, password;
   bool _isLoading = false;
 
   bool isObscure = true;
   final myController = TextEditingController();
 
-  signUp() async{
+  void signUp() async {
     var a = (_formKey.currentState);
     if (a!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
-      await authService.signUpWithEmailAndPassword(email, password).then((value){
-        if (value != null){
+      await authService
+          .signUpWithEmailAndPassword(email, password)
+          .then((value) {
+        if (value != null) {
           setState(() {
             //_isLoading = false;
           });
-          HelperFunctions.saveUserLoggedIn(isLoggedIn: true);
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => HomeScreen(name: name ),));
-          
+          AuthService.saveUserLoggedIn(isLoggedIn: true);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(name: name),
+              ));
         }
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     final myController = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.cyan[600],
-        body: _isLoading? Container(
-          child: Center(child: CircularProgressIndicator(),),
-        ) : Form(
-          key: _formKey,
-            child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 25),
+        body: _isLoading
+            ? Container(
                 child: Center(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                      TextFormField(
-                        controller: myController,
-                        validator: (val){return val!.isEmpty ? "Enter Name" : null;},
-                        decoration: InputDecoration(hintText: "Name"),
-                        onChanged: (val) {
-                          name = val;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        //controller: myController,
-                        validator: (val){return val!.isEmpty ? "Enter Username" : null;},
-                        decoration: InputDecoration(hintText: "Email"),
-                        onChanged: (val) {
-                          email = val;
-                        },
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        obscureText: isObscure,
-                        validator: (val){return val!.isEmpty ? "Enter Password" : null;},
-                        decoration: InputDecoration(
-                            hintText: "Password",
-                            suffixIcon: IconButton(
-                              icon: Icon(isObscure
-                                  ? Icons.visibility
-                                  : Icons.visibility_off),
-                              onPressed: () {
-                                setState(() {
-                                  isObscure = !isObscure;
-                                });
-                              },
-                            )),
-                        onChanged: (val) {
-                          password = val;
-                        },
-                      ),
-                      SizedBox(height: 35),
-                      // GestureDetector(
-                      //     onTap: () {
-                      //       signUp();
-                      //     },
-                      //     child: Container(
-                      //       padding: EdgeInsets.symmetric(vertical: 20),
-                      //       decoration: BoxDecoration(
-                      //           color: Colors.teal,
-                      //           borderRadius: BorderRadius.circular(30)),
-                      //       alignment: Alignment.center,
-                      //       width: MediaQuery.of(context).size.width - 40,
-                      //       child: Text("Sign Up"),
-                      //     )),
-                      GenericButton("Sign Up", signUp()),
-                      SizedBox(height: 35),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Already made an account?  "),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WelcomeScreen()));
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : Form(
+                key: _formKey,
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    child: Center(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                          TextFormField(
+                            controller: myController,
+                            validator: (val) {
+                              return val!.isEmpty ? "Enter Name" : null;
                             },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline),
-                            ),
+                            decoration: InputDecoration(hintText: "Name"),
+                            onChanged: (val) {
+                              name = val;
+                            },
                           ),
-                        ],
-                      )
-                    ])))));
+                          SizedBox(height: 20),
+                          TextFormField(
+                            //controller: myController,
+                            validator: (val) {
+                              return val!.isEmpty ? "Enter Username" : null;
+                            },
+                            decoration: InputDecoration(hintText: "Email"),
+                            onChanged: (val) {
+                              email = val;
+                            },
+                          ),
+                          SizedBox(height: 20),
+                          TextFormField(
+                            obscureText: isObscure,
+                            validator: (val) {
+                              return val!.isEmpty ? "Enter Password" : null;
+                            },
+                            decoration: InputDecoration(
+                                hintText: "Password",
+                                suffixIcon: IconButton(
+                                  icon: Icon(isObscure
+                                      ? Icons.visibility
+                                      : Icons.visibility_off),
+                                  onPressed: () {
+                                    setState(() {
+                                      isObscure = !isObscure;
+                                    });
+                                  },
+                                )),
+                            onChanged: (val) {
+                              password = val;
+                            },
+                          ),
+                          SizedBox(height: 35),
+                          // GestureDetector(
+                          //     onTap: () {
+                          //       signUp();
+                          //     },
+                          //     child: Container(
+                          //       padding: EdgeInsets.symmetric(vertical: 20),
+                          //       decoration: BoxDecoration(
+                          //           color: Colors.teal,
+                          //           borderRadius: BorderRadius.circular(30)),
+                          //       alignment: Alignment.center,
+                          //       width: MediaQuery.of(context).size.width - 40,
+                          //       child: Text("Sign Up"),
+                          //     )),
+                          GenericButton("Sign Up", signUp),
+                          SizedBox(height: 35),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Already made an account?  "),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              WelcomeScreen()));
+                                },
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ),
+                            ],
+                          )
+                        ])))));
   }
 
   // @override

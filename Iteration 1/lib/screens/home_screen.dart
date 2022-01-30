@@ -3,6 +3,9 @@ import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/create_quiz.dart';
 import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
+import 'package:nea_prototype_1/screens/welcome_screen.dart';
+
+import '../main.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.name}) : super(key: key);
@@ -59,8 +62,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text('I don\'t know who you are though 🤔'),
             ));
-          })
-
+          }),
+          SizedBox(height: 50.0),
+          GenericButton("Sign Out", () {
+            authService.signOut();
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WelcomeScreen(),
+                ));
+          }),
           // () {
           //   Navigator.push(context,
           //             MaterialPageRoute(

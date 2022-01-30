@@ -1,9 +1,11 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService{
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   MyUser? _userFromFirebaseUser(FirebaseUser user){
@@ -20,6 +22,7 @@ class AuthService{
     }
     catch (e){
       print(e.toString());
+      AlertDialog(title: Text("Invalid credentials"),);
     }
   }
   // creates a new account
@@ -40,10 +43,23 @@ class AuthService{
    Future signOut() async{
      try{
        return await _auth.signOut();
+       
      }
      catch(e){
        print(e.toString());
        return null;
      }
    }
+    
+  static String userLoggedInKey = "USERKEY";
+  //for saving
+  static saveUserLoggedIn({required bool isLoggedIn})async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.setBool(userLoggedInKey, isLoggedIn);
+  }
+  //for retrieving
+  static Future<bool> getUserLoggedIn() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getBool(userLoggedInKey);
+  }
 }

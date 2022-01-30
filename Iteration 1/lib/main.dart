@@ -1,10 +1,9 @@
 //@dart=2.10
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/helperFunctions.dart';
-import 'package:nea_prototype_1/screens/home_screen.dart';
-import 'package:nea_prototype_1/screens/signUp_screen.dart';
 import 'package:nea_prototype_1/screens/welcome_screen.dart';
+import 'package:nea_prototype_1/services/auth.dart';
 
+AuthService authService = new AuthService();
 void main() {
   runApp(MyApp());
 }
@@ -14,20 +13,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _isLoggedIn = false;
+  //bool _isLoggedIn = false;
   @override
-  void initState(){
-    checkLoginStatus();
-    super.initState();
-  }
+  // void initState(){
+  //   checkLoginStatus();
+  //   super.initState();
+  // }
 
-  checkLoginStatus(){
-     HelperFunctions.getUserLoggedIn().then((value){
-       setState(() {
-         _isLoggedIn = value;
-       });
-     });
-  }
+  // checkLoginStatus(){
+  //    AuthService.getUserLoggedIn().then((value){
+  //      setState(() {
+  //        _isLoggedIn = value;
+  //      });
+  //    });
+  // }
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,9 +36,11 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(name: "Harini"),
-      //(_isLoggedIn ?? false) ? HomeScreen(name: "Harini") : WelcomeScreen(),
-      // if signed in, take to the home screen, else, take to the welcome screen where they can login or sign up
+      
+      home: WelcomeScreen(),
+      //(_isLoggedIn ?? false) ? HomeScreen(name: "") : 
+
+      // home: HomeScreen(name: "Harini"),
       
     );
   }
