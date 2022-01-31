@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/create_quiz.dart';
+import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/Quiz/create_quiz.dart';
 import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
-import 'package:nea_prototype_1/screens/welcome_screen.dart';
-
 import '../main.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -82,4 +81,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class Leaderboard {}
+//class Leaderboard {}

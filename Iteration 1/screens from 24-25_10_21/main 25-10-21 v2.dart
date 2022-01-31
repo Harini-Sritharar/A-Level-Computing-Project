@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
+
 
 void main() {
   runApp(MyApp());

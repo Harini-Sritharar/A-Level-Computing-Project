@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
-import 'package:nea_prototype_1/screens/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:random_string/random_string.dart';
-import '../button.dart';
-import '../main.dart';
+import '../../button.dart';
+import '../../main.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/signUp_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
-import '../main.dart';
-import 'home_screen.dart';
+
+import '../../main.dart';
+import '../home_screen.dart';
+import 'signUp_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   @override

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/screens/Quiz/quiz_screen_function.dart';
 //import 'package:get/get.dart';
-import 'package:nea_prototype_1/screens/quiz_screen_function.dart';
+
 import '../questionInfo.dart';
 
 class QuizNavigator extends StatefulWidget {

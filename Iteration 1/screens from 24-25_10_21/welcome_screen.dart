@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/login_screen.dart';
-import 'package:nea_prototype_1/screens/signUp_screen.dart';
+import 'package:nea_prototype_1/screens/Authentication/login_screen.dart';
+import 'package:nea_prototype_1/screens/Authentication/signUp_screen.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({Key? key, required this.title}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/addQuizQuestion.dart';
+import 'package:nea_prototype_1/screens/Quiz/addQuizQuestion.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:random_string/random_string.dart';
 

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/questionInfo.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:nea_prototype_1/screens/score_screen.dart';
+import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
+import '../questionInfo.dart';
+
 
 // ignore: must_be_immutable
 class QuizScreen extends StatefulWidget {
   //int points = 0;
-  final numOfOptions = 4;
-  late final List<bool> _checkBoxSelected;
   final void Function() setNextQuestion;
   final void Function() returnPreviousQuestion;
   final Function() checkQuizEnd;
@@ -16,9 +15,7 @@ class QuizScreen extends StatefulWidget {
 
   final QuestionInfo questionInfo;
   QuizScreen(this.questionInfo, this.setNextQuestion,
-      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints) {
-    _checkBoxSelected = List.filled(numOfOptions, false);
-  }
+      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints);
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -26,6 +23,14 @@ class QuizScreen extends StatefulWidget {
 
 // screen for each question so the question validation should occur in here
 class _QuizScreenState extends State<QuizScreen> {
+  final numOfOptions = 4;
+  late final List<bool> _checkBoxSelected;
+
+  @protected
+  @mustCallSuper
+  void initState() {
+    _checkBoxSelected = List.filled(numOfOptions, false);
+  }
 
   Object? chosenAnswer = 0;
   //setState((){points = 0});
@@ -61,10 +66,8 @@ class _QuizScreenState extends State<QuizScreen> {
               child:
                   AlertDialog(backgroundColor: bgColour, title: Text(message)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ScoreScreen(10)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ScoreScreen(10)));
               },
             );
           }
@@ -146,7 +149,7 @@ class _QuizScreenState extends State<QuizScreen> {
               ]),
           child: Column(
             children: [
-              for (var i = 0; i < widget.numOfOptions; i++)
+              for (var i = 0; i < numOfOptions; i++)
                 RadioListTile(
                   title: Text(widget.questionInfo.options[i]),
                   value: i,
@@ -155,15 +158,14 @@ class _QuizScreenState extends State<QuizScreen> {
                   onChanged: (value) {
                     setState(() {
                       chosenAnswer = value;
-                      widget._checkBoxSelected[i] =
-                          !widget._checkBoxSelected[i];
+                      _checkBoxSelected[i] =
+                          !_checkBoxSelected[i];
                     });
                   },
                 ),
               QuizButton("Skip", widget.setNextQuestion),
               QuizButton("Submit", () {
-                checkAnswer(
-                    chosenAnswer, widget.questionInfo.correctIndex);
+                checkAnswer(chosenAnswer, widget.questionInfo.correctIndex);
               })
             ],
           ),

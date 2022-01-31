@@ -1,7 +1,7 @@
 //@dart=2.10
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
