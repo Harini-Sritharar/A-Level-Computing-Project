@@ -4,6 +4,7 @@ import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
+import 'package:nea_prototype_1/username.dart';
 import 'package:random_string/random_string.dart';
 import '../../button.dart';
 import '../../main.dart';
@@ -52,8 +53,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 MaterialPageRoute(
                   builder: (context) => HomeScreen(name: name),
                 ));
-          }
+          };
+        await databaseService.getName();
         },
+
       );
     }
   }
@@ -174,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           //       child: Text("Sign Up"),
                           //     )),
                           GenericButton("Sign Up", signUp),
-                          SizedBox(height: 35),
+                          SizedBox(height: 25),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -194,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                             ],
-                          )
+                          ),
                         ])))));
   }
 

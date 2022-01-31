@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 
@@ -17,22 +18,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   bool _isLoading = false;
   bool invalidpassword = false;
-  signIn(id) async {
+  signIn() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
-      await authService.signInEmailAndPassword(email, password).then((val) {
+      await authService.signInEmailAndPassword(email, password).then((val) async {
         if (val != null) {
           setState(() {
             invalidpassword = false;
             _isLoading = false;
           });
           AuthService.saveUserLoggedIn(isLoggedIn: true);
+          await databaseService.getName();
+
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(name: id),
+                builder: (context) => HomeScreen(name:"name"),
               ));
         }
         else{
@@ -113,7 +116,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: 35),
                   GestureDetector(
                       onTap: () {
-                        signIn(myController.text);
+                        signIn();
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 20),
