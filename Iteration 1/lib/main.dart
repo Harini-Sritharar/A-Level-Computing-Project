@@ -2,6 +2,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
+import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
@@ -44,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       home: WelcomeScreen(),
       //(_isLoggedIn ?? false) ? HomeScreen(name: "") : 
 
-      // home: HomeScreen(name: "Harini"),
+      //home: HomeScreen(name: ""),
       
     );
   }

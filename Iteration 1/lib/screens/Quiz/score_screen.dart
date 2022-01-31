@@ -6,37 +6,43 @@ import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
 class ScoreScreen extends StatelessWidget {
   final int points;
   ScoreScreen(this.points);
-@override
+  @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.blue[300],
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              SizedBox(height: 340),
-              Center(
-                child: Text("Score:",
+        backgroundColor: Colors.deepPurple[200],
+        body: Stack(children: <Widget>[
+          Container(
+            height: size.height * 0.45,
+            decoration: BoxDecoration(
+              color: Colors.deepPurple[300],
+            ),
+          ),
+          Container(
+            height: size.height * 0.35,
+            decoration: BoxDecoration(
+              color: Colors.deepPurple[500],
+            ),
+          ),
+          Column( 
+          children: [
+            SizedBox(height:304.0),
+            Center(child: Text("Score:",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30,
-                fontWeight: FontWeight.bold)
-                ),),
-              SizedBox(height: 30),
-              Center(
-                child: Text(("$points" + "/40"),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,fontStyle: FontStyle.italic)),
+          ),
+          SizedBox(height: 30),
+          Center(
+            child: Text(("$points" + "/40"),
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30,
-                fontWeight: FontWeight.bold)
-                ),),
-              GenericButton("Menu", (){
-                      Navigator.push(context,
-                      MaterialPageRoute(
-                          builder: (context) => PresetMenu()));}),
-
-     
-        ],)
-      ],)
-    );
-
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+          ),
+          SizedBox(height: 100.0),
+          GenericButton("Menu", () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => PresetMenu()));
+          }),
+          ])
+        ]));
   }
 }

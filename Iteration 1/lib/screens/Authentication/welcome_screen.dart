@@ -18,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   bool _isLoading = false;
   bool invalidpassword = false;
-  signIn() async {
+  signIn(id) async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(name:"name"),
+                builder: (context) => HomeScreen(name: id),
               ));
         }
         else{
@@ -116,7 +116,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: 35),
                   GestureDetector(
                       onTap: () {
-                        signIn();
+                        signIn(myController.text);
+                        
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 20),

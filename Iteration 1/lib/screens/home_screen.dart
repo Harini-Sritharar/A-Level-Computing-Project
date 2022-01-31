@@ -17,12 +17,22 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blue[100],
+        type: BottomNavigationBarType.fixed,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.account_circle_rounded),label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.leaderboard), label: 'Leaderboard'),
+          BottomNavigationBarItem(icon: Icon(Icons.logout_rounded), label: 'Log Out'),
+
+
+        ],),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => CreateQuiz()));
           },
-          //backgroundColor: Colors.green,
           child: const Icon(Icons.add)),
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -62,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               content: Text('I don\'t know who you are though 🤔'),
             ));
           }),
-          SizedBox(height: 50.0),
+          SizedBox(height: 75.0),
           GenericButton("Sign Out", () {
             authService.signOut();
             Navigator.pushReplacement(
@@ -71,10 +81,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context) => WelcomeScreen(),
                 ));
           }),
-          // () {
-          //   Navigator.push(context,
-          //             MaterialPageRoute(
-          //                 builder: (context) => Leaderboard()));
         ],
       ))),
     );

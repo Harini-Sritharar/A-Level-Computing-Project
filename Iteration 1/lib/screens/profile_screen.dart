@@ -19,7 +19,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         //title: Text("Hi " + widget.name + " !"),
         title: Text(widget.name + "'s Profile"),
-        //title: Text("Hi Harini!"),
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),
