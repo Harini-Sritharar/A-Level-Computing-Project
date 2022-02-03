@@ -15,9 +15,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   late String email, password;
   
-
   bool _isLoading = false;
-  bool invalidpassword = false;
+  //bool invalidpassword = false;
   signIn(id) async {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -26,11 +25,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       await authService.signInEmailAndPassword(email, password).then((val) async {
         if (val != null) {
           setState(() {
-            invalidpassword = false;
+            //invalidpassword = false;
             _isLoading = false;
           });
           AuthService.saveUserLoggedIn(isLoggedIn: true);
-          await databaseService.getName();
+          //await databaseService.getName();
 
           Navigator.pushReplacement(
               context,
@@ -39,8 +38,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ));
         }
         else{
-          invalidpassword = true;
+          //invalidpassword = true;
           _isLoading = false;
+          //print("Incorrect password or username");
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -95,7 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       // if(invalidpassword = true){
                       //   return("Invalid password");
                       // }
-                      return null;
+                      // return null;
                     },
                     decoration: InputDecoration(
                         hintText: "Password",
@@ -117,7 +117,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   GestureDetector(
                       onTap: () {
                         signIn(myController.text);
-                        
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 20),

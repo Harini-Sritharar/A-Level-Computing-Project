@@ -53,7 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 MaterialPageRoute(
                   builder: (context) => HomeScreen(name: name),
                 ));
-          };
+          }
         await databaseService.getName();
         },
 
@@ -163,20 +163,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                           SizedBox(height: 35),
-                          // GestureDetector(
-                          //     onTap: () {
-                          //       signUp();
-                          //     },
-                          //     child: Container(
-                          //       padding: EdgeInsets.symmetric(vertical: 20),
-                          //       decoration: BoxDecoration(
-                          //           color: Colors.teal,
-                          //           borderRadius: BorderRadius.circular(30)),
-                          //       alignment: Alignment.center,
-                          //       width: MediaQuery.of(context).size.width - 40,
-                          //       child: Text("Sign Up"),
-                          //     )),
-                          GenericButton("Sign Up", signUp),
+                          GestureDetector(
+                              onTap: () {
+                                signUp();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 20),
+                                decoration: BoxDecoration(
+                                    color: Colors.teal,
+                                    borderRadius: BorderRadius.circular(30)),
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width - 40,
+                                child: Text("Sign Up"),
+                              )),
+                          //GenericButton("Sign Up", signUp),
                           SizedBox(height: 25),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -200,6 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ])))));
   }
+}
 
   // @override
   // Widget build(BuildContext context) {
@@ -266,4 +267,3 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //         ),
   //       )));
   // }
-}

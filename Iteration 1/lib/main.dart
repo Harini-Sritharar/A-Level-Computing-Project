@@ -19,20 +19,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //bool _isLoggedIn = false;
+  bool _isLoggedIn = false;
   @override
-  // void initState(){
-  //   checkLoginStatus();
-  //   super.initState();
-  // }
+  void initState(){
+    checkLoginStatus();
+    super.initState();
+  }
 
-  // checkLoginStatus(){
-  //    AuthService.getUserLoggedIn().then((value){
-  //      setState(() {
-  //        _isLoggedIn = value;
-  //      });
-  //    });
-  // }
+  checkLoginStatus(){
+     AuthService.getUserLoggedIn().then((value){
+       setState(() {
+         _isLoggedIn = value;
+       });
+     });
+  }
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,11 +42,10 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      
-      home: WelcomeScreen(),
-      //(_isLoggedIn ?? false) ? HomeScreen(name: "") : 
+    home: WelcomeScreen(),
+     //home: (_isLoggedIn ?? false) ? HomeScreen(name: "") : WelcomeScreen(),
 
-      //home: HomeScreen(name: ""),
+      //home: HomeScreen(name: "Harini"),
       
     );
   }
