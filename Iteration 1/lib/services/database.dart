@@ -49,8 +49,11 @@ class DatabaseService {
   }
 
  Future getName() async{
+    //gets current user
     final FirebaseUser user = await auth.currentUser();
+    // gets their user id
     final uid = user.uid;
+    // opens the Users collection
     CollectionReference users = Firestore.instance.collection("Users");
     return FutureBuilder<DocumentSnapshot>(
       future: users.document(uid).get(),
@@ -64,11 +67,13 @@ class DatabaseService {
         }
         if (snapshot.connectionState == ConnectionState.done){
           Map <String,dynamic> data = snapshot.data! as Map<String,dynamic>;
-          var name = (data['name']);
-          print("I FOUND YOU" + name);
+          var username = (data['name']);
+          print("I FOUND YOU" + username);
+          print(username);
+          return(username);
         }
         print("LOADING WAITTTTTTTTT");
-        return(Text("COMING"));
+        return(Text("User"));
 
       },);
     

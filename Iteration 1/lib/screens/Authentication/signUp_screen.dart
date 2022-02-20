@@ -54,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   builder: (context) => HomeScreen(name: name),
                 ));
           }
-        await databaseService.getName();
+        //await databaseService.getName();
         },
 
       );
@@ -83,6 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     final myController = TextEditingController();
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.cyan[600],
         body: _isLoading
             ? Container(
@@ -198,7 +199,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             ],
                           ),
-                        ])))));
+                          SizedBox(height:50)
+                        ])))),
+                        );
   }
 }
 

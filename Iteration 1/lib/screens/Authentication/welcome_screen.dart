@@ -16,30 +16,31 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late String email, password;
   
   bool _isLoading = false;
-  //bool invalidpassword = false;
-  signIn(id) async {
+  bool invalidpassword = false;
+  signIn() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
-      await authService.signInEmailAndPassword(email, password).then((val) async {
+      await authService.signInEmailAndPassword(email, password).then((val) {
         if (val != null) {
           setState(() {
-            //invalidpassword = false;
+             invalidpassword = false;
             _isLoading = false;
+            print(Text("Invalid"));
           });
           AuthService.saveUserLoggedIn(isLoggedIn: true);
-          //await databaseService.getName();
+          //String credential = await databaseService.getName();
 
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(name: id),
+                builder: (context) => HomeScreen(name: "Your"),
               ));
         }
         else{
-          //invalidpassword = true;
-          _isLoading = false;
+          invalidpassword = true;
+          _isLoading = true;
           //print("Incorrect password or username");
           Navigator.pushReplacement(
               context,
@@ -95,7 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       // if(invalidpassword = true){
                       //   return("Invalid password");
                       // }
-                      // return null;
+                      return null;
                     },
                     decoration: InputDecoration(
                         hintText: "Password",
@@ -116,7 +117,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   SizedBox(height: 35),
                   GestureDetector(
                       onTap: () {
-                        signIn(myController.text);
+                        signIn();
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 20),

@@ -60,7 +60,6 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
             );
           }
-          // to navigate from the final question to the score sreen
           else {
             return GestureDetector(
               child:
@@ -138,15 +137,15 @@ class _QuizScreenState extends State<QuizScreen> {
         //     children: [
         // ],)),
         // creating the radio buttons
-        Divider(height: 30, indent: 10),
+        //Divider(height: 30, indent: 10),
         Container(
           padding: EdgeInsets.all(0),
-          decoration: BoxDecoration(
-              color: Colors.blue[200],
-              borderRadius: BorderRadius.circular(50),
-              boxShadow: [
-                BoxShadow(color: Color(0xFF42A5F5), spreadRadius: 3)
-              ]),
+          // decoration: BoxDecoration(
+          //     color: Colors.blue[200],
+          //     borderRadius: BorderRadius.circular(50),
+          //     boxShadow: [
+          //       BoxShadow(color: Color(0xFF42A5F5), spreadRadius: 3)
+          //     ]),
           child: Column(
             children: [
               for (var i = 0; i < numOfOptions; i++)

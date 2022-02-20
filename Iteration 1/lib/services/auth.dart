@@ -2,11 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/user_model.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-    //var a = ();
-
-
 class AuthService{
 final FirebaseAuth _auth = FirebaseAuth.instance;
   MyUser? _userFromFirebaseUser(FirebaseUser user){

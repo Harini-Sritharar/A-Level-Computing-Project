@@ -1,5 +1,4 @@
 //@dart=2.10
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
@@ -25,7 +24,6 @@ class _MyAppState extends State<MyApp> {
     checkLoginStatus();
     super.initState();
   }
-
   checkLoginStatus(){
      AuthService.getUserLoggedIn().then((value){
        setState(() {
@@ -42,8 +40,8 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-    home: WelcomeScreen(),
-     //home: (_isLoggedIn ?? false) ? HomeScreen(name: "") : WelcomeScreen(),
+    //home: WelcomeScreen(),
+     home: (_isLoggedIn ?? false) ? HomeScreen(name: "") : WelcomeScreen(),
 
       //home: HomeScreen(name: "Harini"),
       
