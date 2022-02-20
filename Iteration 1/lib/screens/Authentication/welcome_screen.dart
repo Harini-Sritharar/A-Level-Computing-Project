@@ -14,18 +14,18 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final _formKey = GlobalKey<FormState>();
   late String email, password;
-  
+  AuthService authService = new AuthService();
   bool _isLoading = false;
-  bool invalidpassword = false;
+  //bool invalidpassword = false;
   signIn() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
-      await authService.signInEmailAndPassword(email, password).then((val) {
+      await authService.signInEmailAndPassword(email, password).then((val) async {
         if (val != null) {
           setState(() {
-             invalidpassword = false;
+             //invalidpassword = false;
             _isLoading = false;
             print(Text("Invalid"));
           });
@@ -39,14 +39,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ));
         }
         else{
-          invalidpassword = true;
+          //invalidpassword = true;
           _isLoading = true;
-          //print("Incorrect password or username");
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => WelcomeScreen(),
               ));
+          return Text("Incorrect password or username");
+
 
         }
         
@@ -65,9 +66,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body:
             _isLoading ? Container(
               child: Center(
-                child: CircularProgressIndicator(),)
-            ):
-            Form(
+                child: CircularProgressIndicator(),
+                )
+            ):Form(
           key: _formKey,
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 25),

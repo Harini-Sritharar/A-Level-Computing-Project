@@ -11,7 +11,8 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 
 
 class DatabaseService {
-  Future<void> addQuizData(Map<String, dynamic> quizData, String quizID) async {
+
+  Future<void> addQuizData(Map<String, String> quizData, String quizID) async {
     //getting the instance of Firebase,going inside the collection
     await Firestore.instance
         .collection("Quiz")
@@ -65,15 +66,15 @@ class DatabaseService {
         if (snapshot.hasData && !snapshot.data!.exists){
           print("DOC WHO ARE YOU");
         }
-        if (snapshot.connectionState == ConnectionState.done){
-          Map <String,dynamic> data = snapshot.data! as Map<String,dynamic>;
-          var username = (data['name']);
-          print("I FOUND YOU" + username);
-          print(username);
-          return(username);
-        }
-        print("LOADING WAITTTTTTTTT");
-        return(Text("User"));
+        // if (snapshot.connectionState == ConnectionState.done){
+        Map <String,dynamic> data = snapshot.data! as Map<String,dynamic>;
+        var username = (data['name']);
+        print("I FOUND YOU" + username);
+        print(username);
+        return(username);
+        // }
+        // print("LOADING WAITTTTTTTTT");
+        // return(Text("User"));
 
       },);
     
@@ -83,5 +84,6 @@ class DatabaseService {
     // getData(name)
     //Future <DocumentSnapshot> snapshot = UserCollection.docu 
   }
+
 
 }

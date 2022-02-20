@@ -14,7 +14,7 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
       AuthResult authResult = await _auth.signInWithEmailAndPassword
       (email: email, password: password);
       FirebaseUser firebaseUser = authResult.user;
-      return _userFromFirebaseUser(firebaseUser);
+      return  _userFromFirebaseUser(firebaseUser);
     }
     catch (e){
       print(e.toString());
@@ -28,8 +28,6 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
       FirebaseUser firebaseUser = authResult.user;
       print("User Added");
       return _userFromFirebaseUser(firebaseUser);
-    // need to add user to the database here 
-
     }
     catch (e){
       print(e.toString());
@@ -39,7 +37,6 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
    Future signOut() async{
      try{
        return await _auth.signOut();
-       
      }
      catch(e){
        print(e.toString());

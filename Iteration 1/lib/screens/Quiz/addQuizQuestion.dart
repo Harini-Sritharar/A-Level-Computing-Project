@@ -17,6 +17,7 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
   final _formKey = GlobalKey<FormState>();
   late String q, ans1, ans2, ans3, ans4;
   bool _isLoading = false;
+  DatabaseService databaseService = new DatabaseService();
 
   void uploadQuestionData() async {
     if (_formKey.currentState!.validate()) {
@@ -36,6 +37,7 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         appBar: AppBar(centerTitle: true, title: Text("Add a question")),
         body: _isLoading
             ? Container(

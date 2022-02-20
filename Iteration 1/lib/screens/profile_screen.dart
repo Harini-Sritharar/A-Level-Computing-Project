@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'home_screen.dart';
 
 //import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key, required this.name}) : super(key: key);
   //final String greeting;
   final String name;
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }

@@ -4,6 +4,8 @@ import 'package:nea_prototype_1/screens/Quiz/addQuizQuestion.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:random_string/random_string.dart';
 
+import '../../main.dart';
+
 class CreateQuiz extends StatefulWidget {
   @override
   _CreateQuizState createState() => _CreateQuizState();
@@ -15,7 +17,7 @@ class _CreateQuizState extends State<CreateQuiz> {
   bool _isLoading = false;
   DatabaseService databaseService = new DatabaseService();
 
-  void createNewQuiz() async {
+  createNewQuiz() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
