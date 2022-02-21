@@ -9,12 +9,9 @@ import 'home_screen.dart';
 //import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
-  //final String greeting;
-
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
-
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {

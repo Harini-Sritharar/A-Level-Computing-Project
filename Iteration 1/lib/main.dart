@@ -42,8 +42,8 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      //home: WelcomeScreen(),
-     home: (_isLoggedIn ?? false) ? HomeScreen(name: "") : WelcomeScreen(),
+      home: WelcomeScreen(),
+     //home: (_isLoggedIn ?? false) ? HomeScreen(name: "Harini") : WelcomeScreen(),
 
       //home: HomeScreen(name: "Harini"),
       

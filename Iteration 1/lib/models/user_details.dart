@@ -7,7 +7,7 @@ class UserDetails {
   String uid, name = "", email = "", position = "", classId = "";
   int yearGroup = 11;
   // save quiz scores by quiz id: score map
-  Map <String,int> scores =  [] as Map <String,int>;
+  //Map <String,int> scores =  [] as Map <String,int>;
 
   UserDetails(this.uid);
 
@@ -23,13 +23,11 @@ class UserDetails {
     position = data['position'];
     classId = data['classId'];
     yearGroup = data['yearGroup'];
-    scores = data['scores'];
-    //scores.addEntries();
   }
    Future addScore(quizId,points) async {
      //adds to the scores list which will be uploaded onto Firebase
-     scores[quizId] = points;
-    print(scores);
+     //scores[quizId] = points;
+    //print(scores);
     //  Firestore.instance.collection("Quiz").document(quizId).updateData({{"scores": points})
    }
 

@@ -24,8 +24,6 @@ class _CreateQuizState extends State<CreateQuiz> {
       });
       // randomly generates an alphanumeric quizId of length 10
       quizID = randomAlphaNumeric(10);
-
-// Map <key,value>
       Map<String, String> quizMap = {
         "quizId": quizID,
         "quizTitle": quizTitle,

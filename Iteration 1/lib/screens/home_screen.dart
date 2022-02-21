@@ -78,31 +78,31 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(appUser.name + "'s Home Page"),
           centerTitle: true,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.blue[100],
-          type: BottomNavigationBarType.shifting,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-                backgroundColor: Colors.red),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle_rounded),
-                label: 'Profile',
-                backgroundColor: Colors.green),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.leaderboard),
-                label: 'Leaderboard',
-                backgroundColor: Colors.purple),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.logout_rounded),
-                label: 'Log Out',
-                backgroundColor: Colors.yellow),
-          ],
-          onTap: _onItemTapped,
-          selectedItemColor: Colors.white,
-          currentIndex: _selectedIndex,
-        ),
+        // bottomNavigationBar: BottomNavigationBar(
+        //   backgroundColor: Colors.blue[100],
+        //   type: BottomNavigationBarType.shifting,
+        //   items: const <BottomNavigationBarItem>[
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.home),
+        //         label: 'Home',
+        //         backgroundColor: Colors.red),
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.account_circle_rounded),
+        //         label: 'Profile',
+        //         backgroundColor: Colors.green),
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.leaderboard),
+        //         label: 'Leaderboard',
+        //         backgroundColor: Colors.purple),
+        //     BottomNavigationBarItem(
+        //         icon: Icon(Icons.logout_rounded),
+        //         label: 'Log Out',
+        //         backgroundColor: Colors.yellow),
+        //   ],
+        //   onTap: _onItemTapped,
+        //   selectedItemColor: Colors.white,
+        //   currentIndex: _selectedIndex,
+        // ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.push(context,
@@ -136,47 +136,46 @@ class _HomeScreenState extends State<HomeScreen> {
         //   ),
         // )
         // this is the body with the buttons
-        // body: Center(
-        //     child: Container(
-        //         child: Column(
-        //             mainAxisAlignment: MainAxisAlignment.center,
-        //             children: <Widget>[
-        //       //SizedBox(height: 50.0),
-        //       GenericButton("Profile", () {
-        //         Navigator.push(
-        //             context,
-        //             MaterialPageRoute(
-        //                 builder: (context) => ProfileScreen(
-        //                       name: widget.name,
-        //                     )));
-        //       }),
-        //       SizedBox(height: 35.0),
-        //       GenericButton("Leaderboard", () {
-        //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //           content: Text('Awesome feature is in the works! 😎'),
-        //         ));
-        //       }),
-        //       SizedBox(height: 35.0),
-        //       GenericButton("Pre Set", () {
-        //         Navigator.push(context,
-        //             MaterialPageRoute(builder: (context) => PresetMenu()));
-        //       }),
-        //       SizedBox(height: 35.0),
-        //       GenericButton("By You", () {
-        //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //           content: Text('I don\'t know who you are though 🤔'),
-        //         ));
-        //       }),
-        //       SizedBox(height: 75.0),
-        //       GenericButton("Sign Out", () {
-        //         authService.signOut();
-        //         Navigator.pushReplacement(
-        //             context,
-        //             MaterialPageRoute(
-        //               builder: (context) => WelcomeScreen(),
-        //             ));
-        //       }),
-        //     ])))
+        body: Center(
+            child: Container(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+              //SizedBox(height: 50.0),
+              GenericButton("Profile", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileScreen(
+                            )));
+              }),
+              SizedBox(height: 35.0),
+              GenericButton("Leaderboard", () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Awesome feature is in the works! 😎'),
+                ));
+              }),
+              SizedBox(height: 35.0),
+              GenericButton("Pre Set", () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PresetMenu()));
+              }),
+              SizedBox(height: 35.0),
+              GenericButton("By You", () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('I don\'t know who you are though 🤔'),
+                ));
+              }),
+              SizedBox(height: 75.0),
+              GenericButton("Sign Out", () {
+                authService.signOut();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WelcomeScreen(),
+                    ));
+              }),
+            ])))
         );
   }
 }
