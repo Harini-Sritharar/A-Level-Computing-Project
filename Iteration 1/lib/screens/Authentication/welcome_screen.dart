@@ -18,10 +18,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   bool _isLoading = false;
   //bool invalidpassword = false;
   signIn() async {
-    if (_formKey.currentState!.validate()) {
+    // if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
+      email = "student@gmail.com";
+      password = "student";
       await authService.signInEmailAndPassword(email, password).then((val) async {
         if (val != null) {
           setState(() {
@@ -52,7 +54,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         }
         
       });
-    }
+    // }
   }
 
   bool isObscure = true;

@@ -148,7 +148,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           obscureText: isObscure,
                           validator: (val) {
-                            return val!.isEmpty ? "Enter Password" : null;
+                            if (val!.isEmpty){
+                              return ("Enter Password");
+                            }
+                            if (val.length < 8){
+                              return ("Too short");
+                            }
+                            // return val!.isEmpty ? "Enter Password" : null;
+                            
                           },
                           decoration: InputDecoration(
                               hintText: "Password",

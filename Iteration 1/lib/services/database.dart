@@ -9,9 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-
 class DatabaseService {
-
+  // adding quiz data
   Future<void> addQuizData(Map<String, String> quizData, String quizID) async {
     //getting the instance of Firebase,going inside the collection
     await Firestore.instance
@@ -25,6 +24,7 @@ class DatabaseService {
     );
   }
 
+  // adding question data
   Future<void> addQuData(
       Map<String, dynamic> questionData, String quizID) async {
     await Firestore.instance
@@ -37,6 +37,7 @@ class DatabaseService {
     });
   }
 
+  // adding user data
   Future<void> addUserData(Map<String, dynamic> userData) async {
     final FirebaseUser user = await auth.currentUser();
     final uid = user.uid;
@@ -49,41 +50,83 @@ class DatabaseService {
     });
   }
 
- Future getName() async{
+  Future<String> getName() async {
     //gets current user
+    final FirebaseUser user = await auth.currentUser();
+    // gets their user id
+    final String uid = user.uid;
+    //opens the Users collection
+    DocumentSnapshot document =
+        await Firestore.instance.collection("Users").document(uid).get();
+    Map<String, dynamic> data =
+        document.data as Map<String, dynamic>;
+    print(data);
+    return data['name'];
+    // name = data['name']
+    // return Tex);
+    //CollectionReference users = Firestore.instance.collection("Users");
+   
+  }
+  // return FutureBuilder<DocumentSnapshot>(
+  //   future: users.document(uid).get(),
+
+  //   builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+  //     if (snapshot.hasError){
+  //       print("SOMETHINGS WRONG CAPTAIN");
+  //     }
+  //     if (snapshot.hasData && !snapshot.data!.exists){
+  //       print("DOC WHO ARE YOU");
+  //     }
+  //     if (snapshot.connectionState == ConnectionState.done){
+  //       Map <String,dynamic> data = snapshot.data! as Map<String,dynamic>;
+  //       //name = data['name'];
+  //       //return (name);
+  //       return Text("Name: ${data['name']}");
+  //       //var username = (data['name']);
+  //     //print("I FOUND YOU" + username);
+  //     //print(username);
+  //     //return(username);
+  //     }
+  //     return Text("Loading");
+  //   }
+  // );
+
+  // var query = await collection.get();
+  // re
+  // getData(name)
+  //Future <DocumentSnapshot> snapshot = UserCollection.docu
+
+  Future getAllInfo(field) async {
+    // gets current user
     final FirebaseUser user = await auth.currentUser();
     // gets their user id
     final uid = user.uid;
     // opens the Users collection
-    CollectionReference users = Firestore.instance.collection("Users");
-    return FutureBuilder<DocumentSnapshot>(
-      future: users.document(uid).get(),
-  
-      builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError){
-          print("SOMETHINGS WRONG CAPTAIN");
+    final Stream<QuerySnapshot> users =
+        Firestore.instance.collection("Users").snapshots();
+    return StreamBuilder<QuerySnapshot>(
+      stream: users,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
         }
-        if (snapshot.hasData && !snapshot.data!.exists){
-          print("DOC WHO ARE YOU");
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
         }
-        // if (snapshot.connectionState == ConnectionState.done){
-        Map <String,dynamic> data = snapshot.data! as Map<String,dynamic>;
-        var username = (data['name']);
-        print("I FOUND YOU" + username);
-        print(username);
-        return(username);
-        // }
-        // print("LOADING WAITTTTTTTTT");
-        // return(Text("User"));
 
-      },);
-    
+        final data = snapshot.requireData.documents;
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            return Text('User/s $field is ${data[index]['$field']}');
+          },
+        );
+      },
+    );
 
     // var query = await collection.get();
     // re
     // getData(name)
-    //Future <DocumentSnapshot> snapshot = UserCollection.docu 
+    //Future <DocumentSnapshot> snapshot = UserCollection.docu
   }
-
-
 }

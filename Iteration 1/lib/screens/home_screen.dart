@@ -1,5 +1,7 @@
 import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nea_prototype_1/services/database.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
@@ -67,7 +69,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final Stream<QuerySnapshot> users =
       Firestore.instance.collection("Users").snapshots();
-
+   var username = databaseService.getName();
+  
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
@@ -108,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: const Icon(Icons.add)),
         body: Center(
           child: Container(
-            height: 500,
+            height: 500, 
             child: StreamBuilder<QuerySnapshot>(
                 stream: users,
                 builder: (BuildContext context,
@@ -126,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context,index){
-                      return Text('Users name is ${data[index]['name']}');
+                      return Text('${username}Users name is ${data[index]['name']}');
                     });
 
                 }),
