@@ -24,6 +24,7 @@ class QuizScreen extends StatefulWidget {
 // screen for each question so the question validation should occur in here
 class _QuizScreenState extends State<QuizScreen> {
   final numOfOptions = 4;
+  int points = 0;
   late final List<bool> _checkBoxSelected;
 
   @protected
@@ -38,9 +39,11 @@ class _QuizScreenState extends State<QuizScreen> {
     String message = "Correct";
     Color? bgColour = Colors.green[300];
     if (chosenAns == rightIndex) {
-      widget.addPoints(10);
+      points += 10;
+    }
+      //widget.addPoints(10);
       //return (points);
-    } else {
+    else {
       bgColour = Colors.red[700];
       message = "Incorrect";
     }
@@ -65,8 +68,9 @@ class _QuizScreenState extends State<QuizScreen> {
               child:
                   AlertDialog(backgroundColor: bgColour, title: Text(message)),
               onTap: () {
+                //quizScore = points;
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ScoreScreen(10)));
+                    MaterialPageRoute(builder: (context) => ScoreScreen(points)));
               },
             );
           }

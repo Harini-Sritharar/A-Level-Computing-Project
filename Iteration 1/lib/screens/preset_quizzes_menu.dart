@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/Quiz/quiz_navigator.dart';
+import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/screens/questionInfo.dart';
+
+import '../main.dart';
 
 
 class PresetMenu extends StatelessWidget {
@@ -81,7 +84,11 @@ class PresetMenu extends StatelessWidget {
                     ),
                   );
                 },
-              )
+              ),
+              SizedBox(height: 35),
+            GenericButton("Home Screen", (){
+              Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(name: appUser.name)));
+            })
             ],
           ),
         ),

@@ -29,6 +29,7 @@ class _CreateQuizState extends State<CreateQuiz> {
       Map<String, String> quizMap = {
         "quizId": quizID,
         "quizTitle": quizTitle,
+        "userId": appUser.uid
       };
       await databaseService.addQuizData(quizMap, quizID).then((value) {
         setState(() {

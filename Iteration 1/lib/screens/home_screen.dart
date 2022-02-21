@@ -20,11 +20,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late PersistentTabController _controller;
+  //late PersistentTabController _controller;
   int _selectedIndex = 0;
   List<Widget> _routes = <Widget>[
-    HomeScreen(name: ""),
-    ProfileScreen(name: "Harini"),
+    HomeScreen(name: appUser.name),
+    ProfileScreen(),
     PresetMenu(),
     WelcomeScreen()
   ];
@@ -41,41 +41,41 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
+    //_controller = PersistentTabController(initialIndex: 0);
   }
 
-  Widget? pageCaller(int index) {
-    switch (index) {
-      case 0:
-        {
-          return ProfileScreen(name: "Your");
-          //return HomeScreen(name: "Your");
-        }
-      case 1:
-        {
-          return ProfileScreen(name: "Your");
-        }
-      case 2:
-        {
-          return PresetMenu();
-        }
-      case 3:
-        {
-          authService.signOut();
-          return WelcomeScreen();
-        }
-    }
-  }
+  // Widget? pageCaller(int index) {
+  //   switch (index) {
+  //     case 0:
+  //       {
+  //         //return ProfileScreen(name: appUser.name);
+  //         return HomeScreen(name: appUser.name);
+  //       }
+  //     case 1:
+  //       {
+  //         return ProfileScreen(name: appUser.name);
+  //       }
+  //     case 2:
+  //       {
+  //         return PresetMenu();
+  //       }
+  //     case 3:
+  //       {
+  //         authService.signOut();
+  //         return WelcomeScreen();
+  //       }
+  //   }
+  // }
 
   final Stream<QuerySnapshot> users =
       Firestore.instance.collection("Users").snapshots();
-   var username = databaseService.getName();
+   //var username = databaseService.getName();
   
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(widget.name + " Home Page"),
+          title: Text(appUser.name + "'s Home Page"),
           centerTitle: true,
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -109,32 +109,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   MaterialPageRoute(builder: (context) => CreateQuiz()));
             },
             child: const Icon(Icons.add)),
-        body: Center(
-          child: Container(
-            height: 500, 
-            child: StreamBuilder<QuerySnapshot>(
-                stream: users,
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    return Text("Something went wrong");
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Text("Loading");
-                  }
-                   //final data = snapshot.data;
+        // body: Center(
+        //   child: Container(
+        //     height: 500, 
+        //     child: StreamBuilder<QuerySnapshot>(
+        //         stream: users,
+        //         builder: (BuildContext context,
+        //             AsyncSnapshot<QuerySnapshot> snapshot) {
+        //           if (snapshot.hasError) {
+        //             return Text("Something went wrong");
+        //           }
+        //           if (snapshot.connectionState == ConnectionState.waiting) {
+        //             return Text("Loading");
+        //           }
+        //            //final data = snapshot.data;
 
-                  final data = snapshot.requireData.documents;
+        //           final data = snapshot.requireData.documents;
 
-                  return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context,index){
-                      return Text('${appUser.name}Users name is ${data[index]['name']}');
-                    });
+        //           return ListView.builder(
+        //             itemCount: data.length,
+        //             itemBuilder: (context,index){
+        //               return Text('${appUser.name}Users name is ${data[index]['name']}');
+        //             });
 
-                }),
-          ),
-        )
+        //         }),
+        //   ),
+        // )
+        // this is the body with the buttons
         // body: Center(
         //     child: Container(
         //         child: Column(
