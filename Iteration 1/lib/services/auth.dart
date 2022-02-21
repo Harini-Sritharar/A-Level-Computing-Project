@@ -1,15 +1,15 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/models/user_model.dart';
+import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class AuthService{
 final FirebaseAuth _auth = FirebaseAuth.instance;
-  MyUser? _userFromFirebaseUser(FirebaseUser user){
-    return user != null ? MyUser(uid: user.uid) : null;
+  UserDetails? _userFromFirebaseUser(FirebaseUser user){
+    return user != null ? UserDetails(user.uid) : null;
   }
   // logs into existing account
-  Future signInEmailAndPassword(String email,String password) async{
+  Future<UserDetails?> signInEmailAndPassword(String email,String password) async{
     try{
       AuthResult authResult = await _auth.signInWithEmailAndPassword
       (email: email, password: password);

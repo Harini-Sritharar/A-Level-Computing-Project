@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 
 import '../../main.dart';
@@ -17,44 +18,36 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   AuthService authService = new AuthService();
   bool _isLoading = false;
   //bool invalidpassword = false;
-  signIn() async {
+  Future<void> signIn() async {
     // if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
-      email = "student@gmail.com";
-      password = "student";
-      await authService.signInEmailAndPassword(email, password).then((val) async {
-        if (val != null) {
-          setState(() {
-             //invalidpassword = false;
-            _isLoading = false;
-            print(Text("Invalid"));
-          });
-          AuthService.saveUserLoggedIn(isLoggedIn: true);
-          //String credential = await databaseService.getName();
-
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeScreen(name: "Your"),
-              ));
-        }
-        else{
-          //invalidpassword = true;
-          _isLoading = true;
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => WelcomeScreen(),
-              ));
-          return Text("Incorrect password or username");
-
-
-        }
-        
-      });
-    // }
+    setState(() {
+      _isLoading = true;
+    });
+    email = "student@gmail.com";
+    password = "student";
+    UserDetails? newUser =
+        await authService.signInEmailAndPassword(email, password);
+    if (newUser == null) {
+      _isLoading = false;
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WelcomeScreen(),
+          ));
+      return;
+    }
+    setState(() {
+      _isLoading = false;
+    });
+    AuthService.saveUserLoggedIn(isLoggedIn: true);
+    await newUser.fillBasicData();
+    //String credential = await databaseService.getName();
+    appUser = newUser;
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomeScreen(name: "Your"),
+        ));
   }
 
   bool isObscure = true;
@@ -65,96 +58,96 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
         backgroundColor: Colors.cyan[600],
         // when loading the Progress Indicator will run, after loading, it wil go to the form
-        body:
-            _isLoading ? Container(
-              child: Center(
+        body: _isLoading
+            ? Container(
+                child: Center(
                 child: CircularProgressIndicator(),
-                )
-            ):Form(
-          key: _formKey,
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 25),
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TextFormField(
-                    controller: myController,
-                    validator: (val) {
-                      return val!.isEmpty ? "Enter Email" : null;
-                    },
-                    decoration: InputDecoration(hintText: "Email"),
-                    onChanged: (val) {
-                      email = val;
-                    },
-                  ),
-                  SizedBox(height: 20),
-                  TextFormField(
-                    obscureText: isObscure,
-                    validator: (val) {
-                      if (val == null || val.isEmpty) {
-                        return "Enter password";
-                      }
-                      // if(invalidpassword = true){
-                      //   return("Invalid password");
-                      // }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        hintText: "Password",
-                        suffixIcon: IconButton(
-                          icon: Icon(isObscure
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              isObscure = !isObscure;
-                            });
+              ))
+            : Form(
+                key: _formKey,
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 25),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        TextFormField(
+                          controller: myController,
+                          validator: (val) {
+                            return val!.isEmpty ? "Enter Email" : null;
                           },
-                        )),
-                    onChanged: (val) {
-                      password = val;
-                    },
-                  ),
-                  SizedBox(height: 35),
-                  GestureDetector(
-                      onTap: () {
-                        signIn();
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        decoration: BoxDecoration(
-                            color: Colors.teal,
-                            borderRadius: BorderRadius.circular(30)),
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width - 40,
-                        child: Text("Login"),
-                      )),
-                  SizedBox(height: 35),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("No account yet?  "),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
-                        },
-                        child: Text(
-                          "Sign Up",
-                          style:
-                              TextStyle(decoration: TextDecoration.underline),
+                          decoration: InputDecoration(hintText: "Email"),
+                          onChanged: (val) {
+                            email = val;
+                          },
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        ));
+                        SizedBox(height: 20),
+                        TextFormField(
+                          obscureText: isObscure,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return "Enter password";
+                            }
+                            // if(invalidpassword = true){
+                            //   return("Invalid password");
+                            // }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              hintText: "Password",
+                              suffixIcon: IconButton(
+                                icon: Icon(isObscure
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(() {
+                                    isObscure = !isObscure;
+                                  });
+                                },
+                              )),
+                          onChanged: (val) {
+                            password = val;
+                          },
+                        ),
+                        SizedBox(height: 35),
+                        GestureDetector(
+                            onTap: () async {
+                              await signIn();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              decoration: BoxDecoration(
+                                  color: Colors.teal,
+                                  borderRadius: BorderRadius.circular(30)),
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width - 40,
+                              child: Text("Login"),
+                            )),
+                        SizedBox(height: 35),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("No account yet?  "),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignUpScreen()));
+                              },
+                              child: Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ));
   }
 }

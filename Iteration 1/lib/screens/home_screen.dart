@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return ListView.builder(
                     itemCount: data.length,
                     itemBuilder: (context,index){
-                      return Text('${username}Users name is ${data[index]['name']}');
+                      return Text('${appUser.name}Users name is ${data[index]['name']}');
                     });
 
                 }),

@@ -1,5 +1,6 @@
 //@dart=2.10
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
@@ -8,6 +9,7 @@ import 'package:nea_prototype_1/services/database.dart';
 
 AuthService authService = new AuthService();
 DatabaseService databaseService = new DatabaseService();
+UserDetails appUser = UserDetails("");
 
 void main() {
   runApp(MyApp());
