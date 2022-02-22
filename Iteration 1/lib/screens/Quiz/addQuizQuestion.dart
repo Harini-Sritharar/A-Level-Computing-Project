@@ -29,6 +29,9 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
         "option4": ans4,
       };
       await databaseService.addQuData(questionMap, widget.quizID);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Successful added question 😁'),
+            ));
       Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => AddQuizQuestion(widget.quizID)));
     }
@@ -113,9 +116,9 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                         SizedBox(height: 20),
                       GenericButton("Add Question", () {
                           uploadQuestionData();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Successful added question 😁'),
-            ));
+            //               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //                 content: Text('Successful added question 😁'),
+            // ));
                         }),
                       
                       SizedBox(height: 35),
