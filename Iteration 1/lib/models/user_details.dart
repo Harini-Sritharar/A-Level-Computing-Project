@@ -5,9 +5,6 @@ import 'package:nea_prototype_1/services/database.dart';
 
 class UserDetails {
   String uid, name = "", email = "", position = "", classId = "", yearGroup = "";
-  // save quiz scores by quiz id: score map
-  //Map <String,int> scores =  [] as Map <String,int>;
-
   UserDetails(this.uid);
 
   Future<void> fillBasicData() async {

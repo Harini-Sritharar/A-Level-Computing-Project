@@ -63,10 +63,23 @@ class DatabaseService {
     print(data);
     return data['name'];
     // name = data['name']
-    // return Tex);
-    //CollectionReference users = Firestore.instance.collection("Users");
    
   }
+
+  // Future<String> getQuizzes() async{
+    
+  // Firestore.instance.collection("Quiz")
+  // .where('userId', isEqualTo: appUser.uid).snapshots().listen((data) => { 
+  //   print("userId ${data.documents[0]['userId']}"),
+  //   appUser.quizzes.add(data.documents[0]['userId'])
+  // });
+  //   return "";
+  
+
+    // docs.then((snpashot) => appUser.quizzes.add());
+    //   return "";
+
+  // }
   // return FutureBuilder<DocumentSnapshot>(
   //   future: users.document(uid).get(),
 

@@ -58,7 +58,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   builder: (context) => HomeScreen(name: name),
                 ));
           }
-          //await databaseService.getName();
         },
       );
     }

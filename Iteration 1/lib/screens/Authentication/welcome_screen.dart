@@ -41,7 +41,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
     AuthService.saveUserLoggedIn(isLoggedIn: true);
     await newUser.fillBasicData();
-    //String credential = await databaseService.getName();
     appUser = newUser;
     Navigator.pushReplacement(
         context,

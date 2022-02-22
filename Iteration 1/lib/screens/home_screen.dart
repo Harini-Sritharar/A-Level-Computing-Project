@@ -1,6 +1,7 @@
 import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nea_prototype_1/screens/Quiz/Menus/by_you_quizzes_menu.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final Stream<QuerySnapshot> users =
       Firestore.instance.collection("Users").snapshots();
-   //var username = databaseService.getName();
   
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,9 +163,11 @@ class _HomeScreenState extends State<HomeScreen> {
               }),
               SizedBox(height: 35.0),
               GenericButton("By You", () {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text('I don\'t know who you are though 🤔'),
-                ));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ByYouMenu()));
+                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                //   content: Text('I don\'t know who you are though 🤔'),
+                // ));
               }),
               SizedBox(height: 75.0),
               GenericButton("Sign Out", () {
