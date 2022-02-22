@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
-import '../../button.dart';
-import '../../main.dart';
-
+import '../../../button.dart';
 
 class AddQuizQuestion extends StatefulWidget {
   final String quizID;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/Quiz/addQuizQuestion.dart';
+import 'package:nea_prototype_1/screens/Quiz/Create%20Quiz/addQuizQuestion.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:random_string/random_string.dart';
 
-import '../../main.dart';
+import '../../../main.dart';
+
 
 class CreateQuiz extends StatefulWidget {
   @override

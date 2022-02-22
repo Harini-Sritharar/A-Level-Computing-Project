@@ -1,7 +1,8 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
+
+import 'Menus/preset_quizzes_menu.dart';
 
 class ScoreScreen extends StatelessWidget {
   final int points;

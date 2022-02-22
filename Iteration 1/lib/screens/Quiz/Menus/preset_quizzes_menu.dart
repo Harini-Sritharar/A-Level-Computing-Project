@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/Quiz/quiz_navigator.dart';
+import 'package:nea_prototype_1/main.dart';
+import 'package:nea_prototype_1/screens/Quiz/Navigation/questionInfo.dart';
+import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
-import 'package:nea_prototype_1/screens/questionInfo.dart';
 
-import '../main.dart';
 
 
 class PresetMenu extends StatelessWidget {

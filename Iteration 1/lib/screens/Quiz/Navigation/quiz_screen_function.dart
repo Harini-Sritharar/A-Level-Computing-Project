@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:nea_prototype_1/screens/Quiz/Navigation/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
-import '../questionInfo.dart';
 
 
 // ignore: must_be_immutable

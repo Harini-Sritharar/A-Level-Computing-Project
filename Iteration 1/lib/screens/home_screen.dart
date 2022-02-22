@@ -6,10 +6,11 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
-import 'package:nea_prototype_1/screens/Quiz/create_quiz.dart';
-import 'package:nea_prototype_1/screens/preset_quizzes_menu.dart';
+
 import 'package:nea_prototype_1/screens/profile_screen.dart';
 import '../main.dart';
+import 'Quiz/Create Quiz/create_quiz.dart';
+import 'Quiz/Menus/preset_quizzes_menu.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key, required this.name}) : super(key: key);
