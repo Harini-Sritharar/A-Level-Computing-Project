@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../main.dart';
@@ -13,48 +14,61 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final String initial = appUser.name[0];
+    //final String initial = appUser.name[0];
+    TextStyle myStyle = TextStyle(color: Colors.white);
     //name = myController.text;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        //title: Text("Hi " + widget.name + " !"),
         title: Text(appUser.name + "'s Profile"),
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),
       body: Center(
         child: Column(
+
           children: <Widget>[
             SizedBox(height: 45.0),
             CircleAvatar(
+              backgroundImage: NetworkImage('https://www.woolha.com/media/2020/03/eevee.png'),
+              //backgroundImage: NetworkImage("https:pngtree.com/freepng/flat-user-avatar-astronaut_4720959.html"),
               radius: 50,
-              backgroundColor: Colors.purple[100],
-              child: Text(
-                initial,
-                textScaleFactor: 2,
-              ),
             ),
-            SizedBox(height: 45.0),
+            SizedBox(height:20),         
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color:Colors.teal[20],
+                borderRadius: BorderRadius.circular(40),
+                boxShadow: [
+                  BoxShadow(
+                  color: Color(0xFF42A5F5), spreadRadius: 3
+                  )]),    
+              child: Column(
+                children: [
             Text(
               "Name: " + appUser.name,
               textScaleFactor: 1.5,
+              style: myStyle,
             ),
             SizedBox(height:20),         
             Text(
               "Email: " + appUser.email,
               textScaleFactor: 1.5,
+              style: myStyle,
             ),
             SizedBox(height:20),         
             Text(
               "Year Group: ${appUser.yearGroup}" ,
               textScaleFactor: 1.5,
+              style: myStyle,
             ),
             SizedBox(height:20),         
             Text(
               "Position: " + appUser.position,
               textScaleFactor: 1.5,
-            ),        
+              style: myStyle,
+            )])) 
           ],
         ),
       ),
