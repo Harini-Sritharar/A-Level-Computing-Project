@@ -34,15 +34,12 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Object? chosenAnswer = 0;
-  //setState((){points = 0});
   checkAnswer(chosenAns, rightIndex) {
     String message = "Correct";
     Color? bgColour = Colors.green[300];
     if (chosenAns == rightIndex) {
       points += 10;
     }
-      //widget.addPoints(10);
-      //return (points);
     else {
       bgColour = Colors.red[700];
       message = "Incorrect";
@@ -68,7 +65,6 @@ class _QuizScreenState extends State<QuizScreen> {
               child:
                   AlertDialog(backgroundColor: bgColour, title: Text(message)),
               onTap: () {
-                //quizScore = points;
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ScoreScreen(points)));
               },
@@ -87,11 +83,16 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: AutoSizeText(
-          widget.questionInfo.question,
-          maxLines: 1,
-        ),
+                widget.questionInfo.question,
+                maxLines: 1)
       ),
-      body: (Stack(children: [
+
+      body: (
+        Stack(children: [
+                // AutoSizeText(
+                // widget.questionInfo.question,
+                // maxLines: 1,style: Theme.of(context).textTheme.headline5!.copyWith(color: Color(0xFF42A5f5),fontSize: 30),),
+          
         // // countdown timer => not essential at the moment and so can be included once essential features are completed
         // SafeArea(
         //   child: Padding(
@@ -134,14 +135,10 @@ class _QuizScreenState extends State<QuizScreen> {
         //     ),)),
 
         // Question in body of screen rather than in appbar
-        // Text.rich(
-        //   TextSpan(
-        //     text: (widget.questionInfo.question),
-        //     style: Theme.of(context).textTheme.headline5!.copyWith(color: Color(0xFF42A5f5)),
-        //     children: [
-        // ],)),
+        //SizedBox(height:100,width: 40,),
+
         // creating the radio buttons
-        //Divider(height: 30, indent: 10),
+        Divider(height: 30, indent: 10),
         Container(
           padding: EdgeInsets.all(0),
           // decoration: BoxDecoration(

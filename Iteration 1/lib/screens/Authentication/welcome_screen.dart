@@ -23,8 +23,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     setState(() {
       _isLoading = true;
     });
-    // email = "student@gmail.com";
-    // password = "student";
+    email = "student@gmail.com";
+    password = "student";
     UserDetails? newUser =
         await authService.signInEmailAndPassword(email, password);
     if (newUser == null) {
