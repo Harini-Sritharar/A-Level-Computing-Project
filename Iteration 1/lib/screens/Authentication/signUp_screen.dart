@@ -26,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool isObscure = true;
   final myController = TextEditingController();
 
-   signUp() async {
+  signUp() async {
     var classID = randomAlphaNumeric(10);
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -48,10 +48,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
               "yearGroup": yrGroup,
               "position": position,
               "classId": classID,
-              "password":password
+              "password": password
             };
             databaseService.addUserData(userData);
-            //uploadUserData();
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -63,26 +62,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  // void uploadUserData() async {
-  //     final FirebaseUser user = await auth.currentUser();
-  //     final uid = user.uid;
-  //     var classID = randomAlphaNumeric(10);
-  //    if (_formKey.currentState!.validate()) {
-  //     Map<String, dynamic> userData = {
-  //         "name": name,
-  //         "uid": uid,
-  //         "email": email,
-  //         "yearGroup": yrGroup,
-  //         "position": position,
-  //         "classId": classID,
-  //       };
-  //     await databaseService.addUserData(userData);
-  //     }
-  //   }
-
   @override
   Widget build(BuildContext context) {
-    final myController = TextEditingController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.cyan[600],
@@ -113,7 +94,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 20),
                         TextFormField(
-                          //controller: myController,
                           validator: (val) {
                             return val!.isEmpty ? "Enter Email" : null;
                           },
@@ -145,16 +125,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: 20),
                         TextFormField(
+                          //controller: passwordController,
                           obscureText: isObscure,
                           validator: (val) {
-                            if (val!.isEmpty){
+                            if (val!.isEmpty) {
                               return ("Enter Password");
                             }
-                            if (val.length < 8){
+                            if (val.length < 8) {
                               return ("Too short");
                             }
                             // return val!.isEmpty ? "Enter Password" : null;
-                            
                           },
                           decoration: InputDecoration(
                               hintText: "Password",

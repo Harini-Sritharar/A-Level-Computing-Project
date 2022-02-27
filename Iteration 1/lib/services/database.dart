@@ -1,5 +1,6 @@
 // multidex is enabled so cloud firestore should work :)
 import 'dart:async';
+import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,7 @@ class DatabaseService {
   }
 
   // adding question data
-  Future<void> addQuData(
-      Map<String, dynamic> questionData, String quizID) async {
+  Future<void> addQuData(Map<String, dynamic> questionData, String quizID) async {
     await Firestore.instance
         .collection("Quiz")
         .document(quizID)
@@ -63,8 +63,33 @@ class DatabaseService {
     print(data);
     return data['name'];
     // name = data['name']
-   
   }
+  //  getQuizData(items) async{
+  //    final Query userQuizzes = await Firestore.instance.collection("Quiz")
+  //     .where('userId',isEqualTo: appUser.uid);
+  //   try{
+  //     userQuizzes.getDocuments()
+  //     .then((querySnapshot) =>
+  //     querySnapshot.documents.forEach((element) {
+  //     //     items.add(element.data);
+  //     //    })
+  //     print (items);
+  //     return items;
+  //   }));
+  //   return null;
+  //   }
+  //   catch(e){
+  //     print(e.toString());
+  //     return [];
+  //   }  
+       
+  //           // await Firestore.instance.collection("Quiz").getDocuments()
+  //     // .then((querySnapshot){
+
+
+  // }
+
+  
 
   // Future<String> getQuizzes() async{
     
@@ -116,7 +141,7 @@ class DatabaseService {
     final uid = user.uid;
     // opens the Users collection
     final Stream<QuerySnapshot> users =
-        Firestore.instance.collection("Users").snapshots();
+        Firestore.instance.collection("Users").fetchData();
     return StreamBuilder<QuerySnapshot>(
       stream: users,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

@@ -28,6 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     UserDetails? newUser =
         await authService.signInEmailAndPassword(email, password);
     if (newUser == null) {
+      print("Null");
       _isLoading = false;
       Navigator.pushReplacement(
           context,

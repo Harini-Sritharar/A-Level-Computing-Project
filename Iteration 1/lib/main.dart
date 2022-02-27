@@ -35,7 +35,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget build(BuildContext context) {
-    return MaterialApp(
+   return GestureDetector(
+      onTap: (){
+        FocusScopeNode currentFocus = FocusScope.of(context);
+         
+        if (!currentFocus.hasPrimaryFocus){
+          currentFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Revision Quiz App',
       theme: ThemeData(
@@ -43,10 +51,12 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: WelcomeScreen(),
-     //home: (_isLoggedIn ?? false) ? HomeScreen(name: "Harini") : WelcomeScreen(),
+      // home: (_isLoggedIn ?? false) ? HomeScreen(name: appUser.name) : WelcomeScreen(),
 
       //home: HomeScreen(name: "Harini"),
       
-    );
+    ),
+    ); 
+    
   }
 }

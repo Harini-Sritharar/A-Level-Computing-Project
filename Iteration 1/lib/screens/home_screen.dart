@@ -110,6 +110,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   MaterialPageRoute(builder: (context) => CreateQuiz()));
             },
             child: const Icon(Icons.add)),
+
+        // floatingActionButton: FloatingActionButton(
+        //     onPressed: () {
+        //       Navigator.push(context,
+        //           MaterialPageRoute(builder: (context) => CreateQuiz()));
+        //     },
+        //     child: const Icon(Icons.add)),
         // body: Center(
         //   child: Container(
         //     height: 500, 
