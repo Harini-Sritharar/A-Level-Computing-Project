@@ -12,6 +12,7 @@ class ByYouMenu extends StatefulWidget {
   @override
   _ByYouMenuState createState() => _ByYouMenuState();
 }
+
 // fetchDBList(List quizzes) async{
 //   dynamic result = await databaseService.getQuizData(quizzes);
 //   print(result);
@@ -20,13 +21,9 @@ class ByYouMenu extends StatefulWidget {
 //     return quizzes;
 //   }
 //   return null;
-// //  
+// //
 // }
 class _ByYouMenuState extends State<ByYouMenu> {
-  final Map<String,String> quizzes = appUser.quizzes as Map<String,String>;
-  Stream quizStream = appUser.quizzes as Stream;
-
-
   //   for (var i = 0; i < appUser.quizzes.length; i++)
   //     return Card(
   //       child: Column(children: <Widget>[
@@ -36,84 +33,46 @@ class _ByYouMenuState extends State<ByYouMenu> {
   //       ],)
   //     );
   // }
-  Widget quizList(){
-    return Container(
-      child: StreamBuilder(
-        stream: quizStream,
-        builder: (context,snapshot){
-          return snapshot.data != null 
-          ? Container():
-          ListView.builder(
-            itemCount: appUser.quizzes.length,
-            itemBuilder: (context, index){
-              return QuizTile(snapshot.data!.
-              // requireData[index].data()['quizTitle']);
-            });
-        },
-      )
 
-    );
-  }
-
-      
-
+  List<Map<String, String>> quizzes = [
+    {'quizId': 'huebdjcb67', 'quizTitle': "Testing"},
+    {'quizId': 'zh2378btl', 'quizTitle': "Testing 2"},
+    {'quizId': 'zh2378btl', 'quizTitle': "Testing 2"}
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
-  }
-  
-  
-   //   appBar: AppBar(
-    //     centerTitle: true,
-    //     title: Text("Quizzes made by You"),
- 
-          
-    
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 35)
+,            for (int i = 0; i < (quizzes.length); i++)
+              Container(
+                  padding: EdgeInsets.all(50),
+                  decoration: BoxDecoration(
+                      color: Colors.teal[20],
+                      borderRadius: BorderRadius.circular(40),
+                      boxShadow: [
+                        BoxShadow(color: Color(0xFF42A5F5), spreadRadius: 3)
+                      ]),
+                  child: Column(
+                    children: [
+                      SizedBox(),
+                      Text(quizzes.elementAt(i)['quizTitle'].toString()
+                      ),
+                    ],
+                  ),
+                  ),
+                  SizedBox(height: 35),
 
-    // return StreamBuilder<QuerySnapshot>(
-    //   stream: _usersStream,
-    //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    //     if (snapshot.hasError) {
-    //       return Text('Something went wrong');
-    //     }
-
-    //     if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return Text("Loading");
-    //     }
-
-    //     return ListView(
-    //       children: snapshot.data!.documents.map((DocumentSnapshot document) {
-    //       Map<String, dynamic> data = document.data! as Map<String, dynamic>;
-    //         return ListTile(
-    //           title: Text(data['quizId']),
-    //           subtitle: Text(data['company']),
-    //         );
-    //       }).toList(),
-    //     );
-    //   },
-    // );
-}
-// ignore: must_be_immutable
-class QuizTile extends StatelessWidget {
-  String qTitle;
-  QuizTile(this.qTitle);
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: [
-          Container(
-            child: Column(
-              children: [
-                Text(qTitle)
-              ]
-            )
-          )
-        ],
-      )
+          ],
+        ),
+      ),
     );
+    // return
   }
-  }
+} 
+
+
+

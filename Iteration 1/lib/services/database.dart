@@ -25,7 +25,8 @@ class DatabaseService {
   }
 
   // adding question data
-  Future<void> addQuData(Map<String, dynamic> questionData, String quizID) async {
+  Future<void> addQuData(
+      Map<String, dynamic> questionData, String quizID) async {
     await Firestore.instance
         .collection("Quiz")
         .document(quizID)
@@ -55,18 +56,20 @@ class DatabaseService {
     // gets their user id
     final String uid = user.uid;
     //opens the Users collection
-    DocumentSnapshot document =
-        await Firestore.instance.collection("Users").document(uid).get().catchError((e){
-          print(e);
-        });
-    Map<String, dynamic> data =
-        document.data as Map<String, dynamic>;
+    DocumentSnapshot document = await Firestore.instance
+        .collection("Users")
+        .document(uid)
+        .get()
+        .catchError((e) {
+      print(e);
+    });
+    Map<String, dynamic> data = document.data as Map<String, dynamic>;
     print(data);
     return data['name'];
     // name = data['name']
   }
-  
-    Future getAllInfo(field) async {
+
+  Future getAllInfo(field) async {
     // gets current user
     final FirebaseUser user = await auth.currentUser();
     // gets their user id
@@ -94,12 +97,18 @@ class DatabaseService {
       },
     );
   }
-    Future<void> getQuizzes() async{
-    final query = await Firestore.instance.collection("Quiz").where("userId", isEqualTo: appUser.uid).getDocuments();
+
+  Future<void> getQuizzes() async {
+    final query = await Firestore.instance
+        .collection("Quiz")
+        .where("userId", isEqualTo: appUser.uid)
+        .getDocuments();
+    // print(query);
     final quizzesFetched = query.documents.map((doc) => doc.data);
-    appUser.quizzes = quizzesFetched;
-    print (appUser.quizzes);
-    }
+    // print(quizzesFetched);
+    // appUser.quizzes = quizzesFetched;
+    print(appUser.quizzes);
+  }
 }
   //  getQuizData(items) async{
   //    final Query userQuizzes = await Firestore.instance.collection("Quiz")
