@@ -1,9 +1,8 @@
 // multidex is enabled so cloud firestore should work :)
 import 'dart:async';
-import 'dart:html';
+// import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -57,13 +56,51 @@ class DatabaseService {
     final String uid = user.uid;
     //opens the Users collection
     DocumentSnapshot document =
-        await Firestore.instance.collection("Users").document(uid).get();
+        await Firestore.instance.collection("Users").document(uid).get().catchError((e){
+          print(e);
+        });
     Map<String, dynamic> data =
         document.data as Map<String, dynamic>;
     print(data);
     return data['name'];
     // name = data['name']
   }
+  
+    Future getAllInfo(field) async {
+    // gets current user
+    final FirebaseUser user = await auth.currentUser();
+    // gets their user id
+    final uid = user.uid;
+    // opens the Users collection
+    final Stream<QuerySnapshot> users =
+        Firestore.instance.collection("Users").snapshots();
+    return StreamBuilder<QuerySnapshot>(
+      stream: users,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+
+        final data = snapshot.requireData.documents;
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            return Text('User/s $field is ${data[index]['$field']}');
+          },
+        );
+      },
+    );
+  }
+    Future<void> getQuizzes() async{
+    final query = await Firestore.instance.collection("Quiz").where("userId", isEqualTo: appUser.uid).getDocuments();
+    final quizzesFetched = query.documents.map((doc) => doc.data);
+    appUser.quizzes = quizzesFetched;
+    print (appUser.quizzes);
+    }
+}
   //  getQuizData(items) async{
   //    final Query userQuizzes = await Firestore.instance.collection("Quiz")
   //     .where('userId',isEqualTo: appUser.uid);
@@ -134,37 +171,4 @@ class DatabaseService {
   // getData(name)
   //Future <DocumentSnapshot> snapshot = UserCollection.docu
 
-  Future getAllInfo(field) async {
-    // gets current user
-    final FirebaseUser user = await auth.currentUser();
-    // gets their user id
-    final uid = user.uid;
-    // opens the Users collection
-    final Stream<QuerySnapshot> users =
-        Firestore.instance.collection("Users").fetchData();
-    return StreamBuilder<QuerySnapshot>(
-      stream: users,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
 
-        final data = snapshot.requireData.documents;
-        return ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            return Text('User/s $field is ${data[index]['$field']}');
-          },
-        );
-      },
-    );
-
-    // var query = await collection.get();
-    // re
-    // getData(name)
-    //Future <DocumentSnapshot> snapshot = UserCollection.docu
-  }
-}

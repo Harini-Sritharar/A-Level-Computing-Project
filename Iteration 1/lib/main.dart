@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
-import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
@@ -35,15 +34,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Widget build(BuildContext context) {
-   return GestureDetector(
-      onTap: (){
-        FocusScopeNode currentFocus = FocusScope.of(context);
-         
-        if (!currentFocus.hasPrimaryFocus){
-          currentFocus.unfocus();
-        }
-      },
-      child: MaterialApp(
+   return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Revision Quiz App',
       theme: ThemeData(
@@ -55,8 +46,9 @@ class _MyAppState extends State<MyApp> {
 
       //home: HomeScreen(name: "Harini"),
       
-    ),
-    ); 
+    );
+  }
+ 
     
   }
-}
+

@@ -169,12 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) => PresetMenu()));
               }),
               SizedBox(height: 35.0),
-              GenericButton("By You", () {
+              GenericButton("By You", (){databaseService.getQuizzes();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ByYouMenu()));
-                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                //   content: Text('I don\'t know who you are though 🤔'),
-                // ));
               }),
               SizedBox(height: 75.0),
               GenericButton("Sign Out", () {

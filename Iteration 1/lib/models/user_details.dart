@@ -5,6 +5,7 @@ import 'package:nea_prototype_1/services/database.dart';
 
 class UserDetails {
   String uid, name = "", email = "", position = "", classId = "", yearGroup = "";
+  Iterable<Map <String,dynamic>> quizzes = [];
   UserDetails(this.uid);
 
   Future<void> fillBasicData() async {

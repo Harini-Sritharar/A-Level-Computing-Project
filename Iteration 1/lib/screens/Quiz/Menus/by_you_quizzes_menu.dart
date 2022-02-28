@@ -1,17 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
+import 'package:nea_prototype_1/screens/Quiz/Navigation/questionInfo.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
 class ByYouMenu extends StatefulWidget {
   ByYouMenu({
     Key? key,
   }) : super(key: key);
-
   @override
   _ByYouMenuState createState() => _ByYouMenuState();
 }
-@override
 // fetchDBList(List quizzes) async{
 //   dynamic result = await databaseService.getQuizData(quizzes);
 //   print(result);
@@ -23,56 +23,54 @@ class ByYouMenu extends StatefulWidget {
 // //  
 // }
 class _ByYouMenuState extends State<ByYouMenu> {
-  // late Stream quizStream;
-  // Widget quizList(){
-  //   return Container(
-  //     child: StreamBuilder(
-  //       stream: quizStream,
-  //       builder: (BuildContext context, snapshot){
-  //         if (snapshot.data != null){
-  //           return Container();
-  //         }
+  final Map<String,String> quizzes = appUser.quizzes as Map<String,String>;
+  Stream quizStream = appUser.quizzes as Stream;
 
-  //         //var data = snapshot.data
-  //          });}
-  //       },)
-  //   );
+
+  //   for (var i = 0; i < appUser.quizzes.length; i++)
+  //     return Card(
+  //       child: Column(children: <Widget>[
+  //         ListTile(
+  //           title: appUser.quizzes[i]['quizTitle'],
+  //           subtitle: ,)
+  //       ],)
+  //     );
   // }
+  Widget quizList(){
+    return Container(
+      child: StreamBuilder(
+        stream: quizStream,
+        builder: (context,snapshot){
+          return snapshot.data != null 
+          ? Container():
+          ListView.builder(
+            itemCount: appUser.quizzes.length,
+            itemBuilder: (context, index){
+              return QuizTile(snapshot.data!.
+              // requireData[index].data()['quizTitle']);
+            });
+        },
+      )
+
+    );
+  }
+
+      
+
+
   @override
-    getQuizzes() async{
-      List quizzes = [];
-    QuerySnapshot querySnapshot = await Firestore.instance.collection("Quiz").getDocuments();
-    final docums = querySnapshot.documents.map((doc) => doc.data).toList();
-    quizzes.add(docums);
-    return(quizzes);
-    // for (int i = 0; i < querySnapshot.documents.length; i++){
-    //   var a = querySnapshot.documents[i];
-    //   print(a.documentID);
-    }
-  //List quizzes = getDocs()
   Widget build(BuildContext context) {
-    //databaseService.getQuizzes();
-     return Scaffold(
-       body: Container(
-         child: Column(children: [Text("")]),
-       ));
+    return Scaffold();
+  }
+  
   
    //   appBar: AppBar(
     //     centerTitle: true,
     //     title: Text("Quizzes made by You"),
-    //   ),
-    //   body: Container(
-    //     child: ListView.builder(
-    //       itemCount: quizzes.length,
-    //       itemBuilder: (context,index){
-    //         return Card(
-    //           child: ListTile(
-    //             title: Text(quizzes[index]['quizTitle']),
+ 
+          
+    
 
-    //           )
-    //         );
-    //       }))
-    //   );
     // return StreamBuilder<QuerySnapshot>(
     //   stream: _usersStream,
     //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -95,6 +93,27 @@ class _ByYouMenuState extends State<ByYouMenu> {
     //     );
     //   },
     // );
-    
-  }
 }
+// ignore: must_be_immutable
+class QuizTile extends StatelessWidget {
+  String qTitle;
+  QuizTile(this.qTitle);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Stack(
+        children: [
+          Container(
+            child: Column(
+              children: [
+                Text(qTitle)
+              ]
+            )
+          )
+        ],
+      )
+    );
+  }
+  }
