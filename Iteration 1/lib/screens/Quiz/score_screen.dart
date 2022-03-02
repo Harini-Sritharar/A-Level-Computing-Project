@@ -12,7 +12,8 @@ class ScoreScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.deepPurple[200],
-        body: Stack(children: <Widget>[
+        body: Stack(
+          children: <Widget>[
           Container(
             height: size.height * 0.45,
             decoration: BoxDecoration(
@@ -25,24 +26,27 @@ class ScoreScreen extends StatelessWidget {
               color: Colors.deepPurple[500],
             ),
           ),
-          Column( 
-          children: [
-            SizedBox(height:304.0),
-            Center(child: Text("Score:",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,fontStyle: FontStyle.italic)),
-          ),
-          SizedBox(height: 30),
-          Center(
-            child: Text(("$points" + "/40"),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-          ),
-          SizedBox(height: 100.0),
-          GenericButton("Menu", () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => PresetMenu()));
-          }),
+          Column(children: [
+            SizedBox(height: 304.0),
+            Center(
+              child: Text("Score:",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic)),
+            ),
+            SizedBox(height: 30),
+            Center(
+              child: Text(("$points" + "/40"),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            ),
+            SizedBox(height: 100.0),
+            GenericButton("Menu", () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PresetMenu()));
+            }),
           ])
         ]));
   }

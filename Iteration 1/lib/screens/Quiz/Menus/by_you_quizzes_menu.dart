@@ -35,37 +35,40 @@ class _ByYouMenuState extends State<ByYouMenu> {
   // }
 
   List<Map<String, String>> quizzes = [
-    {'quizId': 'huebdjcb67', 'quizTitle': "Testing"},
-    {'quizId': 'zh2378btl', 'quizTitle': "Testing 2"},
-    {'quizId': 'zh2378btl', 'quizTitle': "Testing 2"}
+    {'quizId': 'huebdjcb67', 'quizTitle': "Differentiation"},
+    {'quizId': 'zh2378btl', 'quizTitle': "Integration"},
+    {'quizId': 'zh7cgy99l', 'quizTitle': "Parametric Equations"}
   ];
 
+onClick(){
+  return null;
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("By You"),
+        centerTitle: true,
+      ),
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 35)
-,            for (int i = 0; i < (quizzes.length); i++)
-              Container(
-                  padding: EdgeInsets.all(50),
-                  decoration: BoxDecoration(
-                      color: Colors.teal[20],
-                      borderRadius: BorderRadius.circular(40),
-                      boxShadow: [
-                        BoxShadow(color: Color(0xFF42A5F5), spreadRadius: 3)
-                      ]),
+            SizedBox(height: 35),
+            for (int i = 0; i < (quizzes.length); i++)
+                TextButton(onPressed: onClick,
+                 child: Card(
                   child: Column(
-                    children: [
-                      SizedBox(),
-                      Text(quizzes.elementAt(i)['quizTitle'].toString()
-                      ),
-                    ],
-                  ),
-                  ),
-                  SizedBox(height: 35),
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                       ListTile(
+                        leading: Icon(Icons.question_answer),
+                        title: Text(quizzes.elementAt(i)['quizTitle'].toString()),
+                        
 
+                      )
+                    ],
+                  )
+                ))
           ],
         ),
       ),
@@ -73,6 +76,22 @@ class _ByYouMenuState extends State<ByYouMenu> {
     // return
   }
 } 
+// class CustomCard extends StatefulWidget{
+//   @override
+//   Widget build(BuildContext context) {
+//     return new Card(
+      
+//       child: new Column(
+//         children: <Widget>[
+//           new Padding(
+//             padding: new EdgeInsets.all(7),
+//              )
+//                       ]
+//                       )
+//                       );
+//                       }
+
+// }
 
 
 
