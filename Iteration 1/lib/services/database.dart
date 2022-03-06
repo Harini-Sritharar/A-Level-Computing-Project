@@ -106,7 +106,7 @@ class DatabaseService {
     // print(query);
     final quizzesFetched = query.documents.map((doc) => doc.data);
     // print(quizzesFetched);
-    // appUser.quizzes = quizzesFetched;
+    appUser.quizzes = quizzesFetched.toList();
     print(appUser.quizzes);
   }
 }
