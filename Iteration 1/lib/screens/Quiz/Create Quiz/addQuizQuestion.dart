@@ -69,7 +69,7 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                           return val!.isEmpty ? "Enter an answer" : null;
                         },
                         decoration: InputDecoration(
-                          hintText: "Option A",
+                          hintText: "Correct Answer",
                         ),
                         onChanged: (val) {
                           ans1 = val;
