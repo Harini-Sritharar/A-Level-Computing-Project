@@ -17,9 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late String email, password;
   AuthService authService = new AuthService();
   bool _isLoading = false;
-  //bool invalidpassword = false;
   Future<void> signIn() async {
-    // if (_formKey.currentState!.validate()) {
     setState(() {
       _isLoading = true;
     });

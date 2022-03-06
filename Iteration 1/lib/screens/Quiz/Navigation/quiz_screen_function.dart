@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:nea_prototype_1/screens/Quiz/Navigation/questionInfo.dart';
+import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 
 
@@ -73,11 +73,6 @@ class _QuizScreenState extends State<QuizScreen> {
         });
   }
 
-  // showScore(checkEnd){
-  //   if (widget.checkQuizEnd){
-
-  //   }
-  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,9 +84,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
       body: (
         Stack(children: [
-                // AutoSizeText(
-                // widget.questionInfo.question,
-                // maxLines: 1,style: Theme.of(context).textTheme.headline5!.copyWith(color: Color(0xFF42A5f5),fontSize: 30),),
           
         // // countdown timer => not essential at the moment and so can be included once essential features are completed
         // SafeArea(
@@ -133,20 +125,10 @@ class _QuizScreenState extends State<QuizScreen> {
         //         )
         //       ],
         //     ),)),
-
-        // Question in body of screen rather than in appbar
-        //SizedBox(height:100,width: 40,),
-
         // creating the radio buttons
         Divider(height: 30, indent: 10),
         Container(
           padding: EdgeInsets.all(0),
-          // decoration: BoxDecoration(
-          //     color: Colors.blue[200],
-          //     borderRadius: BorderRadius.circular(50),
-          //     boxShadow: [
-          //       BoxShadow(color: Color(0xFF42A5F5), spreadRadius: 3)
-          //     ]),
           child: Column(
             children: [
               for (var i = 0; i < numOfOptions; i++)
@@ -173,19 +155,4 @@ class _QuizScreenState extends State<QuizScreen> {
       ])),
     );
   }
-  //  Widget build(BuildContext context) {
-  //    return Stack(
-  //      children: [
-  //        SafeArea(
-  //          child: Padding(
-  //            padding: const EdgeInsets.symmetric(horizontal:20),
-  //            child: Column(children: [Container(
-  //              width: double.infinity,
-  //              height:50,
-  //             color: Colors.purple[200],
-  //            )],))
-  //        )
-  //      ],
-  //    );
-  //  }
 }

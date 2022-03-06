@@ -97,17 +97,23 @@ class DatabaseService {
       },
     );
   }
-
+  // returns all the info about the quizzes that the current user has created
   Future<void> getQuizzes() async {
     final query = await Firestore.instance
         .collection("Quiz")
         .where("userId", isEqualTo: appUser.uid)
         .getDocuments();
+    // for (var)
+    // final questionsQuery = await Firestore.instance
+    //       .collection();
     // print(query);
+    final ids = query.documents.map((doc) => doc.documentID);
     final quizzesFetched = query.documents.map((doc) => doc.data);
     // print(quizzesFetched);
     appUser.quizzes = quizzesFetched.toList();
+    // List questions = questionsQuery.toList();
     print(appUser.quizzes);
+    print(ids);
   }
 }
   //  getQuizData(items) async{

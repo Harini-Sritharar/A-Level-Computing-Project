@@ -33,7 +33,7 @@ dependencies:
   random_string: ^2.0.1
   persistent_bottom_nav_bar: ^4.0.2
   custom_navigator: ^0.3.0
-  # this allows handling of SvGs for Android,iOS and Web
+  toggle_switch: ^1.4.0  # this allows handling of SvGs for Android,iOS and Web
   #websafe_svg: ^1.1.4
   #get: ^3.24.0
   # cached_network_image: ^2.0.0

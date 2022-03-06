@@ -40,6 +40,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        // errorColor: Colors.yellow
       ),
       home: WelcomeScreen(),
       // home: (_isLoggedIn ?? false) ? HomeScreen(name: appUser.name) : WelcomeScreen(),

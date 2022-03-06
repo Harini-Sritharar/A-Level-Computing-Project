@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
-import 'package:nea_prototype_1/screens/Quiz/Navigation/questionInfo.dart';
+import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 
