@@ -33,20 +33,20 @@ class PresetMenu extends StatelessWidget {
                       builder: (context) => QuizNavigator(
                         [
                           QuestionInfo(
-                            "What is dy/dx of cos x?",
-                            ["cos x", "sin x", "-sin x", "sec x"], 2 
+                            "What is dy/dx of cos x?", "-sin x",
+                            ["cos x", "sin x", "sec x"], 
                           ),
                           QuestionInfo(
-                            "What is dy/dx of sin x?",
-                            ["cosec x", "tan x", "-cos x", "cos x"], 3
+                            "What is dy/dx of sin x?", "cos x",
+                            ["cosec x", "tan x", "-cos x"],
                           ),
                           QuestionInfo(
-                            "What is dy/dx of tan x?",
-                            ["sec^2 x", "cosec^2 x", "cot x", "-sec x"], 0
+                            "What is dy/dx of tan x?", "sec^2 x", 
+                            ["cosec^2 x", "cot x", "-sec x"], 
                           ),
                           QuestionInfo(
-                            "What is dy/dx of sec x?",
-                            ["tan x", "cos x sin x", "sec x tan x", "cos x"], 2
+                            "What is dy/dx of sec x?","sec x tan x",
+                            ["tan x", "cos x sin x", "cos x"],
                           ),
                         ],
                       ),
@@ -64,20 +64,20 @@ class PresetMenu extends StatelessWidget {
                       builder: (context) => QuizNavigator(
                         [
                           QuestionInfo(
-                            "If events A and B are independent: P(A and B)= ?",
-                            ["P(A)", "P(B)", "P(A) + P(B)","P(A) * P(B)"], 3
+                            "If events A and B are independent: P(A and B)= ?","P(A) * P(B)",
+                            ["P(A)", "P(B)", "P(A) + P(B)"]
                           ),
                           QuestionInfo(
-                            "If events A and B are independent: P(A|B) = ?",
-                            ["P(A) / P(B)", "P(B)", "P(A)", "P(A) * P(B)"], 2
+                            "If events A and B are independent: P(A|B) = ?",  "P(A)", 
+                            ["P(A) / P(B)", "P(B)","P(A) * P(B)"],
                           ),
                           QuestionInfo(
-                            "If events A and B are mutually exclusive: P(A and B)= ?",
-                            ["P(A) * P(B)", "0", "P(A) + P(B)", "1"], 1
+                            "If events A and B are mutually exclusive: P(A and B)= ?", "0",
+                            ["P(A) * P(B)", "P(A) + P(B)", "1"], 
                           ),
                           QuestionInfo(
-                            "If events A and B are mutually exclusive: P(A or B)= ?",
-                            ["P(A) + P(B)", "P(A)", "P(B)", "P(A) - P(B)"], 0 
+                            "If events A and B are mutually exclusive: P(A or B)= ?","P(A) + P(B)",
+                            [ "P(A)", "P(B)", "P(A) - P(B)"], 
                           ),
                         ],
                       ),

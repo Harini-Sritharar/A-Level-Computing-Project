@@ -4,7 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 
-
 // ignore: must_be_immutable
 class QuizScreen extends StatefulWidget {
   //int points = 0;
@@ -23,24 +22,24 @@ class QuizScreen extends StatefulWidget {
 
 // screen for each question so the question validation should occur in here
 class _QuizScreenState extends State<QuizScreen> {
-  final numOfOptions = 4;
+  late final int numOfIncorrectOptions;
   int points = 0;
   late final List<bool> _checkBoxSelected;
 
   @protected
   @mustCallSuper
   void initState() {
-    _checkBoxSelected = List.filled(numOfOptions, false);
+    numOfIncorrectOptions = widget.questionInfo.incorrectOptions.length;
+    _checkBoxSelected = List.filled(numOfIncorrectOptions + 1, false);
   }
 
-  Object? chosenAnswer = 0;
-  checkAnswer(chosenAns, rightIndex) {
+  int chosenAnswer = 0;
+  checkAnswer(int chosenAns) {
     String message = "Correct";
     Color? bgColour = Colors.green[300];
-    if (chosenAns == rightIndex) {
+    if (chosenAns == 0) {
       points += 10;
-    }
-    else {
+    } else {
       bgColour = Colors.red[700];
       message = "Incorrect";
     }
@@ -59,32 +58,63 @@ class _QuizScreenState extends State<QuizScreen> {
                 title: Text(message),
               ),
             );
-          }
-          else {
+          } else {
             return GestureDetector(
               child:
                   AlertDialog(backgroundColor: bgColour, title: Text(message)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ScoreScreen(points)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScoreScreen(points)));
               },
             );
           }
         });
   }
 
+  List<Widget> buildOptions() {
+    List<RadioListTile> options = [];
+    options.add(RadioListTile(
+      title: Text(widget.questionInfo.correctOption),
+      value: 0,
+      groupValue: chosenAnswer,
+      toggleable: true,
+      onChanged: (value) {
+        setState(() {
+          if (value is int) {
+            chosenAnswer = value;
+            _checkBoxSelected[0] = !_checkBoxSelected[0];
+          }
+        });
+      },
+    ));
+    for (int i = 0; i < numOfIncorrectOptions; i++) {
+      options.add(RadioListTile(
+        title: Text(widget.questionInfo.incorrectOptions[i]),
+        value: i + 1,
+        groupValue: chosenAnswer,
+        toggleable: true,
+        onChanged: (value) {
+          setState(() {
+            if (value is int) {
+              chosenAnswer = value;
+              _checkBoxSelected[i + 1] = !_checkBoxSelected[i + 1];
+            }
+          });
+        },
+      ));
+    }
+    options.shuffle();
+    return options;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AutoSizeText(
-                widget.questionInfo.question,
-                maxLines: 1)
-      ),
-
-      body: (
-        Stack(children: [
-          
+          title: AutoSizeText(widget.questionInfo.questionName, maxLines: 1)),
+      body: (Stack(children: [
         // // countdown timer => not essential at the moment and so can be included once essential features are completed
         // SafeArea(
         //   child: Padding(
@@ -131,23 +161,11 @@ class _QuizScreenState extends State<QuizScreen> {
           padding: EdgeInsets.all(0),
           child: Column(
             children: [
-              for (var i = 0; i < numOfOptions; i++)
-                RadioListTile(
-                  title: Text(widget.questionInfo.options[i]),
-                  value: i,
-                  groupValue: chosenAnswer,
-                  toggleable: true,
-                  onChanged: (value) {
-                    setState(() {
-                      chosenAnswer = value;
-                      _checkBoxSelected[i] =
-                          !_checkBoxSelected[i];
-                    });
-                  },
-                ),
+              for (Widget q in buildOptions())
+              q,
               QuizButton("Skip", widget.setNextQuestion),
               QuizButton("Submit", () {
-                checkAnswer(chosenAnswer, widget.questionInfo.correctIndex);
+                checkAnswer(chosenAnswer);
               })
             ],
           ),

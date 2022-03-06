@@ -3,6 +3,8 @@ import 'dart:async';
 // import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/models/questionInfo.dart';
+import 'package:nea_prototype_1/models/quiz.dart';
 import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,67 +52,79 @@ class DatabaseService {
     });
   }
 
-  Future<String> getName() async {
-    //gets current user
-    final FirebaseUser user = await auth.currentUser();
-    // gets their user id
-    final String uid = user.uid;
-    //opens the Users collection
-    DocumentSnapshot document = await Firestore.instance
-        .collection("Users")
-        .document(uid)
-        .get()
-        .catchError((e) {
-      print(e);
-    });
-    Map<String, dynamic> data = document.data as Map<String, dynamic>;
-    print(data);
-    return data['name'];
-    // name = data['name']
-  }
+  // Future<String> getName() async {
+  //   //gets current user
+  //   final FirebaseUser user = await auth.currentUser();
+  //   // gets their user id
+  //   final String uid = user.uid;
+  //   //opens the Users collection
+  //   DocumentSnapshot document = await Firestore.instance
+  //       .collection("Users")
+  //       .document(uid)
+  //       .get()
+  //       .catchError((e) {
+  //     print(e);
+  //   });
+  //   Map<String, dynamic> data = document.data as Map<String, dynamic>;
+  //   print(data);
+  //   return data['name'];
+  //   // name = data['name']
+  // }
 
-  Future getAllInfo(field) async {
-    // gets current user
-    final FirebaseUser user = await auth.currentUser();
-    // gets their user id
-    final uid = user.uid;
-    // opens the Users collection
-    final Stream<QuerySnapshot> users =
-        Firestore.instance.collection("Users").snapshots();
-    return StreamBuilder<QuerySnapshot>(
-      stream: users,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Something went wrong");
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
+  // Future getAllInfo(field) async {
+  //   // gets current user
+  //   final FirebaseUser user = await auth.currentUser();
+  //   // gets their user id
+  //   final uid = user.uid;
+  //   // opens the Users collection
+  //   final Stream<QuerySnapshot> users =
+  //       Firestore.instance.collection("Users").snapshots();
+  //   return StreamBuilder<QuerySnapshot>(
+  //     stream: users,
+  //     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+  //       if (snapshot.hasError) {
+  //         return Text("Something went wrong");
+  //       }
+  //       if (snapshot.connectionState == ConnectionState.waiting) {
+  //         return Text("Loading");
+  //       }
 
-        final data = snapshot.requireData.documents;
-        return ListView.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            return Text('User/s $field is ${data[index]['$field']}');
-          },
-        );
-      },
-    );
-  }
+  //       final data = snapshot.requireData.documents;
+  //       return ListView.builder(
+  //         itemCount: data.length,
+  //         itemBuilder: (context, index) {
+  //           return Text('User/s $field is ${data[index]['$field']}');
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
   // returns all the info about the quizzes that the current user has created
   Future<void> getQuizzes() async {
     final query = await Firestore.instance
         .collection("Quiz")
         .where("userId", isEqualTo: appUser.uid)
         .getDocuments();
-    // for (var)
-    // final questionsQuery = await Firestore.instance
-    //       .collection();
+
     // print(query);
     final ids = query.documents.map((doc) => doc.documentID);
     final quizzesFetched = query.documents.map((doc) => doc.data);
     // print(quizzesFetched);
-    appUser.quizzes = quizzesFetched.toList();
+    appUser.quizzes = convertToQuizStructure(quizzesFetched.toList());
+    print("MANGO ${appUser.quizzes}");
+    for (int i = 0; i < appUser.quizzes.length; i++) {
+          final questionsQuery = await Firestore.instance
+          .collection("Quiz").document( appUser.quizzes[i].quizId )
+          .collection("q").getDocuments();
+          List<DocumentSnapshot> questionDetails = questionsQuery.documents;
+          for (DocumentSnapshot question in questionDetails){
+            Map<String,dynamic> optionsData = question.data; // as  Map<String,dynamic>;
+            QuestionInfo questionInfo = QuestionInfo(optionsData["question"],optionsData["option1"], [optionsData["option2"],optionsData["option3"],optionsData["option4"]]);
+            appUser.quizzes[i].questions.add(questionInfo);       
+          }
+
+           print("BANANA $questionsQuery");
+    }
     // List questions = questionsQuery.toList();
     print(appUser.quizzes);
     print(ids);

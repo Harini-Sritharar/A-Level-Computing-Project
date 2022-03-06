@@ -1,7 +1,7 @@
 class QuestionInfo {
-  final String question;
-  final List<String> options;
-  final int correctIndex ;
+  final String questionName;
+  final String correctOption;
+  final List<String> incorrectOptions;
 
-  QuestionInfo(this.question, this.options,this.correctIndex );
+  QuestionInfo(this.questionName,this.correctOption,this.incorrectOptions,);
 }

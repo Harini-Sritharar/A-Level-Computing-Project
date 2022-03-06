@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
+import 'package:nea_prototype_1/models/quiz.dart';
 import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
@@ -35,7 +36,7 @@ class _ByYouMenuState extends State<ByYouMenu> {
   //     );
   // }
 
-  List<Map<String, dynamic>> userQuizzes = appUser.quizzes;
+  List<Quiz> userQuizzes = appUser.quizzes;
   // [
   //   // {'quizId': 'huebdjcb67', 'quizTitle': "Differentiation",},
   //   // {'quizId': 'zh2378btl', 'quizTitle': "Integration"},
@@ -110,7 +111,7 @@ onClick(){
                     children: <Widget>[
                        ListTile(
                         leading: Icon(Icons.question_answer),
-                        title: Text(userQuizzes.elementAt(i)['quizTitle'].toString()),
+                        title: Text(userQuizzes[i].quizTitle),
                       )
                     ],
                   )
