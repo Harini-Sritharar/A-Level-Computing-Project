@@ -6,6 +6,7 @@ import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:nea_prototype_1/username.dart';
 import 'package:random_string/random_string.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import '../../button.dart';
 import '../../main.dart';
 
@@ -82,6 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                        // NAME FIELD
                         TextFormField(
                           controller: myController,
                           validator: (val) {
@@ -92,6 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             name = val;
                           },
                         ),
+                        // EMAIL FIELD
                         SizedBox(height: 20),
                         TextFormField(
                           validator: (val) {
@@ -102,6 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             email = val;
                           },
                         ),
+                        // YEAR GROUP FIELD
                         SizedBox(height: 20),
                         TextFormField(
                           validator: (val) {
@@ -113,16 +117,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           },
                         ),
                         SizedBox(height: 20),
-                        TextFormField(
-                          validator: (val) {
-                            return val!.isEmpty ? "Enter Position" : null;
-                          },
-                          decoration:
-                              InputDecoration(hintText: "Teacher or Student?"),
-                          onChanged: (val) {
-                            position = val;
-                          },
-                        ),
+                        ToggleSwitch(
+                          minHeight: 50,
+                          minWidth: 170,
+                          initialLabelIndex: 0,
+                          totalSwitches: 2,
+                          labels: ['Student','Teacher'],
+                          onToggle: (index){
+                            position = (index == 0) ? "Student": "Teacher";
+                            print('switched to: $position');
+                          }),
+                        // TextFormField(
+                        //   validator: (val) {
+                        //     return val!.isEmpty ? "Enter Position" : null;
+                        //   },
+                        //   decoration:
+                        //       InputDecoration(hintText: "Teacher or Student?"),
+                        //   onChanged: (val) {
+                        //     position = val;
+                        //   },
+                        // ),
                         SizedBox(height: 20),
                         TextFormField(
                           //controller: passwordController,
