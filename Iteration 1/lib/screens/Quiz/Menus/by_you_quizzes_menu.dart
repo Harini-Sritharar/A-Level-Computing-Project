@@ -26,72 +26,8 @@ class ByYouMenu extends StatefulWidget {
 // //
 // }
 class _ByYouMenuState extends State<ByYouMenu> {
-  //   for (var i = 0; i < appUser.quizzes.length; i++)
-  //     return Card(
-  //       child: Column(children: <Widget>[
-  //         ListTile(
-  //           title: appUser.quizzes[i]['quizTitle'],
-  //           subtitle: ,)
-  //       ],)
-  //     );
-  // }
-
   List<Quiz> userQuizzes = appUser.quizzes;
-  // [
-  //   // {'quizId': 'huebdjcb67', 'quizTitle': "Differentiation",},
-  //   // {'quizId': 'zh2378btl', 'quizTitle': "Integration"},
-  //   // {'quizId': 'zh7cgy99l', 'quizTitle': "Parametric Equations"}
-  // ];
 
-  loadInUserQuiz(){
-    List<Map<String,dynamic>> questions = [];
-            for (int i = 0; i < questions.length; i++){
-          //QuestionInfo
-        }
-    // Navigator.push(context,MaterialPageRoute(builder: (context) => QuizNavigator(
-    //   [
-
-    // )))
-
-    }
-  
-
-  // Navigator.push(
-  //                   context,
-  //                   MaterialPageRoute(
-  //                     builder: (context) => QuizNavigator(
-  //                       [
-  //                         QuestionInfo(
-  //                           "What is dy/dx of cos x?",
-  //                           ["cos x", "sin x", "-sin x", "sec x"], 2 
-  //                         ),
-  //                         QuestionInfo(
-  //                           "What is dy/dx of sin x?",
-  //                           ["cosec x", "tan x", "-cos x", "cos x"], 3
-  //                         ),
-  //                         QuestionInfo(
-  //                           "What is dy/dx of tan x?",
-  //                           ["sec^2 x", "cosec^2 x", "cot x", "-sec x"], 0
-  //                         ),
-  //                         QuestionInfo(
-  //                           "What is dy/dx of sec x?",
-  //                           ["tan x", "cos x sin x", "sec x tan x", "cos x"], 2
-  //                         ),
-  //                       ],
-  //                     ),
-  // check(){
-  //   for (int i = 0; i< userQuizzes.length; i++){
-  //     print(Text(userQuizzes.elementAt(i)['quizTitle'].toString()),);
-  //   }
-  // }
-
-
-onClick(){
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: 
-    Text("Clicked"))
-  );
-}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,30 +40,36 @@ onClick(){
           children: [
             SizedBox(height: 35),
             for (int i = 0; i < (userQuizzes.length); i++)
-                TextButton(onPressed: onClick,
-                 child: new Card(
-                  child: Column(
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                QuizNavigator(userQuizzes[i].questions)));
+                  },
+                  child: new Card(
+                      child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                       ListTile(
+                      ListTile(
                         leading: Icon(Icons.question_answer),
                         title: Text(userQuizzes[i].quizTitle),
                       )
                     ],
-                  )
-                ))
+                  )))
           ],
         ),
       ),
     );
     // return
   }
-} 
+}
 // class CustomCard extends StatefulWidget{
 //   @override
 //   Widget build(BuildContext context) {
 //     return new Card(
-      
+
 //       child: new Column(
 //         children: <Widget>[
 //           new Padding(
@@ -139,6 +81,3 @@ onClick(){
 //                       }
 
 // }
-
-
-
