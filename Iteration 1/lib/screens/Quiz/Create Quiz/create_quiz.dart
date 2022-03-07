@@ -33,6 +33,7 @@ class _CreateQuizState extends State<CreateQuiz> {
       await databaseService.addQuizData(quizMap, quizID).then((value) {
         setState(() {
           _isLoading = false;
+          appUser.initialise();
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => AddQuizQuestion(quizID)));
         });
