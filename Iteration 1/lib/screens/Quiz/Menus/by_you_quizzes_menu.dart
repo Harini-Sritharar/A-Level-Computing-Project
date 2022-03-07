@@ -27,7 +27,6 @@ class ByYouMenu extends StatefulWidget {
 // }
 class _ByYouMenuState extends State<ByYouMenu> {
   List<Quiz> userQuizzes = appUser.quizzes;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,19 +64,3 @@ class _ByYouMenuState extends State<ByYouMenu> {
     // return
   }
 }
-// class CustomCard extends StatefulWidget{
-//   @override
-//   Widget build(BuildContext context) {
-//     return new Card(
-
-//       child: new Column(
-//         children: <Widget>[
-//           new Padding(
-//             padding: new EdgeInsets.all(7),
-//              )
-//                       ]
-//                       )
-//                       );
-//                       }
-
-// }

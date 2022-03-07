@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
+import 'package:random_string/random_string.dart';
 
 // ignore: must_be_immutable
 class QuizScreen extends StatefulWidget {
@@ -11,21 +14,22 @@ class QuizScreen extends StatefulWidget {
   final void Function() returnPreviousQuestion;
   final Function() checkQuizEnd;
   final Function(int newPoints) addPoints;
+  final int seed;
 
   final QuestionInfo questionInfo;
   QuizScreen(this.questionInfo, this.setNextQuestion,
-      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints);
+      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints,this.seed);
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
 
-// screen for each question so the question validation should occur in here
 class _QuizScreenState extends State<QuizScreen> {
   late final int numOfIncorrectOptions;
   int points = 0;
   late final List<bool> _checkBoxSelected;
 
+//
   @protected
   @mustCallSuper
   void initState() {
@@ -105,7 +109,14 @@ class _QuizScreenState extends State<QuizScreen> {
         },
       ));
     }
-    options.shuffle();
+    //Random(seed) creates a random generator which is an object used
+    // by any random object to create a random sequence. Based on the seed,
+    // a sequence of random numbers will be created, because I want the ssame sequence
+    // to be generated each time, i shuffle it with Random(seed) where the seed is generated
+    // once and not changed. It is needed because when then user clicks on a option
+    // the screen is reloaded with the chnage in effect but this also sreshuffles the optiosn
+    // i wnat to reshuffle the optiosn with the same seed so that the order doesn't change
+    options.shuffle(Random(widget.seed));
     return options;
   }
 
@@ -163,7 +174,7 @@ class _QuizScreenState extends State<QuizScreen> {
             children: [
               for (Widget q in buildOptions())
               q,
-              QuizButton("Skip", widget.setNextQuestion),
+              QuizButton("${widget.seed}", widget.setNextQuestion),
               QuizButton("Submit", () {
                 checkAnswer(chosenAnswer);
               })
