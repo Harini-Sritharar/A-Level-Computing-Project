@@ -5,7 +5,8 @@ import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
 class UserDetails {
-  String uid, name = "", email = "", position = "", classId = "", yearGroup = "";
+  String uid, name = "", email = "", position = "", yearGroup = "";
+  List<String> classes = [];
   List<Quiz> quizzes = [];
   UserDetails(this.uid);
 
@@ -19,7 +20,9 @@ class UserDetails {
     name = data['name'];
     email = data['email'];
     position = data['position'];
-    classId = data['classId'];
+    for (int i = 0; i < (data['classes'].length);i++){
+      classes.add(data['classes'][i] as String);
+    }
     yearGroup = data['yearGroup'];
   }
    Future addScore(quizId,points) async {

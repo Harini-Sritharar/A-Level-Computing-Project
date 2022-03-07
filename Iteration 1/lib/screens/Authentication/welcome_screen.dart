@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
+import 'package:nea_prototype_1/screens/bottom_nav_bar.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 
 import '../../main.dart';
@@ -44,7 +45,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomeScreen(name: "Your"),
+          builder: (context) => BottomNavBar(),
+          // HomeScreen(name: "Your"),
         ));
   }
 

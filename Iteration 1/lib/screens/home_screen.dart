@@ -22,52 +22,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //late PersistentTabController _controller;
-  int _selectedIndex = 0;
-  List<Widget> _routes = <Widget>[
-    HomeScreen(name: appUser.name),
-    ProfileScreen(),
-    PresetMenu(),
-    WelcomeScreen()
-  ];
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      print("Index changed");
-    });
-    pushNewScreen(context, screen: _routes[index]);
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => _routes[index]));
-  }
+
 
   @override
   void initState() {
     super.initState();
-    //_controller = PersistentTabController(initialIndex: 0);
   }
-
-  // Widget? pageCaller(int index) {
-  //   switch (index) {
-  //     case 0:
-  //       {
-  //         //return ProfileScreen(name: appUser.name);
-  //         return HomeScreen(name: appUser.name);
-  //       }
-  //     case 1:
-  //       {
-  //         return ProfileScreen(name: appUser.name);
-  //       }
-  //     case 2:
-  //       {
-  //         return PresetMenu();
-  //       }
-  //     case 3:
-  //       {
-  //         authService.signOut();
-  //         return WelcomeScreen();
-  //       }
-  //   }
-  // }
 
   final Stream<QuerySnapshot> users =
       Firestore.instance.collection("Users").snapshots();
@@ -79,31 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(appUser.name + "'s Home Page"),
           centerTitle: true,
         ),
-        // bottomNavigationBar: BottomNavigationBar(
-        //   backgroundColor: Colors.blue[100],
-        //   type: BottomNavigationBarType.shifting,
-        //   items: const <BottomNavigationBarItem>[
-        //     BottomNavigationBarItem(
-        //         icon: Icon(Icons.home),
-        //         label: 'Home',
-        //         backgroundColor: Colors.red),
-        //     BottomNavigationBarItem(
-        //         icon: Icon(Icons.account_circle_rounded),
-        //         label: 'Profile',
-        //         backgroundColor: Colors.green),
-        //     BottomNavigationBarItem(
-        //         icon: Icon(Icons.leaderboard),
-        //         label: 'Leaderboard',
-        //         backgroundColor: Colors.purple),
-        //     BottomNavigationBarItem(
-        //         icon: Icon(Icons.logout_rounded),
-        //         label: 'Log Out',
-        //         backgroundColor: Colors.yellow),
-        //   ],
-        //   onTap: _onItemTapped,
-        //   selectedItemColor: Colors.white,
-        //   currentIndex: _selectedIndex,
-        // ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.push(context,
