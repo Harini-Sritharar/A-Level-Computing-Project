@@ -21,10 +21,10 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
     if (_formKey.currentState!.validate()) {
       Map<String, String> questionMap = {
         "question": q,
-        "option1": ans1,
-        "option2": ans2,
-        "option3": ans3,
-        "option4": ans4,
+        "correctAnswer": ans1,
+        "incorrectOption1": ans2,
+        "incorrectOption2": ans3,
+        "incorrectOption3": ans4,
       };
       await databaseService.addQuData(questionMap, widget.quizID);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -54,10 +54,10 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                       //question
                       TextFormField(
                         validator: (val) {
-                          return val!.isEmpty ? "Enter a question" : null;
+                          return val!.isEmpty ? " ⚠️ Enter a question" : null;
                         },
                         decoration: InputDecoration(
-                          hintText: "Add Question",
+                          hintText: "Enter Question",
                         ),
                         onChanged: (val) {
                           q = val;
@@ -66,7 +66,7 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                       //answer1
                       TextFormField(
                         validator: (val) {
-                          return val!.isEmpty ? "Enter an answer" : null;
+                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
                         },
                         decoration: InputDecoration(
                           hintText: "Correct Answer",
@@ -78,10 +78,10 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                       //answer2
                       TextFormField(
                         validator: (val) {
-                          return val!.isEmpty ? "Enter an answer" : null;
+                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
                         },
                         decoration: InputDecoration(
-                          hintText: "Option B",
+                          hintText: "Incorrect Option 1",
                         ),
                         onChanged: (val) {
                           ans2 = val;
@@ -90,10 +90,10 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                       //answer3
                       TextFormField(
                         validator: (val) {
-                          return val!.isEmpty ? "Enter an answer" : null;
+                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
                         },
                         decoration: InputDecoration(
-                          hintText: "Option C",
+                          hintText: "Incorrect Option 2",
                         ),
                         onChanged: (val) {
                           ans3 = val;
@@ -102,10 +102,10 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                       //answer4
                       TextFormField(
                         validator: (val) {
-                          return val!.isEmpty ? "Enter an answer" : null;
+                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
                         },
                         decoration: InputDecoration(
-                          hintText: "Option D",
+                          hintText: "Incorrect Option 3",
                         ),
                         onChanged: (val) {
                           ans4 = val;

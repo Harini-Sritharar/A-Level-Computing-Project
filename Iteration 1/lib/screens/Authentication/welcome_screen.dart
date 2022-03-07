@@ -73,7 +73,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         TextFormField(
                           controller: myController,
                           validator: (val) {
-                            return val!.isEmpty ? "Enter Email" : null;
+                            return val!.isEmpty ? "⚠️ Enter Email" : null;
                           },
                           decoration: InputDecoration(hintText: "Email"),
                           onChanged: (val) {
@@ -85,7 +85,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           obscureText: isObscure,
                           validator: (val) {
                             if (val == null || val.isEmpty) {
-                              return "Enter password";
+                              return "⚠️ Enter password";
                             }
                             // if(invalidpassword = true){
                             //   return("Invalid password");
