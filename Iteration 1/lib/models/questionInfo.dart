@@ -4,4 +4,9 @@ class QuestionInfo {
   final List<String> incorrectOptions;
 
   QuestionInfo(this.questionName,this.correctOption,this.incorrectOptions,);
+
+  @override
+  String toString(){
+    return "--,$questionName,$correctOption,$incorrectOptions";
+  }
 }
