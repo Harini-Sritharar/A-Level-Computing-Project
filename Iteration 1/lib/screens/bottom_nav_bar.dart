@@ -24,19 +24,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
       ProfileScreen(),
       PresetMenu(),
       ByYouMenu(),
-      WelcomeScreen()
     ];
   }
 
   List<PersistentBottomNavBarItem> buildItems() {
     return [
-      PersistentBottomNavBarItem(icon: Icon(Icons.home_filled),title: "Home"),
-      PersistentBottomNavBarItem(icon: Icon(Icons.account_circle_rounded),title: "Profile"),
-      PersistentBottomNavBarItem(icon: Icon(Icons.question_answer),title: "Preset"),
-      PersistentBottomNavBarItem(icon: Icon(Icons.question_answer_outlined),title: "By You"),
-      PersistentBottomNavBarItem(icon: Icon(Icons.logout_rounded),title: "Sign Out"),
-
-
+      PersistentBottomNavBarItem(icon: Icon(Icons.home_filled), title: "Home"),
+      PersistentBottomNavBarItem(
+          icon: Icon(Icons.account_circle_rounded), title: "Profile"),
+      PersistentBottomNavBarItem(
+          icon: Icon(Icons.question_answer), title: "Preset"),
+      PersistentBottomNavBarItem(
+          icon: Icon(Icons.question_answer_outlined), title: "By You"),
     ];
   }
 

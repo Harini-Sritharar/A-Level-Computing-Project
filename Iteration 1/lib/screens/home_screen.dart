@@ -111,11 +111,9 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 75.0),
               GenericButton("Sign Out", () {
                 authService.signOut();
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
+                Navigator.of(context,rootNavigator: true).pushAndRemoveUntil( MaterialPageRoute(
                       builder: (context) => WelcomeScreen(),
-                    ));
+                    ), (route) => false);
               }),
             ])))
         );
