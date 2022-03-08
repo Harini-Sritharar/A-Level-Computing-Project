@@ -174,7 +174,7 @@ class _QuizScreenState extends State<QuizScreen> {
             children: [
               for (Widget q in buildOptions())
               q,
-              QuizButton("${widget.seed}", widget.setNextQuestion),
+              QuizButton("Skip", widget.setNextQuestion),
               QuizButton("Submit", () {
                 checkAnswer(chosenAnswer);
               })

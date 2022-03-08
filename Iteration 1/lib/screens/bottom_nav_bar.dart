@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/Quiz/Create%20Quiz/create_quiz.dart';
 import 'package:nea_prototype_1/screens/Quiz/Menus/by_you_quizzes_menu.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
@@ -22,6 +23,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return [
       HomeScreen(name: appUser.name),
       ProfileScreen(),
+      CreateQuiz(),
       PresetMenu(),
       ByYouMenu(),
     ];
@@ -32,6 +34,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       PersistentBottomNavBarItem(icon: Icon(Icons.home_filled), title: "Home"),
       PersistentBottomNavBarItem(
           icon: Icon(Icons.account_circle_rounded), title: "Profile"),
+      PersistentBottomNavBarItem(
+          icon: Icon(Icons.add,color: Colors.white,), title: "Create"),    
       PersistentBottomNavBarItem(
           icon: Icon(Icons.question_answer), title: "Preset"),
       PersistentBottomNavBarItem(
@@ -46,7 +50,34 @@ class _BottomNavBarState extends State<BottomNavBar> {
       controller: controller,
       screens: buildScreens(),
       items: buildItems(),
-      navBarStyle: NavBarStyle.style13,
+
+       confineInSafeArea: true,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      handleAndroidBackButtonPress: true, // Default is true.
+      resizeToAvoidBottomInset:
+          true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true, // Default is true.
+      hideNavigationBarWhenKeyboardShows:
+           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
+      ),
+      popAllScreensOnTapOfSelectedTab: true,
+       popActionScreens: PopActionScreensType.all,
+      // itemAnimationProperties: ItemAnimationProperties(
+      //   // Navigation Bar's items animation properties.
+      //   duration: Duration(milliseconds: 200),
+      //   curve: Curves.ease,
+      // ),
+      // // screenTransitionAnimation: ScreenTransitionAnimation(
+      // //   // Screen transition animation on change of selected tab.
+      // //   animateTabTransition: true,
+      // //   curve: Curves.ease,
+      // //   duration: Duration(milliseconds: 200),
+      // // ),
+
+      navBarStyle: NavBarStyle.style15,
     );
   }
 }

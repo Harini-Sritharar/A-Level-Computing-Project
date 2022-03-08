@@ -68,7 +68,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               "Position: " + appUser.position,
               textScaleFactor: 1.5,
               style: myStyle,
-            )])) 
+            )
+            
+            ])) 
           ],
         ),
       ),

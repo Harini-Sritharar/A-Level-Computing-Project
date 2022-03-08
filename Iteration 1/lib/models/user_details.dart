@@ -4,6 +4,8 @@ import 'package:nea_prototype_1/models/quiz.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
+import '../main.dart';
+
 class UserDetails {
   String uid, name = "", email = "", position = "", yearGroup = "";
   List<String> classes = [];
@@ -31,6 +33,10 @@ class UserDetails {
     //print(scores);
     //  Firestore.instance.collection("Quiz").document(quizId).updateData({{"scores": points})
    }
+
+  Future<void> initialise() async {
+    await databaseService.getQuizzes();
+  }
 
 
 

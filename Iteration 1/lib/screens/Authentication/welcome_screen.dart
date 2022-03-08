@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         await authService.signInEmailAndPassword(email, password);
     if (newUser == null) {
       print("Null");
-      _isLoading = false;
+      _isLoading = true;
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -36,17 +36,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           ));
       return;
     }
-    setState(() {
-      _isLoading = false;
-    });
+
     AuthService.saveUserLoggedIn(isLoggedIn: true);
     await newUser.fillBasicData();
     appUser = newUser;
+    appUser.initialise();
+    setState(() {
+      _isLoading = false;
+    });
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => BottomNavBar(),
-          // HomeScreen(name: "Your"),
         ));
   }
 
@@ -54,7 +55,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   @override
   Widget build(BuildContext context) {
-    final myController = TextEditingController();
     return Scaffold(
         backgroundColor: Colors.cyan[600],
         // when loading the Progress Indicator will run, after loading, it wil go to the form
@@ -73,7 +73,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         TextFormField(
-                          controller: myController,
                           validator: (val) {
                             return val!.isEmpty ? "⚠️ Enter Email" : null;
                           },
@@ -89,9 +88,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             if (val == null || val.isEmpty) {
                               return "⚠️ Enter password";
                             }
-                            // if(invalidpassword = true){
-                            //   return("Invalid password");
-                            // }
                             return null;
                           },
                           decoration: InputDecoration(
