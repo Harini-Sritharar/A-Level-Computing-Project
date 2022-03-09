@@ -39,12 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(appUser.name + "'s Home Page"),
           centerTitle: true,
         ),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreateQuiz()));
-            },
-            child: const Icon(Icons.add)),
+        // floatingActionButton: FloatingActionButton(
+        //     onPressed: () {
+        //       Navigator.push(context,
+        //           MaterialPageRoute(builder: (context) => CreateQuiz()));
+        //     },
+        //     child: const Icon(Icons.add)),
 
         // floatingActionButton: FloatingActionButton(
         //     onPressed: () {
