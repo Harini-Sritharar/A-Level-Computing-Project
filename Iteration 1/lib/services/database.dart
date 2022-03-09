@@ -52,6 +52,18 @@ class DatabaseService {
     });
   }
 
+    Future<void> addClassToUser(String classId) async {
+    appUser.classes.add(classId);
+    final FirebaseUser user = await auth.currentUser();
+    final uid = user.uid;
+    await Firestore.instance
+        .collection("Users")
+        .document(uid)
+        .updateData({'classes': appUser.classes})
+        .catchError((e) {
+      print(e);
+    });
+  }
   // returns all the info about the quizzes that the current user has created
   Future<void> getQuizzes() async {
     final query = await Firestore.instance
