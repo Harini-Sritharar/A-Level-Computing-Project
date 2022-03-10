@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
@@ -28,18 +29,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final myController = TextEditingController();
 
   signUp() async {
-    var classID = randomAlphaNumeric(10);
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
+       UserDetails? newUser =
+        // await authService.signInEmailAndPassword(email, password);
       await authService.signUpWithEmailAndPassword(email, password).then(
-        (value) async {
-          if (value != null) {
+        (newUser) async {
+          if (newUser != null) {
             setState(() {
               _isLoading = false;
             });
             AuthService.saveUserLoggedIn(isLoggedIn: true);
+            await newUser.fillBasicData();
+            appUser = newUser;
+            appUser.initialise();
             final FirebaseUser user = await auth.currentUser();
             final uid = user.uid;
             Map<String, dynamic> userData = {
@@ -48,7 +53,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               "email": email,
               "yearGroup": yrGroup,
               "position": position,
-              "classId": classID,
               "password": password
             };
             databaseService.addUserData(userData);
