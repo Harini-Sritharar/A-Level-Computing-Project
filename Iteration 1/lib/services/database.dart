@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
+import 'package:random_string/random_string.dart';
 import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -52,18 +53,32 @@ class DatabaseService {
     });
   }
 
-    Future<void> addClassToUser(String classId) async {
+  // adds the class to the user's classes in Firebase
+  Future<void> addExistingClassToUser(String classId) async {
     appUser.classes.add(classId);
     final FirebaseUser user = await auth.currentUser();
     final uid = user.uid;
     await Firestore.instance
         .collection("Users")
         .document(uid)
-        .updateData({'classes': appUser.classes})
-        .catchError((e) {
+        .updateData({'classes': appUser.classes}).catchError((e) {
       print(e);
     });
   }
+
+  
+  Future<void> addNewClassToFirebase(Map<String, dynamic> classData) async {
+    String classId = randomAlphaNumeric(8);
+    await Firestore.instance
+        .collection("Classes")
+        .document(classId)
+        .setData(classData)
+        .catchError((e) {
+      print("error" + e);
+    });
+    appUser.classes.add(classId);
+  }
+
   // returns all the info about the quizzes that the current user has created
   Future<void> getQuizzes() async {
     final query = await Firestore.instance
@@ -74,13 +89,14 @@ class DatabaseService {
     // final ids = query.documents.map((doc) => doc.documentID);
     final quizzesFetched = query.documents.map((doc) => doc.data);
     appUser.quizzes = convertToQuizStructure(quizzesFetched.toList());
-    print("MANGO ${appUser.quizzes}");
+    // print(" ${appUser.quizzes}");
     for (int i = 0; i < appUser.quizzes.length; i++) {
       final questionsQuery = await Firestore.instance
           .collection("Quiz")
           .document(appUser.quizzes[i].quizId)
           .collection("q")
           .getDocuments();
+
       List<DocumentSnapshot> questionDetails = questionsQuery.documents;
       for (DocumentSnapshot question in questionDetails) {
         Map<String, dynamic> optionsData =
@@ -96,7 +112,7 @@ class DatabaseService {
     }
     // List questions = questionsQuery.toList();
     print(appUser.quizzes);
-    print(appUser.quizzes[1].questions);
+    //print(appUser.quizzes[1].questions);
     // print("Ids $ids");
   }
 }
