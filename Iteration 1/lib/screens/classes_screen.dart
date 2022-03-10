@@ -52,7 +52,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   }
 
   Map<String,dynamic> createMap(TextEditingController a, TextEditingController b) {
-    Map<String, dynamic> classData = {'className': a.text, 'subject': b.text};
+    Map<String, dynamic> classData = {'className': a.text, 'subject': b.text, 'teacherId': appUser.uid};
     return classData;
   }
 
