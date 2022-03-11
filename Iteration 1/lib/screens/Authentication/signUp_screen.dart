@@ -42,7 +42,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               _isLoading = false;
             });
             AuthService.saveUserLoggedIn(isLoggedIn: true);
-            await newUser.fillBasicData();
             appUser = newUser;
             appUser.initialise();
             final FirebaseUser user = await auth.currentUser();
@@ -59,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(name: name),
+                  builder: (context) => HomeScreen(),
                 ));
           }
         },
@@ -128,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           totalSwitches: 2,
                           labels: ['Student','Teacher'],
                           onToggle: (index){
-                            position = (index == 0) ? "Student": "Teacher";
+                            position = (index == 0) ? "student": "teacher";
                             print('switched to: $position');
                           }),
                         // TextFormField(

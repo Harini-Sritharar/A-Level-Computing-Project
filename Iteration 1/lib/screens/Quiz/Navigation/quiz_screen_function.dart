@@ -5,6 +5,7 @@ import 'package:nea_prototype_1/button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:random_string/random_string.dart';
 
 // ignore: must_be_immutable
@@ -62,15 +63,16 @@ class _QuizScreenState extends State<QuizScreen> {
                 title: Text(message),
               ),
             );
-          } else {
+          } 
+          else {
             return GestureDetector(
               child:
                   AlertDialog(backgroundColor: bgColour, title: Text(message)),
               onTap: () {
-                Navigator.push(
+                pushNewScreen(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => ScoreScreen(points)));
+                    screen: ScoreScreen(points),
+                    withNavBar: true);
               },
             );
           }

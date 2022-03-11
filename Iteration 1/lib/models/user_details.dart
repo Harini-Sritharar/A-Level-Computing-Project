@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nea_prototype_1/models/class_details.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 import 'package:nea_prototype_1/services/database.dart';
@@ -8,7 +9,7 @@ import '../main.dart';
 
 class UserDetails {
   String uid, name = "", email = "", position = "", yearGroup = "";
-  List<String> classes = [];
+  List<ClassDetails> classes = [];
   List<Quiz> quizzes = [];
   UserDetails(this.uid);
 
@@ -22,9 +23,6 @@ class UserDetails {
     name = data['name'];
     email = data['email'];
     position = data['position'];
-    for (int i = 0; i < (data['classes'].length);i++){
-      classes.add(data['classes'][i] as String);
-    }
     yearGroup = data['yearGroup'];
   }
    Future addScore(quizId,points) async {
@@ -35,13 +33,7 @@ class UserDetails {
    }
 
   Future<void> initialise() async {
+    await fillBasicData();
     await databaseService.getQuizzes();
-  }
-
-
-
-
-
-
-
+    await databaseService.getStudentClasses(); }
 }

@@ -122,7 +122,7 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
                       SizedBox(height: 35),
                       GenericButton("Finish", () {
                          Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => HomeScreen(name:"Harini")));
+                            MaterialPageRoute(builder: (context) => HomeScreen()));
                         }),
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'dart:async';
 // import 'dart:html';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/models/class_details.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
 import 'package:random_string/random_string.dart';
@@ -54,29 +55,44 @@ class DatabaseService {
   }
 
   // adds the class to the user's classes in Firebase
-  Future<void> addExistingClassToUser(String classId) async {
-    appUser.classes.add(classId);
-    final FirebaseUser user = await auth.currentUser();
-    final uid = user.uid;
-    await Firestore.instance
-        .collection("Users")
-        .document(uid)
-        .updateData({'classes': appUser.classes}).catchError((e) {
-      print(e);
-    });
-  }
-
-  
-  Future<void> addNewClassToFirebase(Map<String, dynamic> classData) async {
-    String classId = randomAlphaNumeric(8);
+  Future<void> addStudentToClass(String classId) async {
+    assert (appUser.position == "student");
     await Firestore.instance
         .collection("Classes")
         .document(classId)
+        .updateData({'studentIds': FieldValue.arrayUnion([appUser.uid])}).catchError((e) {
+      print(e);
+    });
+    await getStudentClasses();
+  }
+
+  Future<void> getStudentClasses() async {
+   final classes = await Firestore.instance
+        .collection("Classes")
+        .where('studentIds', arrayContains: appUser.uid)
+        .getDocuments()
+         .catchError((e) {
+      print("error" + e);
+    });
+    print(classes)
+       ;
+    final classesFetched = classes.documents.map((doc) => doc.data);
+    appUser.classes = convertToClassDetailsStructure(classesFetched.toList());
+    print(appUser.classes);
+
+    
+  }
+
+  Future<void> addNewClassToFirebase(Map<String, dynamic> classData) async {
+    await Firestore.instance
+        .collection("Classes")
+        .document(classData['classId'])
         .setData(classData)
         .catchError((e) {
       print("error" + e);
     });
-    appUser.classes.add(classId);
+    List <ClassDetails> classDetails = convertToClassDetailsStructure([classData]);
+     appUser.classes.add(classDetails[0]);
   }
 
   // returns all the info about the quizzes that the current user has created

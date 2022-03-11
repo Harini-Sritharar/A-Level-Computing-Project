@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
+import 'package:random_string/random_string.dart';
 
 class ClassesScreen extends StatefulWidget {
   const ClassesScreen({Key? key}) : super(key: key);
@@ -20,7 +21,15 @@ class _ClassesScreenState extends State<ClassesScreen> {
       margin: EdgeInsets.symmetric(horizontal: 5),
       width: 200,
       height: 200,
-      child: Center(child: Text(appUser.classes[i])),
+      child: Center(child: Column(
+        children: [
+          Spacer(),
+          Text(appUser.classes[i].className),
+          Text(appUser.classes[i].subject),
+          Spacer(),
+
+        ],
+      )),
     );
   }
 
@@ -42,7 +51,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
             actions: [
               GenericButton("Add", () {
                 databaseService
-                    .addExistingClassToUser(classCodeController.text);
+                .addStudentToClass(classCodeController.text);
                 classCodeController.text = "";
                 Navigator.pop(context);
               })
@@ -51,8 +60,16 @@ class _ClassesScreenState extends State<ClassesScreen> {
         });
   }
 
-  Map<String,dynamic> createMap(TextEditingController a, TextEditingController b) {
-    Map<String, dynamic> classData = {'className': a.text, 'subject': b.text, 'teacherId': appUser.uid};
+  Map<String, dynamic> createMap() {
+    String classId = randomAlphaNumeric(8);
+    Map<String, dynamic> classData = {
+      'classId' : classId,
+      'className': classNameController.text,
+      'subject': subjectController.text,
+      'teacherId': appUser.uid,
+      'studentIds': [],
+      'quizzes': []
+    };
     return classData;
   }
 
@@ -83,7 +100,8 @@ class _ClassesScreenState extends State<ClassesScreen> {
             ),
             actions: [
               GenericButton("Add", () {
-                Map<String,dynamic> classData = createMap(classNameController, subjectController);
+                Map<String, dynamic> classData =
+                    createMap();
                 // print("ClassData" );
                 databaseService.addNewClassToFirebase(classData);
                 classNameController.text = "";
@@ -110,13 +128,13 @@ class _ClassesScreenState extends State<ClassesScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text((appUser.position == "Student")
+                  Text((appUser.position == "student")
                       ? "Join using a class code"
                       : "Create a new class"),
                   IconButton(
                     icon: Icon(Icons.add),
                     onPressed: () {
-                      (appUser.position == "Student")
+                      (appUser.position == "student")
                           ? addClassCode(context)
                           : createClass(context);
                     },

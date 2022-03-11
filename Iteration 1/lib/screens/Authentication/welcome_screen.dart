@@ -18,12 +18,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   late String email, password;
   AuthService authService = new AuthService();
   bool _isLoading = false;
+
+
   Future<void> signIn() async {
     setState(() {
       _isLoading = true;
     });
     email = "student@gmail.com";
     password = "student";
+    // email = "teacher@gmail.com";
+    // password = "teacherteacher";
     UserDetails? newUser =
         await authService.signInEmailAndPassword(email, password);
     if (newUser == null) {
@@ -38,7 +42,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     }
 
     AuthService.saveUserLoggedIn(isLoggedIn: true);
-    await newUser.fillBasicData();
     appUser = newUser;
     appUser.initialise();
     setState(() {
