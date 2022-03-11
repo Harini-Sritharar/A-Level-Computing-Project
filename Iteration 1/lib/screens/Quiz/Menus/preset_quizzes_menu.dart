@@ -87,7 +87,7 @@ class PresetMenu extends StatelessWidget {
               ),
               SizedBox(height: 35),
             GenericButton("Home Screen", (){
-              Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen(name: appUser.name)));
+              Navigator.push(context,MaterialPageRoute(builder: (context) => HomeScreen()));
             })
             ],
           ),

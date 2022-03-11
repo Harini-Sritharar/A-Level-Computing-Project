@@ -3,19 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nea_prototype_1/screens/Quiz/Menus/by_you_quizzes_menu.dart';
 import 'package:nea_prototype_1/services/database.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 
 import 'package:nea_prototype_1/screens/profile_screen.dart';
 import '../main.dart';
-import 'Quiz/Create Quiz/create_quiz.dart';
 import 'Quiz/Menus/preset_quizzes_menu.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key, required this.name}) : super(key: key);
-  final String name;
+  HomeScreen({Key? key,}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
