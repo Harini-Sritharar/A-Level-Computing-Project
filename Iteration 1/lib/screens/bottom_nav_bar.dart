@@ -22,21 +22,21 @@ class _BottomNavBarState extends State<BottomNavBar> {
       PersistentTabController(initialIndex: 0);
   List<Widget> buildScreens() {
     return [
-      HomeScreen(),
       ProfileScreen(),
+      ClassesScreen(),
       CreateQuiz(),
       PresetMenu(),
-      ClassesScreen(),
+      ByYouMenu(),
     ];
   }
 
   List<PersistentBottomNavBarItem> buildItems() {
     return [
-      PersistentBottomNavBarItem(icon: Icon(Icons.home_filled), title: "Home"),
       PersistentBottomNavBarItem(
           icon: Icon(Icons.account_circle_rounded), title: "Profile"),
+      PersistentBottomNavBarItem(icon: Icon(Icons.class__outlined),title: "Classes"),
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.add,color: Colors.white,), title: "Create"),    
+          icon: Icon(Icons.add,color: Colors.white), title: "Create"),
       PersistentBottomNavBarItem(
           icon: Icon(Icons.question_answer), title: "Preset"),
       PersistentBottomNavBarItem(
@@ -51,21 +51,20 @@ class _BottomNavBarState extends State<BottomNavBar> {
       controller: controller,
       screens: buildScreens(),
       items: buildItems(),
-
-       confineInSafeArea: true,
-      backgroundColor: Colors.white, // Default is Colors.white.
-      handleAndroidBackButtonPress: true, // Default is true.
+      confineInSafeArea: true,
+      backgroundColor: Colors.white,
+      handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
       hideNavigationBarWhenKeyboardShows:
-           true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+          true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
         colorBehindNavBar: Colors.white,
       ),
       popAllScreensOnTapOfSelectedTab: true,
-       popActionScreens: PopActionScreensType.all,
+      popActionScreens: PopActionScreensType.all,
       // itemAnimationProperties: ItemAnimationProperties(
       //   // Navigation Bar's items animation properties.
       //   duration: Duration(milliseconds: 200),
