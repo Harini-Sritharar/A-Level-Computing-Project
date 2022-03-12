@@ -12,15 +12,15 @@ import '../main.dart';
 import 'Quiz/Menus/preset_quizzes_menu.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key,}) : super(key: key);
+  HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final Stream<QuerySnapshot> users =
       Firestore.instance.collection("Users").snapshots();
-  
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
@@ -36,58 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(appUser.name + "'s Home Page"),
           centerTitle: true,
         ),
-        // floatingActionButton: FloatingActionButton(
-        //     onPressed: () {
-        //       Navigator.push(context,
-        //           MaterialPageRoute(builder: (context) => CreateQuiz()));
-        //     },
-        //     child: const Icon(Icons.add)),
-
-        // floatingActionButton: FloatingActionButton(
-        //     onPressed: () {
-        //       Navigator.push(context,
-        //           MaterialPageRoute(builder: (context) => CreateQuiz()));
-        //     },
-        //     child: const Icon(Icons.add)),
-        // body: Center(
-        //   child: Container(
-        //     height: 500, 
-        //     child: StreamBuilder<QuerySnapshot>(
-        //         stream: users,
-        //         builder: (BuildContext context,
-        //             AsyncSnapshot<QuerySnapshot> snapshot) {
-        //           if (snapshot.hasError) {
-        //             return Text("Something went wrong");
-        //           }
-        //           if (snapshot.connectionState == ConnectionState.waiting) {
-        //             return Text("Loading");
-        //           }
-        //            //final data = snapshot.data;
-
-        //           final data = snapshot.requireData.documents;
-
-        //           return ListView.builder(
-        //             itemCount: data.length,
-        //             itemBuilder: (context,index){
-        //               return Text('${appUser.name}Users name is ${data[index]['name']}');
-        //             });
-
-        //         }),
-        //   ),
-        // )
-        // this is the body with the buttons
         body: Center(
             child: Container(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-              //SizedBox(height: 50.0),
               GenericButton("Profile", () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfileScreen(
-                            )));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfileScreen()));
               }),
               SizedBox(height: 35.0),
               GenericButton("Leaderboard", () {
@@ -106,14 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) => ByYouMenu()));
               }),
               SizedBox(height: 75.0),
-              GenericButton("Sign Out", () {
-                authService.signOut();
-                Navigator.of(context,rootNavigator: true).pushAndRemoveUntil( MaterialPageRoute(
-                      builder: (context) => WelcomeScreen(),
-                    ), (route) => false);
-              }),
-            ])))
-        );
+              
+            ]))));
   }
 }
 
