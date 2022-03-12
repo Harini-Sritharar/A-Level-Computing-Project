@@ -24,13 +24,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     setState(() {
       _isLoading = true;
     });
-    email = "student@gmail.com";
-    password = "student";
+    // email = "student@gmail.com";
+    // password = "student";
     // email = "teacher@gmail.com";
     // password = "teacherteacher";
     UserDetails? newUser =
         await authService.signInEmailAndPassword(email, password);
-    if (newUser == null) {
+    if (newUser == "") {
       print("Null");
       _isLoading = true;
       Navigator.pushReplacement(
@@ -41,9 +41,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       return;
     }
 
-    AuthService.saveUserLoggedIn(isLoggedIn: true);
+    //AuthService.saveUserLoggedIn(isLoggedIn: true);
     appUser = newUser;
-    appUser.initialise();
+    await appUser.initialise();
     setState(() {
       _isLoading = false;
     });

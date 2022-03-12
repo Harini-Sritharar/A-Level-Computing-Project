@@ -31,9 +31,9 @@ class _CreateQuizState extends State<CreateQuiz> {
         "userId": appUser.uid
       };
       await databaseService.addQuizData(quizMap, quizID).then((value) {
-        setState(() {
+        setState(() async {
           _isLoading = false;
-          appUser.initialise();
+         await appUser.initialise();
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => AddQuizQuestion(quizID)));
         });

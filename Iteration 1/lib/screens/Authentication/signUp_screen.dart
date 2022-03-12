@@ -44,7 +44,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             });
             AuthService.saveUserLoggedIn(isLoggedIn: true);
             appUser = newUser;
-            appUser.initialise();
+            await appUser.initialise();
             final FirebaseUser user = await auth.currentUser();
             final uid = user.uid;
             Map<String, dynamic> userData = {
