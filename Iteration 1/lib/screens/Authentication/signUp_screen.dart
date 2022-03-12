@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
+import 'package:nea_prototype_1/screens/bottom_nav_bar.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
@@ -33,9 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _isLoading = true;
       });
-       UserDetails? newUser =
-        // await authService.signInEmailAndPassword(email, password);
-      await authService.signUpWithEmailAndPassword(email, password).then(
+      UserDetails? newUser =
+          // await authService.signInEmailAndPassword(email, password);
+          await authService.signUpWithEmailAndPassword(email, password).then(
         (newUser) async {
           if (newUser != null) {
             setState(() {
@@ -58,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => BottomNavBar(),
                 ));
           }
         },
@@ -119,17 +120,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             yrGroup = val;
                           },
                         ),
+                        // POSITION TOGGLE SWITCH
                         SizedBox(height: 20),
                         ToggleSwitch(
-                          minHeight: 50,
-                          minWidth: 170,
-                          initialLabelIndex: 0,
-                          totalSwitches: 2,
-                          labels: ['Student','Teacher'],
-                          onToggle: (index){
-                            position = (index == 0) ? "student": "teacher";
-                            print('switched to: $position');
-                          }),
+                            minHeight: 50,
+                            minWidth: 170,
+                            initialLabelIndex: 0,
+                            totalSwitches: 2,
+                            labels: ['Student', 'Teacher'],
+                            onToggle: (index) {
+                              position = (index == 0) ? "student" : "teacher";
+                              print('switched to: $position');
+                            }),
                         // TextFormField(
                         //   validator: (val) {
                         //     return val!.isEmpty ? "Enter Position" : null;
@@ -141,6 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         //   },
                         // ),
                         SizedBox(height: 20),
+                        // PASSWORD FIELD
                         TextFormField(
                           //controller: passwordController,
                           obscureText: isObscure,
@@ -183,7 +186,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               width: MediaQuery.of(context).size.width - 40,
                               child: Text("Sign Up"),
                             )),
-                        //GenericButton("Sign Up", signUp),
                         SizedBox(height: 25),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
