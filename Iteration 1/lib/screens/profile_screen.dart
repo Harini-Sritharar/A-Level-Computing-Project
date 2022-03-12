@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
-import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../main.dart';
-import 'home_screen.dart';
+import 'Authentication/welcome_screen.dart';
 
 //import 'package:nea_prototype_1/screens/signUp_screen.dart';
 class ProfileScreen extends StatefulWidget {
@@ -11,6 +9,7 @@ class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
+ 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Center(
         child: Column(
-
           children: <Widget>[
             SizedBox(height: 45.0),
             CircleAvatar(
@@ -69,9 +67,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               textScaleFactor: 1.5,
               style: myStyle,
             ),
-            ])) 
-          ],
-        ),
+            ]
+            )),
+            SizedBox(height:200),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+            onPressed: ()  async {await authService.signOut();
+                Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => WelcomeScreen(),
+                    ),
+                    (route) => false);
+            },
+            child: const Icon(Icons.logout))
+            )
+          ])
       ),
     );
   }
