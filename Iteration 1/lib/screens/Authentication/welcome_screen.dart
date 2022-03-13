@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
-import 'package:nea_prototype_1/screens/bottom_nav_bar.dart';
+import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
 import 'package:nea_prototype_1/services/auth.dart';
-
 import '../../main.dart';
-import '../home_screen.dart';
 import 'signUp_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -26,11 +23,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     });
     // email = "student@gmail.com";
     // password = "student";
-    // email = "teacher@gmail.com";
-    // password = "teacherteacher";
+    email = "teacher@gmail.com";
+    password = "teacherteacher";
     UserDetails? newUser =
         await authService.signInEmailAndPassword(email, password);
-    if (newUser == "") {
+    if (newUser == null) {
       print("Null");
       _isLoading = true;
       Navigator.pushReplacement(
@@ -38,10 +35,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           MaterialPageRoute(
             builder: (context) => WelcomeScreen(),
           ));
-      return;
+      return null;
     }
-
-    //AuthService.saveUserLoggedIn(isLoggedIn: true);
     appUser = newUser;
     await appUser.initialise();
     setState(() {
@@ -53,7 +48,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           builder: (context) => BottomNavBar(),
         ));
   }
-
   bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   @override

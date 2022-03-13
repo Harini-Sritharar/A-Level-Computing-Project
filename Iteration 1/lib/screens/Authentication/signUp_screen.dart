@@ -2,14 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
-import 'package:nea_prototype_1/screens/bottom_nav_bar.dart';
-import 'package:nea_prototype_1/screens/home_screen.dart';
+import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
-import 'package:nea_prototype_1/username.dart';
-import 'package:random_string/random_string.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import '../../button.dart';
 import '../../main.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,8 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   DatabaseService databaseService = new DatabaseService();
   late String name, email, yrGroup, position, password;
   bool _isLoading = false;
-
   bool isObscure = true;
+  String dropdownVal = "7";
   final myController = TextEditingController();
 
   signUp() async {
@@ -35,7 +31,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _isLoading = true;
       });
       UserDetails? newUser =
-          // await authService.signInEmailAndPassword(email, password);
           await authService.signUpWithEmailAndPassword(email, password).then(
         (newUser) async {
           if (newUser != null) {
@@ -62,6 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   builder: (context) => BottomNavBar(),
                 ));
           }
+          
         },
       );
     }
@@ -111,15 +107,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         // YEAR GROUP FIELD
                         SizedBox(height: 20),
-                        TextFormField(
-                          validator: (val) {
-                            return val!.isEmpty ? "Enter Year Group" : null;
-                          },
-                          decoration: InputDecoration(hintText: "Year Group"),
-                          onChanged: (val) {
-                            yrGroup = val;
-                          },
-                        ),
+                        // DropdownButton <String>(
+                        //   value: dropdownVal,
+                        //   icon: const Icon(Icons.arrow_circle_up),
+                        //   elevation: 15,
+                        //   style: const TextStyle(color: Colors.blueAccent),
+                        //   underline: Container(
+                        //     height: 3;
+                        //     color: Colors.blueAccent,
+                        //   ),
+                        //   onChanged: (String? newVal){
+                        //     setState(() {
+                        //       dropdownVal = newVal!;
+                        //     });
+                        //   },
+                        //   // items: <String>['7','8',],
+                        //   )
+                        // TextFormField(
+                        //   validator: (val) {
+                        //     return val!.isEmpty ? "Enter Year Group" : null;
+                        //   },
+                        //   decoration: InputDecoration(hintText: "Year Group"),
+                        //   onChanged: (val) {
+                        //     yrGroup = val;
+                        //   },
+                        // ),
                         // POSITION TOGGLE SWITCH
                         SizedBox(height: 20),
                         ToggleSwitch(
