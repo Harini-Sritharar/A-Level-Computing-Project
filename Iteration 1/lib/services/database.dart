@@ -1,12 +1,8 @@
 // multidex is enabled so cloud firestore should work :)
 import 'dart:async';
-// import 'dart:html';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/models/class_details.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
-import 'package:random_string/random_string.dart';
 import '../main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -54,33 +50,51 @@ class DatabaseService {
     });
   }
 
-  // adds the class to the user's classes in Firebase
+  // adds the student to the class in Firebase
   Future<void> addStudentToClass(String classId) async {
-    assert (appUser.position == "student");
+    assert(appUser.position == "student");
     await Firestore.instance
         .collection("Classes")
         .document(classId)
-        .updateData({'studentIds': FieldValue.arrayUnion([appUser.uid])}).catchError((e) {
+        .updateData({
+      'studentIds': FieldValue.arrayUnion([appUser.uid])
+    }).catchError((e) {
       print(e);
     });
     await getStudentClasses();
   }
 
+  // retrieves student's classes from Firebase
   Future<void> getStudentClasses() async {
-   final classes = await Firestore.instance
+    final classes = await Firestore.instance
         .collection("Classes")
         .where('studentIds', arrayContains: appUser.uid)
         .getDocuments()
-         .catchError((e) {
+        .catchError((e) {
       print("error" + e);
     });
-    print(classes)
-       ;
+    print(classes);
     final classesFetched = classes.documents.map((doc) => doc.data);
     appUser.classes = convertToClassDetailsStructure(classesFetched.toList());
     print(appUser.classes);
+  }
 
-    
+
+
+
+
+
+  Future<void> getTeacherClasses() async {
+    final groups = await Firestore.instance
+        .collection('Classes')
+        .where('teacherId', isEqualTo: appUser.uid)
+        .getDocuments()
+        .catchError((e) {
+      print(e);
+    });
+    final groupsFetched = groups.documents.map((doc) => doc.data);
+    appUser.classes = convertToClassDetailsStructure(groupsFetched.toList());
+    print(appUser.classes);
   }
 
   Future<void> addNewClassToFirebase(Map<String, dynamic> classData) async {
@@ -91,8 +105,10 @@ class DatabaseService {
         .catchError((e) {
       print("error" + e);
     });
-    List <ClassDetails> classDetails = convertToClassDetailsStructure([classData]);
-     appUser.classes.add(classDetails[0]);
+    List<ClassDetails> classDetails =
+        convertToClassDetailsStructure([classData]);
+    appUser.classes.add(classDetails[0]);
+    getTeacherClasses();
   }
 
   // returns all the info about the quizzes that the current user has created
@@ -102,17 +118,14 @@ class DatabaseService {
         .where("userId", isEqualTo: appUser.uid)
         .getDocuments();
 
-    // final ids = query.documents.map((doc) => doc.documentID);
     final quizzesFetched = query.documents.map((doc) => doc.data);
     appUser.quizzes = convertToQuizStructure(quizzesFetched.toList());
-    // print(" ${appUser.quizzes}");
     for (int i = 0; i < appUser.quizzes.length; i++) {
       final questionsQuery = await Firestore.instance
           .collection("Quiz")
           .document(appUser.quizzes[i].quizId)
           .collection("q")
           .getDocuments();
-
       List<DocumentSnapshot> questionDetails = questionsQuery.documents;
       for (DocumentSnapshot question in questionDetails) {
         Map<String, dynamic> optionsData =
@@ -126,80 +139,6 @@ class DatabaseService {
         appUser.quizzes[i].questions.add(questionInfo);
       }
     }
-    // List questions = questionsQuery.toList();
     print(appUser.quizzes);
-    //print(appUser.quizzes[1].questions);
-    // print("Ids $ids");
   }
 }
-  //  getQuizData(items) async{
-  //    final Query userQuizzes = await Firestore.instance.collection("Quiz")
-  //     .where('userId',isEqualTo: appUser.uid);
-  //   try{
-  //     userQuizzes.getDocuments()
-  //     .then((querySnapshot) =>
-  //     querySnapshot.documents.forEach((element) {
-  //     //     items.add(element.data);
-  //     //    })
-  //     print (items);
-  //     return items;
-  //   }));
-  //   return null;
-  //   }
-  //   catch(e){
-  //     print(e.toString());
-  //     return [];
-  //   }  
-       
-  //           // await Firestore.instance.collection("Quiz").getDocuments()
-  //     // .then((querySnapshot){
-
-
-  // }
-
-  
-
-  // Future<String> getQuizzes() async{
-    
-  // Firestore.instance.collection("Quiz")
-  // .where('userId', isEqualTo: appUser.uid).snapshots().listen((data) => { 
-  //   print("userId ${data.documents[0]['userId']}"),
-  //   appUser.quizzes.add(data.documents[0]['userId'])
-  // });
-  //   return "";
-  
-
-    // docs.then((snpashot) => appUser.quizzes.add());
-    //   return "";
-
-  // }
-  // return FutureBuilder<DocumentSnapshot>(
-  //   future: users.document(uid).get(),
-
-  //   builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-  //     if (snapshot.hasError){
-  //       print("SOMETHINGS WRONG CAPTAIN");
-  //     }
-  //     if (snapshot.hasData && !snapshot.data!.exists){
-  //       print("DOC WHO ARE YOU");
-  //     }
-  //     if (snapshot.connectionState == ConnectionState.done){
-  //       Map <String,dynamic> data = snapshot.data! as Map<String,dynamic>;
-  //       //name = data['name'];
-  //       //return (name);
-  //       return Text("Name: ${data['name']}");
-  //       //var username = (data['name']);
-  //     //print("I FOUND YOU" + username);
-  //     //print(username);
-  //     //return(username);
-  //     }
-  //     return Text("Loading");
-  //   }
-  // );
-
-  // var query = await collection.get();
-  // re
-  // getData(name)
-  //Future <DocumentSnapshot> snapshot = UserCollection.docu
-
-

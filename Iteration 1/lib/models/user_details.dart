@@ -35,5 +35,7 @@ class UserDetails {
   Future<void> initialise() async {
     await fillBasicData();
     await databaseService.getQuizzes();
-    await databaseService.getStudentClasses(); }
+    await databaseService.getStudentClasses(); 
+    await databaseService.getTeacherClasses();
+    }
 }
