@@ -55,18 +55,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               textScaleFactor: 1.5,
               style: myStyle,
             ),
-            SizedBox(height:20),         
-            Text(
-              "Year Group: ${appUser.yearGroup}" ,
-              textScaleFactor: 1.5,
-              style: myStyle,
-            ),
+           
             SizedBox(height:20),         
             Text(
               "Position: " + appUser.position,
               textScaleFactor: 1.5,
               style: myStyle,
             ),
+            SizedBox(height:20),
+            
+            Text((appUser.position == "student")
+                      ? ("Year Group: ${appUser.yearGroup}") : '',
+             textScaleFactor: 1.5,
+              style: myStyle),
             ]
             )),
             SizedBox(height:200),

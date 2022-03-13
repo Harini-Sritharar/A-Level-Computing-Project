@@ -132,6 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 '11',
                                 '12',
                                 '13'
+                                'Teacher (N/A)'
                               ].map<DropdownMenuItem<String>>((String val) {
                                 return DropdownMenuItem<String>(
                                   value: val,
