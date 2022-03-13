@@ -15,11 +15,13 @@ class QuizScreen extends StatefulWidget {
   final void Function() returnPreviousQuestion;
   final Function() checkQuizEnd;
   final Function(int newPoints) addPoints;
+  final Function() checkLenQuiz;
   final int seed;
+  
 
   final QuestionInfo questionInfo;
   QuizScreen(this.questionInfo, this.setNextQuestion,
-      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints,this.seed);
+      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints,this.seed,this.checkLenQuiz);
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -29,6 +31,7 @@ class _QuizScreenState extends State<QuizScreen> {
   late final int numOfIncorrectOptions;
   int points = 0;
   late final List<bool> _checkBoxSelected;
+  int numOfQs = 0;
 
 //
   @protected
@@ -36,8 +39,8 @@ class _QuizScreenState extends State<QuizScreen> {
   void initState() {
     numOfIncorrectOptions = widget.questionInfo.incorrectOptions.length;
     _checkBoxSelected = List.filled(numOfIncorrectOptions + 1, false);
+    numOfQs = widget.checkLenQuiz();
   }
-
   int chosenAnswer = 0;
   checkAnswer(int chosenAns) {
     String message = "Correct";
@@ -71,7 +74,7 @@ class _QuizScreenState extends State<QuizScreen> {
               onTap: () {
                 pushNewScreen(
                     context,
-                    screen: ScoreScreen(points),
+                    screen: ScoreScreen(points,numOfQs),
                     withNavBar: true);
               },
             );
