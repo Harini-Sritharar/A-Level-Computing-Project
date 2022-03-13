@@ -57,7 +57,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   builder: (context) => BottomNavBar(),
                 ));
           }
-          
         },
       );
     }
@@ -105,33 +104,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             email = val;
                           },
                         ),
-                        // YEAR GROUP FIELD
+                        // YEAR GROUP DROPDOWN LIST
                         SizedBox(height: 20),
-                        // DropdownButton <String>(
-                        //   value: dropdownVal,
-                        //   icon: const Icon(Icons.arrow_circle_up),
-                        //   elevation: 15,
-                        //   style: const TextStyle(color: Colors.blueAccent),
-                        //   underline: Container(
-                        //     height: 3;
-                        //     color: Colors.blueAccent,
-                        //   ),
-                        //   onChanged: (String? newVal){
-                        //     setState(() {
-                        //       dropdownVal = newVal!;
-                        //     });
-                        //   },
-                        //   // items: <String>['7','8',],
-                        //   )
-                        // TextFormField(
-                        //   validator: (val) {
-                        //     return val!.isEmpty ? "Enter Year Group" : null;
-                        //   },
-                        //   decoration: InputDecoration(hintText: "Year Group"),
-                        //   onChanged: (val) {
-                        //     yrGroup = val;
-                        //   },
-                        // ),
+                        Row(
+                          children: [
+                            Text("Year Group",textScaleFactor: 1.05),
+                            SizedBox( height: 10, width: 30,),
+                            DropdownButton<String>(
+                              value: dropdownVal,
+                              icon: const Icon(Icons.arrow_circle_down_sharp),
+                              elevation: 25,
+                              style: const TextStyle(color: Colors.black),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.black,
+                              ),
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  dropdownVal = newValue!;
+                                });
+                              },
+                              items: <String>[
+                                '7',
+                                '8',
+                                '9',
+                                '10',
+                                '11',
+                                '12',
+                                '13'
+                              ].map<DropdownMenuItem<String>>((String val) {
+                                return DropdownMenuItem<String>(
+                                  value: val,
+                                  child: Text(val),
+                                );
+                              }).toList(),
+                            ),
+                          ],
+                        ),
                         // POSITION TOGGLE SWITCH
                         SizedBox(height: 20),
                         ToggleSwitch(
