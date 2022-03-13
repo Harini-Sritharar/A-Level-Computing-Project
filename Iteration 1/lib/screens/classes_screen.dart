@@ -21,39 +21,51 @@ class _ClassesScreenState extends State<ClassesScreen> {
       margin: EdgeInsets.symmetric(horizontal: 5),
       width: 200,
       height: 200,
-      child: Center(child: Column(
+      child: Center(
+          child: Column(
         children: [
           Spacer(),
           Text(appUser.classes[i].className),
           Text(appUser.classes[i].subject),
           Spacer(),
-
         ],
       )),
     );
   }
 
   void addClassCode(BuildContext context) async {
+    final _formKey = GlobalKey<FormState>();
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('TextField in Dialog'),
+            title: Text('Join Class'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
-                  controller: classCodeController,
-                  decoration: InputDecoration(hintText: "Enter Class Code"),
-                ),
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: classCodeController,
+                          validator: (val) {
+                            return val!.isEmpty ? "Enter Class Code" : null;
+                          },
+                          decoration:
+                              InputDecoration(hintText: "Enter Class Code"),
+                        ),
+                      ],
+                    ))
               ],
             ),
             actions: [
               GenericButton("Add", () {
-                databaseService
-                .addStudentToClass(classCodeController.text);
-                classCodeController.text = "";
-                Navigator.pop(context);
+                if (_formKey.currentState!.validate()) {
+                  databaseService.addStudentToClass(classCodeController.text);
+                  classCodeController.text = "";
+                  Navigator.pop(context);
+                }
               })
             ],
           );
@@ -63,7 +75,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   Map<String, dynamic> createMap() {
     String classId = randomAlphaNumeric(8);
     Map<String, dynamic> classData = {
-      'classId' : classId,
+      'classId': classId,
       'className': classNameController.text,
       'subject': subjectController.text,
       'teacherId': appUser.uid,
@@ -74,6 +86,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   }
 
   void createClass(BuildContext context) async {
+    final _formKey = GlobalKey<FormState>();
     return showDialog(
         context: context,
         builder: (context) {
@@ -82,31 +95,38 @@ class _ClassesScreenState extends State<ClassesScreen> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextFormField(
-                  controller: classNameController,
-                  validator: (val) {
-                    return val!.isEmpty ? "Class Name" : null;
-                  },
-                  decoration: InputDecoration(hintText: "Class Name"),
-                ),
-                TextFormField(
-                  controller: subjectController,
-                  validator: (val) {
-                    return val!.isEmpty ? "Subject" : null;
-                  },
-                  decoration: InputDecoration(hintText: "Subject"),
-                ),
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: classNameController,
+                          validator: (val) {
+                            return val!.isEmpty ? "Class Name" : null;
+                          },
+                          decoration: InputDecoration(hintText: "Class Name"),
+                        ),
+                        TextFormField(
+                          controller: subjectController,
+                          validator: (val) {
+                            return val!.isEmpty ? "Subject" : null;
+                          },
+                          decoration: InputDecoration(hintText: "Subject"),
+                        ),
+                      ],
+                    ))
               ],
             ),
             actions: [
-              GenericButton("Add", () {
-                Map<String, dynamic> classData =
-                    createMap();
-                // print("ClassData" );
-                databaseService.addNewClassToFirebase(classData);
-                classNameController.text = "";
-                subjectController.text = "";
-                Navigator.pop(context);
+              GenericButton("Create", () {
+                if (_formKey.currentState!.validate()) {
+                  Map<String, dynamic> classData = createMap();
+                  databaseService.addNewClassToFirebase(classData);
+                  databaseService.getTeacherClasses();
+                  classNameController.text = "";
+                  subjectController.text = "";
+                  Navigator.pop(context);
+                }
               })
             ],
           );
