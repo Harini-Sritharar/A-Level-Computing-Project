@@ -6,12 +6,12 @@ import 'Menus/preset_quizzes_menu.dart';
 
 class ScoreScreen extends StatelessWidget {
   final int points;
-  final int sum;
-  ScoreScreen(this.points,this.sum);
+  final int numOfQs;
+  ScoreScreen(this.points,this.numOfQs);
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    int total = sum * 10;
+    int total = numOfQs * 10;
     return Scaffold(
         backgroundColor: Colors.deepPurple[200],
         body: Stack(
@@ -40,7 +40,7 @@ class ScoreScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             Center(
-              child: Text(("$points" + "/${total}"),
+              child: Text(("$points" + "/$total"),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
             ),
