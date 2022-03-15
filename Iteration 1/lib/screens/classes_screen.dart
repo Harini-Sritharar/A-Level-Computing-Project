@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
+import 'package:nea_prototype_1/screens/classes_information_screen.dart';
 import 'package:random_string/random_string.dart';
 
 class ClassesScreen extends StatefulWidget {
@@ -16,20 +17,28 @@ class _ClassesScreenState extends State<ClassesScreen> {
   TextEditingController subjectController = TextEditingController();
 
   Widget buildCard(int i) {
-    return Container(
-      color: Colors.red,
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      width: 200,
-      height: 200,
-      child: Center(
-          child: Column(
-        children: [
-          Spacer(),
-          Text(appUser.classes[i].className),
-          Text(appUser.classes[i].subject),
-          Spacer(),
-        ],
-      )),
+    int value = i;
+    return GestureDetector(
+      child: Container(
+        color: Colors.red,
+        margin: EdgeInsets.symmetric(horizontal: 5),
+        width: 200,
+        height: 200,
+        child: Center(
+            child: Column(
+          children: [
+            Spacer(),
+            Text(appUser.classes[i].className),
+            Text(appUser.classes[i].subject),
+            Spacer(),
+          ],
+        )),
+      ),
+      onTap:(){
+      Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  ClassInfoScreen(value)));}
     );
   }
 

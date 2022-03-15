@@ -12,7 +12,6 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 class DatabaseService {
   // adding quiz data
   Future<void> addQuizData(Map<String, String> quizData, String quizID) async {
-    //getting the instance of Firebase,going inside the collection
     await Firestore.instance
         .collection("Quiz")
         .document(quizID)
@@ -79,11 +78,6 @@ class DatabaseService {
     print(appUser.classes);
   }
 
-
-
-
-
-
   Future<void> getTeacherClasses() async {
     final groups = await Firestore.instance
         .collection('Classes')
@@ -140,5 +134,15 @@ class DatabaseService {
       }
     }
     print(appUser.quizzes);
+  }
+  Future<String> fetchStudentName(String studentId) async {
+    final query = await Firestore.instance.collection('Users')
+    .document(studentId).get();
+    print("Query $query");
+    Map<String, dynamic> data = query.data;
+    print("Data $data");
+    String name = data['name'];
+    print("Name $name");
+    return name;
   }
 }
