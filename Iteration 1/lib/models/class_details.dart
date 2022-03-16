@@ -1,15 +1,17 @@
+import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
 
 class ClassDetails {
   String className = "", subject = "", teacherId = "", classId;
   List<Quiz> quizzes = [];
   List<String> studentIds = [];
+  List<String> studentNames = [];
 
   ClassDetails(this.classId);
 }
 
-  List<ClassDetails> convertToClassDetailsStructure(
-      List<Map<String, dynamic>> classesFetched) {
+  Future<List<ClassDetails>> convertToClassDetailsStructure(
+      List<Map<String, dynamic>> classesFetched) async {
     List<ClassDetails> classes = [];
     for (int i = 0; i < classesFetched.length; i++) {
       var currentClass = classesFetched.elementAt(i);
@@ -20,9 +22,12 @@ class ClassDetails {
       for (int i = 0; i < currentClass['studentIds'].length;i++ ){
         newClass.studentIds.add(currentClass['studentIds'][i]);
       }
+      for (int i = 0; i < currentClass['studentIds'].length;i++ ){
+       String name = await databaseService.fetchStudentName(currentClass['studentIds'][i]);
+        newClass.studentNames.add(name);
+      }
       //newClass.quizzes = currentClass['quizzes'];
       //newClass.studentIds = currentClass['studentIds'];
-
       classes.add(newClass);
     }
     return classes;
