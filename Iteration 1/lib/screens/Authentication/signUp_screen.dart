@@ -37,7 +37,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             setState(() {
               _isLoading = false;
             });
-            AuthService.saveUserLoggedIn(isLoggedIn: true);
             appUser = newUser;
             await appUser.initialise();
             final FirebaseUser user = await auth.currentUser();
@@ -58,6 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ));
           }
         },
+
       );
     }
   }
@@ -96,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // EMAIL FIELD
                         SizedBox(height: 20),
                         TextFormField(
+                          
                           validator: (val) {
                             return val!.isEmpty ? "Enter Email" : null;
                           },
@@ -131,7 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 '10',
                                 '11',
                                 '12',
-                                '13'
+                                '13',
                                 'Teacher (N/A)'
                               ].map<DropdownMenuItem<String>>((String val) {
                                 return DropdownMenuItem<String>(
@@ -146,18 +147,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: 20),
                         ToggleSwitch(
                             minHeight: 50,
-                            minWidth: 170,
+                            minWidth: 125,
                             initialLabelIndex: 0,
                             totalSwitches: 2,
                             labels: ['Student', 'Teacher'],
                             onToggle: (index) {
                               position = (index == 0) ? "student" : "teacher";
-                              print('switched to: $position');
                             }),
                         // TextFormField(
                         //   validator: (val) {
                         //     return val!.isEmpty ? "Enter Position" : null;
                         //   },
+                        
                         //   decoration:
                         //       InputDecoration(hintText: "Teacher or Student?"),
                         //   onChanged: (val) {

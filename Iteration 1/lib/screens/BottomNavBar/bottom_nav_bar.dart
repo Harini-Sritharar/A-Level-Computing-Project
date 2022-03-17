@@ -3,7 +3,7 @@ import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/Quiz/Create%20Quiz/create_quiz.dart';
 import 'package:nea_prototype_1/screens/Quiz/Menus/by_you_quizzes_menu.dart';
 import 'package:nea_prototype_1/screens/Quiz/Menus/preset_quizzes_menu.dart';
-import 'package:nea_prototype_1/screens/classes_screen.dart';
+import 'package:nea_prototype_1/screens/Classes/classes_screen.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/screens/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';

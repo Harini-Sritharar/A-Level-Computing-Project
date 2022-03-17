@@ -3,7 +3,7 @@ import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/class_details.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
-import 'package:nea_prototype_1/screens/Classes/classes_quiz_screen.dart';
+//import 'package:nea_prototype_1/screens/Classes/classes_quiz_screen.dart';
 import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
 
 class ClassInfoScreen extends StatefulWidget {

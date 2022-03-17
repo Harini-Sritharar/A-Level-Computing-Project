@@ -18,13 +18,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 
   Future<void> signIn() async {
+    if (_formKey.currentState!.validate()) {
     setState(() {
       _isLoading = true;
     });
-    // email = "student@gmail.com";
-    // password = "student";
-    email = "teacher@gmail.com";
-    password = "teacherteacher";
+    // email = 'teacher@gmail.com';
+    // password = 'teacherteacher';
     UserDetails? newUser =
         await authService.signInEmailAndPassword(email, password);
     if (newUser == null) {
@@ -42,12 +41,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
+    Navigator.pushReplacement(context,
+    MaterialPageRoute(
           builder: (context) => BottomNavBar(),
         ));
   }
+  }
+
   bool isObscure = true;
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
   @override
