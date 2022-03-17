@@ -74,7 +74,7 @@ class DatabaseService {
     });
     print(classes);
     final classesFetched = classes.documents.map((doc) => doc.data);
-    appUser.classes = convertToClassDetailsStructure(classesFetched.toList());
+    appUser.classes =  await convertToClassDetailsStructure(classesFetched.toList());
     print(appUser.classes);
   }
 
@@ -87,7 +87,7 @@ class DatabaseService {
       print(e);
     });
     final groupsFetched = groups.documents.map((doc) => doc.data);
-    appUser.classes = convertToClassDetailsStructure(groupsFetched.toList());
+    appUser.classes = await convertToClassDetailsStructure(groupsFetched.toList());
     print(appUser.classes);
   }
 
@@ -100,7 +100,7 @@ class DatabaseService {
       print("error" + e);
     });
     List<ClassDetails> classDetails =
-        convertToClassDetailsStructure([classData]);
+        await convertToClassDetailsStructure([classData]);
     appUser.classes.add(classDetails[0]);
     getTeacherClasses();
   }
@@ -144,5 +144,15 @@ class DatabaseService {
     String name = data['name'];
     print("Name $name");
     return name;
+  }
+  Future<void> addQuizToClass(String classId,String quizId) async {
+     await Firestore.instance
+        .collection("Classes")
+        .document(classId)
+        .updateData({
+      'quizzes': FieldValue.arrayUnion([quizId])})
+        .catchError((e) {
+      print("error" + e);
+    });
   }
 }
