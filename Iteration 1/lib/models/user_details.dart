@@ -14,28 +14,30 @@ class UserDetails {
   UserDetails(this.uid);
 
   Future<void> fillBasicData() async {
-    //opens the Users collection
     DocumentSnapshot document =
         await Firestore.instance.collection("Users").document(uid).get();
-    Map<String, dynamic> data =
-        document.data as Map<String, dynamic>;
+    Map<String, dynamic> data = document.data as Map<String, dynamic>;
     print(data);
     name = data['name'];
     email = data['email'];
     position = data['position'];
     yearGroup = data['yearGroup'];
   }
-   Future addScore(quizId,points) async {
-     //adds to the scores list which will be uploaded onto Firebase
-     //scores[quizId] = points;
+
+  Future addScore(quizId, points) async {
+    //adds to the scores list which will be uploaded onto Firebase
+    //scores[quizId] = points;
     //print(scores);
     //  Firestore.instance.collection("Quiz").document(quizId).updateData({{"scores": points})
-   }
+  }
 
   Future<void> initialise() async {
     await fillBasicData();
     await databaseService.getQuizzes();
-    await databaseService.getStudentClasses(); 
-    await databaseService.getTeacherClasses();
+    if (position == 'student') {
+      await databaseService.getStudentClasses();
+    } else {
+      await databaseService.getTeacherClasses();
     }
+  }
 }
