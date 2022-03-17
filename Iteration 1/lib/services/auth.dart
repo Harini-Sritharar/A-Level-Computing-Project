@@ -4,48 +4,46 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-class AuthService{
-final FirebaseAuth _auth = FirebaseAuth.instance;
-  UserDetails? _userFromFirebaseUser(FirebaseUser user){
+class AuthService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  UserDetails? _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? UserDetails(user.uid) : null;
   }
   // logs into existing account
-  Future<UserDetails?> signInEmailAndPassword(String email,String password) async{
-    try{
-      AuthResult authResult = await _auth.signInWithEmailAndPassword
-      (email: email, password: password);
+  Future<UserDetails?> signInEmailAndPassword(
+      String email, String password) async {
+    try {
+      AuthResult authResult = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser firebaseUser = authResult.user;
-      return  _userFromFirebaseUser(firebaseUser);
-    }
-    catch (e){
+      return _userFromFirebaseUser(firebaseUser);
+    } catch (e) {
       print(e.toString());
     }
   }
   // creates a new account
-   Future signUpWithEmailAndPassword(String email, String password) async{
-     try{
-      AuthResult authResult = await _auth.createUserWithEmailAndPassword
-        (email: email, password: password);
+  Future signUpWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      AuthResult authResult = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser firebaseUser = authResult.user;
       print("User Added");
       return _userFromFirebaseUser(firebaseUser);
-    }
-    catch (e){
+    } catch (e) {
       print(e.toString());
     }
-   }
-   // signing out
-   Future signOut() async{
-     try{
-       appUser = null;
-       return await _auth.signOut();
-     }
-     catch(e){
-       print(e.toString());
-       return null;
-     }
-   }
-    
+  }
+  // signing out
+  Future signOut() async {
+    try {
+      appUser = null;
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
   static String userLoggedInKey = "USERKEY";
   //for saving
   static saveUserLoggedIn({required bool isLoggedIn})async {

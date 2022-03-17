@@ -19,27 +19,26 @@ class _ClassesScreenState extends State<ClassesScreen> {
   Widget buildCard(int i) {
     int value = i;
     return GestureDetector(
-      child: Container(
-        color: Colors.red,
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        width: 200,
-        height: 200,
-        child: Center(
-            child: Column(
-          children: [
-            Spacer(),
-            Text(appUser.classes[i].className),
-            Text(appUser.classes[i].subject),
-            Spacer(),
-          ],
-        )),
-      ),
-      onTap:(){
-      Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>  ClassInfoScreen(value)));}
-    );
+        child: Container(
+          decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.circular(15)),
+          //color: Colors.red,
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          width: 200,
+          height: 200,
+          child: Center(
+              child: Column(
+            children: [
+              Spacer(),
+              Text(appUser.classes[i].className),
+              Text(appUser.classes[i].subject),
+              Spacer(),
+            ],
+          )),
+        ),
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ClassInfoScreen(value)));
+        });
   }
 
   void addClassCode(BuildContext context) async {

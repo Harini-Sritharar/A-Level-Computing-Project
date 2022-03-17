@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nea_prototype_1/screens/Quiz/Menus/by_you_quizzes_menu.dart';
@@ -61,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     MaterialPageRoute(builder: (context) => ByYouMenu()));
               }),
               SizedBox(height: 75.0),
-              
+
             ]))));
   }
 }

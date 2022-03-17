@@ -61,7 +61,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                       children: [
                         TextFormField(
                           validator: (val) {
-                            return val!.isEmpty ? "⚠️ Enter Quiz Title" : null;
+                            return val!.isEmpty ? " Enter Quiz Title" : null;
                           },
                           decoration: InputDecoration(
                             hintText: "Quiz Title",
@@ -74,8 +74,9 @@ class _CreateQuizState extends State<CreateQuiz> {
                         Spacer(),
                         GenericButton("Create", () {
                           createNewQuiz();
+                          appUser.initialise();
                         }),
-                        SizedBox(height: 20),
+                        SizedBox(height: 40),
                       ],
                     ),
                   ),

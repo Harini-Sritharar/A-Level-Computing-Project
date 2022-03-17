@@ -13,6 +13,7 @@ UserDetails appUser = UserDetails("");
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -21,35 +22,29 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   bool _isLoggedIn = false;
   @override
-  void initState(){
+  void initState() {
     checkLoginStatus();
     super.initState();
   }
-  checkLoginStatus(){
-     AuthService.getUserLoggedIn().then((value){
-       setState(() {
-         _isLoggedIn = value;
-       });
-     });
+  checkLoginStatus() {
+    AuthService.getUserLoggedIn().then((value) {
+      setState(() {
+        _isLoggedIn = value;
+      });
+    });
   }
 
   Widget build(BuildContext context) {
-   return MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Revision Quiz App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        //errorColor: Colors.yellow
       ),
-      home: WelcomeScreen(),
-      // home: (_isLoggedIn ?? false) ? HomeScreen(name: appUser.name) : WelcomeScreen(),
+     home: WelcomeScreen(),
 
-      //home: HomeScreen(name: "Harini"),
-      
+      // home: (_isLoggedIn ?? false) ? HomeScreen() : WelcomeScreen(),
     );
   }
- 
-    
-  }
-
+}
