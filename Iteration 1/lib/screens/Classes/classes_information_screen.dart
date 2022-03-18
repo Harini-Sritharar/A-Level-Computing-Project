@@ -68,65 +68,45 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle myStyle2 = TextStyle(fontSize: 25, fontFamily: 'Montserrat');
     //i is the index of the class picked in appUser.classes
     ClassDetails chosenClass = appUser.classes[widget.value];
+
     return Scaffold(
-        appBar: AppBar(
-          title: Text(chosenClass.className),
-          centerTitle: true,
-        ),
-        //floatingActionButton: FloatingActionButton(),
+        appBar: screenWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
         body: Center(
             child: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('lib/assets/classes_screen_bg.jpg')),),
                 child: Column(
           children: [
             SizedBox(
               height: 35,
             ),
-            // Text("${widget.value}"),
-            Text(
-              "Subject: ${chosenClass.subject}",
-              style: myStyle2,
-              maxLines: 1,
-            ),
-            Text("Class Code : ${chosenClass.classId}",
-                style: myStyle2, maxLines: 1),
-            SizedBox(height: 35),
-            Text("Members: ", style: myStyle2, maxLines: 1),
+            screenWidgets.infoCard(Icons.subject_outlined,'${chosenClass.subject}',Colors.blue[700]),
+            screenWidgets.infoCard(Icons.class__rounded,'Class Id : ${chosenClass.classId}',Colors.blue[700]),
+            Text('Members:',style: TextStyle(fontSize: 20, color: Colors.white ),),
             Container(
-              height: 200,
-              width: 200,
-              color: Colors.lightBlue,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  for (int i = 0; i < chosenClass.studentNames.length; i++)
-                    ListTile(
-                      leading: Icon(Icons.school),
-                      title: Text(chosenClass.studentNames[i]),
-                    )
-                ],
-              ),
-            ),
+                  height: 200,
+                  width: 200,
+                  child: ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      for (int i = 0; i < chosenClass.studentNames.length; i++)
+                        screenWidgets.infoCard(Icons.person,'${chosenClass.studentNames[i]}',Colors.blue[500])
+                    ],
+                  ),
+                ),
+            SizedBox(height: 35),
             SizedBox(height: 50),
-            GenericButton("Add Quiz", () {
-              addQuiz(context, chosenClass.classId);
-            })
+            
 
-            //     Column(
-            // children:[ ListView(
-            //   children:  <Widget> [
-            //     for (int i = 0; i < chosenClass.studentNames.length; i++)
-            //       ListTile(
-            //         leading: Icon(Icons.map),
-            //         title: Text(chosenClass.studentNames[i]),
-            //       )
-            //   ],
-            // ),]
-            //     )
-            //Text("Students ${chosenClass.studentNames}")
-            //Text(chosenClass],
+            GenericButton("Add Quiz", () {
+              (appUser.position == "teacher")
+                            ? addQuiz(context, chosenClass.classId)
+                            : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Student's cannot add quizzes")));
+            })
           ],
         ))));
   }
