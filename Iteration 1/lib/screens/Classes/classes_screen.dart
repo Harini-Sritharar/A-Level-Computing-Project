@@ -20,12 +20,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   TextEditingController classCodeController = TextEditingController();
   TextEditingController classNameController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
-  Widget welcomeGreeting() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text("Hi", style: TextStyle(fontSize: 14, color: Colors.white)),
-      Text("${appUser.name}", style: nameStyle),
-    ]);
-  }
+
 
   Widget buildCard(int i) {
     int value = i;
@@ -60,8 +55,10 @@ class _ClassesScreenState extends State<ClassesScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
+            backgroundColor: Colors.blueAccent,
             title: Text('Join Class'),
             content: Column(
+            
               mainAxisSize: MainAxisSize.min,
               children: [
                 Form(
@@ -157,26 +154,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          automaticallyImplyLeading: true,
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('lib/assets/classes_screen_bg.jpg')),
-                  gradient: LinearGradient(
-                    colors: [Colors.blue, Colors.black, Colors.purple],
-                  ))),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: Container(
-                decoration: BoxDecoration(),
-                padding: EdgeInsets.all(20),
-                alignment: Alignment.centerLeft,
-                child: welcomeGreeting()),
-          ),
-        ),
+        appBar: screenWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
         body: Container(
             decoration: BoxDecoration(
                 //color: Colors.blue[900],
