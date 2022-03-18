@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/screens/Classes/classes_information_screen.dart';
+import 'package:nea_prototype_1/screens/profile_screen.dart';
 import 'package:random_string/random_string.dart';
 
 class ClassesScreen extends StatefulWidget {
@@ -12,16 +13,28 @@ class ClassesScreen extends StatefulWidget {
 }
 
 class _ClassesScreenState extends State<ClassesScreen> {
+  TextStyle nameStyle =
+      TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white);
+    TextStyle fieldStyle =
+      TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
   TextEditingController classCodeController = TextEditingController();
   TextEditingController classNameController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
+  Widget welcomeGreeting() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text("Hi", style: TextStyle(fontSize: 14, color: Colors.white)),
+      Text("${appUser.name}", style: nameStyle),
+    ]);
+  }
 
   Widget buildCard(int i) {
     int value = i;
     return GestureDetector(
         child: Container(
-          decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.circular(15)),
-          //color: Colors.red,
+          decoration: BoxDecoration(
+              color: Colors.red, borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                colors: [Colors.blueAccent,Colors.blue,Colors.lightBlueAccent]) ),
           margin: EdgeInsets.symmetric(horizontal: 5),
           width: 200,
           height: 200,
@@ -29,8 +42,8 @@ class _ClassesScreenState extends State<ClassesScreen> {
               child: Column(
             children: [
               Spacer(),
-              Text(appUser.classes[i].className),
-              Text(appUser.classes[i].subject),
+              Text(appUser.classes[i].className,style: nameStyle),
+              Text(appUser.classes[i].subject, style: fieldStyle),
               Spacer(),
             ],
           )),
@@ -145,41 +158,69 @@ class _ClassesScreenState extends State<ClassesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Classes"),
           centerTitle: true,
+          automaticallyImplyLeading: true,
+          flexibleSpace: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('lib/assets/classes_screen_bg.jpg')),
+                  gradient: LinearGradient(
+                    colors: [Colors.blue, Colors.black, Colors.purple],
+                  ))),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(50),
+            child: Container(
+                decoration: BoxDecoration(),
+                padding: EdgeInsets.all(20),
+                alignment: Alignment.centerLeft,
+                child: welcomeGreeting()),
+          ),
         ),
-        body: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text((appUser.position == "student")
-                      ? "Join using a class code"
-                      : "Create a new class"),
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      (appUser.position == "student")
-                          ? addClassCode(context)
-                          : createClass(context);
-                    },
-                  )
-                ],
-              ),
-            ),
-            Container(
-              height: 200,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  for (int i = 0; i < appUser.classes.length; i++) buildCard(i)
-                ],
-              ),
-            ),
-          ],
-        ));
+        body: Container(
+            decoration: BoxDecoration(
+                //color: Colors.blue[900],
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage('lib/assets/classes_screen_bg.jpg'))),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(color: Colors.blue[900]),
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        (appUser.position == "student")
+                            ? "Join using a class code"
+                            : "Create a new class",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        onPressed: () {
+                          (appUser.position == "student")
+                              ? addClassCode(context)
+                              : createClass(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 30),
+                Container(
+                  height: 200,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      for (int i = 0; i < appUser.classes.length; i++)
+                        buildCard(i)
+                    ],
+                  ),
+                ),
+              ],
+            )));
   }
 }
