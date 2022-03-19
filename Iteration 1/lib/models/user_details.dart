@@ -1,10 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nea_prototype_1/models/class_details.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
-import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
-import 'package:nea_prototype_1/services/database.dart';
-
 import '../main.dart';
 
 class UserDetails {

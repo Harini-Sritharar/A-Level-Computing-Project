@@ -1,6 +1,4 @@
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:shared_preferences/shared_preferences.dart';
