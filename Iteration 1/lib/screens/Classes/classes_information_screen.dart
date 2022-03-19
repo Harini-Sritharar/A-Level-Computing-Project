@@ -72,7 +72,7 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
     ClassDetails chosenClass = appUser.classes[widget.value];
 
     return Scaffold(
-        appBar: screenWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
+        appBar: customWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
         body: Center(
             child: Container(
               decoration: BoxDecoration(
@@ -84,8 +84,8 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
             SizedBox(
               height: 35,
             ),
-            screenWidgets.infoCard(Icons.subject_outlined,'${chosenClass.subject}',Colors.blue[700]),
-            screenWidgets.infoCard(Icons.class__rounded,'Class Id : ${chosenClass.classId}',Colors.blue[700]),
+            customWidgets.infoCard(Icons.subject_outlined,'${chosenClass.subject}',Colors.blue[700]),
+            customWidgets.infoCard(Icons.class__rounded,'Class Id : ${chosenClass.classId}',Colors.blue[700]),
             Text('Members:',style: TextStyle(fontSize: 20, color: Colors.white ),),
             Container(
                   height: 200,
@@ -94,7 +94,7 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
                     scrollDirection: Axis.vertical,
                     children: [
                       for (int i = 0; i < chosenClass.studentNames.length; i++)
-                        screenWidgets.infoCard(Icons.person,'${chosenClass.studentNames[i]}',Colors.blue[500])
+                        customWidgets.infoCard(Icons.person,'${chosenClass.studentNames[i]}',Colors.blue[500])
                     ],
                   ),
                 ),

@@ -154,7 +154,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: screenWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
+        appBar: customWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
         body: Container(
             decoration: BoxDecoration(
                 //color: Colors.blue[900],

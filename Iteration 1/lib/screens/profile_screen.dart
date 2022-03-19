@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/screens/screen_widgets.dart';
+import 'package:nea_prototype_1/screens/custom_widgets.dart';
 import '../main.dart';
 import 'Authentication/welcome_screen.dart';
 
@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   image: AssetImage('lib/assets/profile_screen_bg.jpeg'))),
           child: ListView(physics: BouncingScrollPhysics(), children: <Widget>[
             SizedBox(height: 30),
-            screenWidgets.buildInfo(),
+            customWidgets.buildInfo(),
             SizedBox(height: 20),
           ]),
         ));

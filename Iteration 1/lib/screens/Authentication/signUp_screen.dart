@@ -121,10 +121,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                           // NAME FIELD
-                          screenWidgets.customContainer(nameField()),
+                          customWidgets.customContainer(nameField()),
                           // EMAIL FIELD
                           SizedBox(height: 20),
-                          screenWidgets.customContainer(emailField()),
+                          customWidgets.customContainer(emailField()),
                           // YEAR GROUP DROPDOWN LIST
                           SizedBox(height: 20),
                           Container(

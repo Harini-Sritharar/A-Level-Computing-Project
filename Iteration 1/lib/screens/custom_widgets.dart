@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
 
-class ScreenWidgets {
+class CustomWidgets {
   
   Widget welcomeGreeting() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -26,7 +26,7 @@ class ScreenWidgets {
         child: Container(
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
-            child: screenWidgets.welcomeGreeting()),
+            child: customWidgets.welcomeGreeting()),
       ),
     );
   }
@@ -109,11 +109,11 @@ class ScreenWidgets {
           ),
           SizedBox(height: 35),
           // info cards
-          screenWidgets.infoCard(
+          customWidgets.infoCard(
               Icons.person, appUser.position, constants.defaultCardColour),
-          screenWidgets.infoCard(
+          customWidgets.infoCard(
               Icons.email_outlined, appUser.email, constants.defaultCardColour),
-          screenWidgets.infoCard(Icons.school, "Year " + appUser.yearGroup,
+          customWidgets.infoCard(Icons.school, "Year " + appUser.yearGroup,
               constants.defaultCardColour)
         ]);
   }

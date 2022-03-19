@@ -124,9 +124,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                screenWidgets.customContainer(emailField()),
+                                customWidgets.customContainer(emailField()),
                                 SizedBox(height: 20),
-                                screenWidgets.customContainer(passwordField()),
+                                customWidgets.customContainer(passwordField()),
                                 SizedBox(height: 35),
                                 LoginButton(
                                   "Login",

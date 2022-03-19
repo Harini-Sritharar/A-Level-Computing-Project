@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/constants.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
-import 'package:nea_prototype_1/screens/screen_widgets.dart';
+import 'package:nea_prototype_1/screens/custom_widgets.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 // creating an instance of the following classes allows me to use easily in my code
 AuthService authService = new AuthService();
 DatabaseService databaseService = new DatabaseService();
 UserDetails appUser = UserDetails("");
-ScreenWidgets screenWidgets = ScreenWidgets();
+CustomWidgets customWidgets = CustomWidgets();
 Constants constants = Constants();
 
 void main() {
