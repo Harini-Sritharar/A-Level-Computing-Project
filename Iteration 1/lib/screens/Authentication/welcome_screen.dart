@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
 import 'package:nea_prototype_1/services/auth.dart';
@@ -101,23 +102,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                     )),
                                 SizedBox(height: 35),
                                 GestureDetector(
+                                  child: LoginButton("Login"),
                                     onTap: () async {
                                       await signIn();
                                     },
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 20),
-                                      decoration: BoxDecoration(
-                                          color: Colors.cyan[400],
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      alignment: Alignment.center,
-                                      width: MediaQuery.of(context).size.width -
-                                          40,
-                                      child: Text("Login",style: TextStyle(
-                                        color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold
-                                      )),
-                                    )),
+                                    ),
                                 SizedBox(height: 35),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -134,6 +123,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       child: Text(
                                         "Sign Up",
                                         style: TextStyle(
+                                          fontSize: 16,
                                           color: Colors.white,
                                           decoration: TextDecoration.underline
                                         )

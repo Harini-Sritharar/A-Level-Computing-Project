@@ -122,7 +122,7 @@ class ScreenWidgets {
         ]);
   }
 
-  Widget textFormFieldContainer(IconData icon, String hint, field, color,[IconButton? iconButton]) {
+  Widget textFormFieldContainer(IconData icon, String hint, field, Color? color ,[IconButton? iconButton]) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       decoration: BoxDecoration(
