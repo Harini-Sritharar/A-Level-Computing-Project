@@ -6,7 +6,7 @@ class ScreenWidgets {
       TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
   TextStyle nameStyle =
       TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white);
-    
+
   Widget welcomeGreeting() {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text("Hi", style: TextStyle(fontSize: 14, color: Colors.white)),
@@ -14,29 +14,27 @@ class ScreenWidgets {
     ]);
   }
 
-  PreferredSizeWidget? customAppBar(imagePath){
+  PreferredSizeWidget? customAppBar(imagePath) {
     return AppBar(
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: AssetImage('${imagePath}')),
-                  gradient: LinearGradient(
-                    colors: [Colors.blue, Colors.black, Colors.purple],
-                  ))),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(50),
-            child: Container(
-                decoration: BoxDecoration(),
-                padding: EdgeInsets.all(20),
-                alignment: Alignment.centerLeft,
-                child: screenWidgets.welcomeGreeting()),
-          ),
-        );
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+      flexibleSpace: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: AssetImage('${imagePath}')),
+              gradient: LinearGradient(
+                colors: [Colors.blue, Colors.black, Colors.purple],
+              ))),
+      bottom: PreferredSize(
+        preferredSize: Size.fromHeight(50),
+        child: Container(
+            decoration: BoxDecoration(),
+            padding: EdgeInsets.all(20),
+            alignment: Alignment.centerLeft,
+            child: screenWidgets.welcomeGreeting()),
+      ),
+    );
   }
-
 
   Widget infoCard(icon, title, color) {
     return Card(
@@ -122,5 +120,23 @@ class ScreenWidgets {
           screenWidgets.infoCard(
               Icons.school, "Year " + appUser.yearGroup, Colors.blue[700])
         ]);
+  }
+
+  Widget textFormFieldContainer(IconData icon, String hint, field, color,[IconButton? iconButton]) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(30)),
+      child: TextFormField(
+        validator: (val) {
+          return val!.isEmpty ? "⚠️ Enter $hint" : null;
+        },
+        decoration: InputDecoration(icon: Icon(icon), hintText: "Your $hint", suffixIcon: iconButton ),
+        onChanged: (val) {
+          field = val;
+        },
+      ),
+    );
   }
 }
