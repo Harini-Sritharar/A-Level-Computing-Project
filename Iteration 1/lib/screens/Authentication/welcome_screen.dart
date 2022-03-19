@@ -12,9 +12,10 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  
+
   final _formKey = GlobalKey<FormState>();
-  late String email = '', password = '';
-  TextStyle myStyle = TextStyle(color: Colors.white12);
+  late String email, password;
   // fixed late initialiseation error by giving email and password default vallues of empty strings.
   AuthService authService = new AuthService();
   bool _isLoading = false;
@@ -41,14 +42,59 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       appUser = newUser;
       await appUser.initialise();
       setState(() {
-        _isLoading = false;
+        _isLoading = true;
       });
+      _isLoading = false;
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => BottomNavBar(),
           ));
     }
+  }
+
+  Widget emailField() {
+    return TextFormField(
+      validator: (val) {
+        return val!.isEmpty ? "⚠️ Enter Email" : null;
+      },
+      decoration: InputDecoration(
+        icon: Icon(
+          Icons.email,
+          color: Colors.white,
+        ),
+        hintText: "Your Email",
+      ),
+      onChanged: (val) {
+        email = val;
+      },
+    );
+  }
+
+  Widget passwordField() {
+    return TextFormField(
+      obscureText: isObscure,
+      validator: (val) {
+        return val!.isEmpty ? "⚠️ Enter Password" : null;
+      },
+      decoration: InputDecoration(
+          icon: Icon(
+            Icons.password,
+            color: Colors.white,
+          ),
+          hintText: "Your Password",
+          suffixIcon: IconButton(
+            icon: Icon(isObscure ? Icons.visibility : Icons.visibility_off),
+            onPressed: () {
+              setState(() {
+                isObscure = !isObscure;
+              });
+            },
+          )),
+      onChanged: (val) {
+        password = val;
+      },
+    );
   }
 
   bool isObscure = true;
@@ -78,40 +124,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                screenWidgets.textFormFieldContainer(
-                                    Icons.email,
-                                    'Email',
-                                    email,
-                                    Colors.cyan[300],
-                                    null),
+                                screenWidgets.customContainer(emailField()),
                                 SizedBox(height: 20),
-                                screenWidgets.textFormFieldContainer(
-                                    Icons.password,
-                                    'Password',
-                                    password,
-                                    Colors.cyan[300],
-                                    IconButton(
-                                      icon: Icon(isObscure
-                                          ? Icons.visibility
-                                          : Icons.visibility_off),
-                                      onPressed: () {
-                                        setState(() {
-                                          isObscure = !isObscure;
-                                        });
-                                      },
-                                    )),
+                                screenWidgets.customContainer(passwordField()),
                                 SizedBox(height: 35),
-                                GestureDetector(
-                                  child: LoginButton("Login"),
-                                    onTap: () async {
-                                      await signIn();
-                                    },
-                                    ),
+                                LoginButton(
+                                  "Login",
+                                  () async {
+                                    await signIn();
+                                  },
+                                ),
                                 SizedBox(height: 35),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text("No account yet?  ", style: TextStyle(color: Colors.white),),
+                                    Text(
+                                      "No account yet?  ",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
                                     GestureDetector(
                                       onTap: () {
                                         Navigator.pushReplacement(
@@ -120,17 +150,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                                 builder: (context) =>
                                                     SignUpScreen()));
                                       },
-                                      child: Text(
-                                        "Sign Up",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.white,
-                                          decoration: TextDecoration.underline
-                                        )
-                                        ),
-                                      ),
-
-                                    
+                                      child: Text("Sign Up",
+                                          style: constants.underlineStyle),
+                                    ),
                                   ],
                                 )
                               ],

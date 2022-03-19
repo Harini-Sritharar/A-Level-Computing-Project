@@ -4,7 +4,6 @@ import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
-import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../main.dart';
@@ -18,13 +17,10 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
-  AuthService authService = new AuthService();
-  DatabaseService databaseService = new DatabaseService();
-  late String name = '', email = '', yrGroup = '', position = '', password = '';
+  late String name, email, yrGroup, position, password;
   bool _isLoading = false;
   bool isObscure = true;
   String dropdownVal = "7";
-  final myController = TextEditingController();
 
   signUp() async {
     if (_formKey.currentState!.validate()) {
@@ -62,14 +58,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  Widget nameField() {
+    return TextFormField(
+      validator: (val) {
+        return val!.isEmpty ? "⚠️ Enter Name" : null;
+      },
+      decoration: InputDecoration(
+        icon: Icon(
+          Icons.password,
+          color: Colors.white,
+        ),
+        hintText: "Your Name",
+      ),
+      onChanged: (val) {
+        name = val;
+      },
+    );
+  }
+
+  Widget emailField() {
+    return TextFormField(
+      validator: (val) {
+        return val!.isEmpty ? "⚠️ Enter Email" : null;
+      },
+      decoration: InputDecoration(
+        icon: Icon(
+          Icons.password,
+          color: Colors.white,
+        ),
+        hintText: "Your Email",
+      ),
+      onChanged: (val) {
+        email = val;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage('lib/assets/welcome_screen_bg.jpg')),
-        ),
+        image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('lib/assets/welcome_screen_bg.jpg')),
+      ),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
@@ -89,92 +121,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                           // NAME FIELD
-                          screenWidgets.textFormFieldContainer(
-                            Icons.person,
-                            'Name',
-                            name,
-                            Colors.cyan[300],
-                          ),
+                          screenWidgets.customContainer(nameField()),
                           // EMAIL FIELD
                           SizedBox(height: 20),
-                          screenWidgets.textFormFieldContainer(
-                            Icons.email,
-                            'Email',
-                            name,
-                            Colors.cyan[300],
-                          ),
+                          screenWidgets.customContainer(emailField()),
                           // YEAR GROUP DROPDOWN LIST
                           SizedBox(height: 20),
-
                           Container(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 10),
                             decoration: BoxDecoration(
                                 color: Colors.cyan[300],
                                 borderRadius: BorderRadius.circular(30)),
-                              child: Center(
-                            child: Row(
-                              children: [
-                                Icon(Icons.school),
-                                SizedBox(width: 10),
-                                Text("Year Group", textScaleFactor: 1.05),
-                                SizedBox(
-                                  height: 10,
-                                  width: 30,
-                                ),
-                                DropdownButton<String>(
-                                  value: dropdownVal,
-                                  icon: const Icon(Icons.arrow_circle_down_sharp),
-                                  elevation: 25,
-                                  style: const TextStyle(color: Colors.black),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.blue,
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  Icon(Icons.school, color: Colors.white),
+                                  SizedBox(width: 10),
+                                  Text("Year Group", textScaleFactor: 1.05),
+                                  SizedBox(
+                                    height: 10,
+                                    width: 30,
                                   ),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      dropdownVal = newValue!;
-                                    });
-                                  },
-                                  items: <String>[
-                                    '7',
-                                    '8',
-                                    '9',
-                                    '10',
-                                    '11',
-                                    '12',
-                                    '13',
-                                    'Teacher (N/A)'
-                                  ].map<DropdownMenuItem<String>>((String val) {
-                                    return DropdownMenuItem<String>(
-                                      value: val,
-                                      child: Text(val),
-                                    );
-                                  }).toList(),
-                                ),
-                              ],
+                                  DropdownButton<String>(
+                                    value: dropdownVal,
+                                    icon: const Icon(
+                                      Icons.arrow_circle_down_sharp,
+                                    ),
+                                    elevation: 25,
+                                    style: const TextStyle(color: Colors.black),
+                                    underline: Container(
+                                      height: 2,
+                                      color: Colors.blue,
+                                    ),
+                                    onChanged: (String? newValue) {
+                                      setState(() {
+                                        dropdownVal = newValue!;
+                                      });
+                                    },
+                                    items: <String>[
+                                      '7',
+                                      '8',
+                                      '9',
+                                      '10',
+                                      '11',
+                                      '12',
+                                      '13',
+                                      'Teacher (N/A)'
+                                    ].map<DropdownMenuItem<String>>(
+                                        (String val) {
+                                      return DropdownMenuItem<String>(
+                                        value: val,
+                                        child: Text(val),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),),
+                          ),
                           // POSITION TOGGLE SWITCH
                           SizedBox(height: 20),
-
                           Container(
-                             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        decoration: BoxDecoration(
-            color: defaultBlueColour,
-            borderRadius: BorderRadius.circular(30)),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 10),
+                            decoration: BoxDecoration(
+                                color: constants.defaultBlueColour,
+                                borderRadius: BorderRadius.circular(30)),
                             child: ToggleSwitch(
-                              
                                 minHeight: 50,
                                 minWidth: 150,
                                 initialLabelIndex: 0,
                                 totalSwitches: 2,
                                 labels: ['Student', 'Teacher'],
                                 onToggle: (index) {
-                                  position = (index == 0) ? "student" : "teacher";
+                                  position =
+                                      (index == 0) ? "student" : "teacher";
                                 }),
                           ),
-
                           SizedBox(height: 20),
                           // PASSWORD FIELD
                           Container(
@@ -212,30 +236,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                           SizedBox(height: 35),
-                          GestureDetector(
-                            child: LoginButton('Sign Up'),
-                              onTap: () {
-                                signUp();
-                              },
-                              ),
+                          LoginButton('Sign Up', () {
+                            signUp();
+                          }),
+
                           SizedBox(height: 25),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Already made an account?  ",style: TextStyle(color: Colors.white)),
+                              Text("Already made an account?  ",
+                                  style: TextStyle(color: Colors.white)),
                               GestureDetector(
                                 onTap: () {
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => WelcomeScreen()));
+                                          builder: (context) =>
+                                              WelcomeScreen()));
                                 },
                                 child: Text(
                                   "Login",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                      decoration: TextDecoration.underline),
+                                  style: constants.underlineStyle,
                                 ),
                               ),
                             ],
