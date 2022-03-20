@@ -7,6 +7,7 @@ class UserDetails {
   String uid, name = "", email = "", position = "", yearGroup = "";
   List<ClassDetails> classes = [];
   List<Quiz> quizzes = [];
+  List<Quiz> presetQuizzes = [];
   UserDetails(this.uid);
 
   Future<void> fillBasicData() async {
@@ -29,7 +30,8 @@ class UserDetails {
 
   Future<void> initialise() async {
     await fillBasicData();
-    await databaseService.getQuizzes();
+    await databaseService.getUserQuizzes();
+    await databaseService.getPresetQuizzes();
     if (position == 'student') {
       await databaseService.getStudentClasses();
     } else {

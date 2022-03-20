@@ -106,7 +106,7 @@ class DatabaseService {
   }
 
   // returns all the info about the quizzes that the current user has created
-  Future<void> getQuizzes() async {
+  Future<void> getUserQuizzes() async {
     final query = await Firestore.instance
         .collection("Quiz")
         .where("userId", isEqualTo: appUser.uid)
@@ -155,4 +155,35 @@ class DatabaseService {
       print("error" + e);
     });
   }
+  bool presetChecker = true;
+  Future<void> getPresetQuizzes()async{
+    final query = await Firestore.instance
+        .collection("Quiz")
+        .where("preset", isEqualTo: presetChecker )
+        .getDocuments();
+  print("Query ${query.toString()}");
+    final quizzesFetched = query.documents.map((doc) => doc.data);
+    appUser.presetQuizzes = convertToQuizStructure(quizzesFetched.toList());
+    for (int i = 0; i < appUser.presetQuizzes.length; i++) {
+      final questionQuery = await Firestore.instance
+          .collection("Quiz")
+          .document(appUser.presetQuizzes[i].quizId)
+          .collection("q")
+          .getDocuments();
+      List<DocumentSnapshot> questionDetails = questionQuery.documents;
+      for (DocumentSnapshot question in questionDetails) {
+        Map<String, dynamic> optionsData =
+            question.data; // as  Map<String,dynamic>;
+        QuestionInfo questionInfo = QuestionInfo(
+            optionsData["question"], optionsData["correctAnswer"], [
+          optionsData["incorrectOption1"],
+          optionsData["incorrectOption2"],
+          optionsData["incorrectOption3"]
+        ]);
+        appUser.presetQuizzes[i].questions.add(questionInfo);
+      }
+    }
+    print(appUser.presetQuizzes);
+  }
+  
 }
