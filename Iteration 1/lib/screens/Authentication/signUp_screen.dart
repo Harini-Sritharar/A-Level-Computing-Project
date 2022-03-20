@@ -159,7 +159,7 @@
 //               return DropdownMenuItem<String>(
 //                 value: val,
 //                 child: Text(val),
-                
+
 //               );
 //             }).toList(),
 //           ),
@@ -346,187 +346,230 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ));
           }
         },
-
       );
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.cyan[600],
-      body: _isLoading
-          ? Container(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            )
-          : Form(
-              key: _formKey,
-              child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25),
-                  child: Center(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                        // NAME FIELD
-                        TextFormField(
-                          //controller: myController,
-                          validator: (val) {
-                            return val!.isEmpty ? "Enter Name" : null;
-                          },
-                          decoration: InputDecoration(hintText: "Name"),
-                          onChanged: (val) {
-                            name = val;
-                          },
-                        ),
-                        // EMAIL FIELD
-                        SizedBox(height: 20),
-                        TextFormField(
-                          
-                          validator: (val) {
-                            return val!.isEmpty ? "Enter Email" : null;
-                          },
-                          decoration: InputDecoration(hintText: "Email"),
-                          onChanged: (val) {
-                            email = val;
-                          },
-                        ),
-                        // YEAR GROUP DROPDOWN LIST
-                        SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Text("Year Group",textScaleFactor: 1.05),
-                            SizedBox( height: 10, width: 30,),
-                            DropdownButton<String>(
-                              value: dropdownVal,
-                              icon: const Icon(Icons.arrow_circle_down_sharp),
-                              elevation: 25,
-                              style: const TextStyle(color: Colors.black),
-                              underline: Container(
-                                height: 2,
-                                color: Colors.black,
-                              ),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  //print(position);
-                                  dropdownVal = newValue!;
-                                  print("DPV $dropdownVal");
-                                  position = newValue;
+  Widget nameField() {
+    return TextFormField(
+      validator: (val) {
+        return val!.isEmpty ? "Enter Name" : null;
+      },
+      decoration: InputDecoration(hintText: "Name"),
+      onChanged: (val) {
+        name = val;
+      },
+    );
+  }
 
-                                  print("Position: $position");
-                                });
-                              },
-                              items: <String>[
-                                '',
-                                '7',
-                                '8',
-                                '9',
-                                '10',
-                                '11',
-                                '12',
-                                '13',
-                                'Teacher (N/A)'
-                              ].map<DropdownMenuItem<String>>((String val) {
-                                return DropdownMenuItem<String>(
-                                  value: val,
-                                  child: Text(val),
-                                );
-                              }).toList(),
-                            ),
-                          ],
-                        ),
-                        // POSITION TOGGLE SWITCH
-                        SizedBox(height: 20),
-                        ToggleSwitch(
-                            minHeight: 50,
-                            minWidth: 125,
-                            initialLabelIndex: 0,
-                            totalSwitches: 2,
-                            labels: ['Student', 'Teacher'],
-                            onToggle: (index) {
-                              position = (index == 0) ? "student" : "teacher";
-                              print(position );
-                            }),
-                        // TextFormField(
-                        //   validator: (val) {
-                        //     return val!.isEmpty ? "Enter Position" : null;
-                        //   },
-                        
-                        //   decoration:
-                        //       InputDecoration(hintText: "Teacher or Student?"),
-                        //   onChanged: (val) {
-                        //     position = val;
-                        //   },
-                        // ),
-                        SizedBox(height: 20),
-                        // PASSWORD FIELD
-                        TextFormField(
-                          //controller: passwordController,
-                          obscureText: isObscure,
-                          validator: (val) {
-                            if (val!.isEmpty) {
-                              return ("Enter Password");
-                            }
-                            if (val.length < 8) {
-                              return ("Too short");
-                            }
-                            // return val!.isEmpty ? "Enter Password" : null;
-                          },
-                          decoration: InputDecoration(
-                              hintText: "Password",
-                              suffixIcon: IconButton(
-                                icon: Icon(isObscure
-                                    ? Icons.visibility
-                                    : Icons.visibility_off),
-                                onPressed: () {
+  Widget emailField() {
+    return TextFormField(
+      validator: (val) {
+        return val!.isEmpty ? "Enter Email" : null;
+      },
+      decoration: InputDecoration(hintText: "Email"),
+      onChanged: (val) {
+        email = val;
+      },
+    );
+  }
+
+  Widget passwordField() {
+    return TextFormField(
+      obscureText: isObscure,
+      validator: (val) {
+        if (val!.isEmpty) {
+          return ("Enter Password");
+        }
+        if (val.length < 8) {
+          return ("Too short");
+        }
+      },
+      decoration: InputDecoration(
+          hintText: "Password",
+          suffixIcon: IconButton(
+            icon: Icon(isObscure ? Icons.visibility : Icons.visibility_off),
+            onPressed: () {
+              setState(() {
+                isObscure = !isObscure;
+              });
+            },
+          )),
+      onChanged: (val) {
+        password = val;
+      },
+    );
+  }
+  Widget positionField(){
+    return ToggleSwitch(
+                              minHeight: 50,
+                              minWidth: 125,
+                              initialLabelIndex: 0,
+                              totalSwitches: 2,
+                              labels: ['Student', 'Teacher'],
+                              onToggle: (index) {
+                                position = (index == 0) ? "student" : "teacher";
+                                print(position);
+                              });
+  }
+
+  Widget yrGroupField(){
+    return Row(
+                            children: [
+                              Text("Year Group", textScaleFactor: 1.05),
+                              SizedBox(
+                                height: 10,
+                                width: 30,
+                              ),
+                              DropdownButton<String>(
+                                value: dropdownVal,
+                                icon: const Icon(Icons.arrow_circle_down_sharp),
+                                elevation: 25,
+                                style: const TextStyle(color: Colors.black),
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.black,
+                                ),
+                                onChanged: (String? newValue) {
                                   setState(() {
-                                    isObscure = !isObscure;
+                                    //print(position);
+                                    dropdownVal = newValue!;
+                                    print("DPV $dropdownVal");
+                                    position = newValue;
+
+                                    print("Position: $position");
                                   });
                                 },
-                              )),
-                          onChanged: (val) {
-                            password = val;
-                          },
-                        ),
-                        SizedBox(height: 35),
-                        GestureDetector(
-                            onTap: () {
-                              signUp();
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 20),
-                              decoration: BoxDecoration(
-                                  color: Colors.teal,
-                                  borderRadius: BorderRadius.circular(30)),
-                              alignment: Alignment.center,
-                              width: MediaQuery.of(context).size.width - 40,
-                              child: Text("Sign Up"),
-                            )),
-                        SizedBox(height: 25),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Already made an account?  "),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => WelcomeScreen()));
-                              },
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline),
+                                items: <String>[
+                                  '',
+                                  '7',
+                                  '8',
+                                  '9',
+                                  '10',
+                                  '11',
+                                  '12',
+                                  '13',
+                                  'Teacher (N/A)'
+                                ].map<DropdownMenuItem<String>>((String val) {
+                                  return DropdownMenuItem<String>(
+                                    value: val,
+                                    child: Text(val),
+                                  );
+                                }).toList(),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 50)
-                      ])))),
+                            ],
+                          );
+  }
+  // TextFormField(
+  //   validator: (val) {
+  //     return val!.isEmpty ? "Enter Name" : null;
+  //   },
+  //   decoration: InputDecoration(hintText: "Name"),
+  //   onChanged: (val) {
+  //     name = val;
+  //   },
+  // ),
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('lib/assets/welcome_screen_bg.jpg')),
+      ),
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Colors.transparent,
+        body: _isLoading
+            ? Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              )
+            : Form(
+                key: _formKey,
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    child: Center(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                          customWidgets.customContainer(nameField()),
+                          customWidgets.customContainer(emailField()),
+                          // NAME FIELD
+                          // TextFormField(
+                          //   validator: (val) {
+                          //     return val!.isEmpty ? "Enter Name" : null;
+                          //   },
+                          //   decoration: InputDecoration(hintText: "Name"),
+                          //   onChanged: (val) {
+                          //     name = val;
+                          //   },
+                          // ),
+                          // EMAIL FIELD
+                          SizedBox(height: 20),
+
+                          // YEAR GROUP DROPDOWN LIST
+                          SizedBox(height: 20),
+                          customWidgets.customContainer(yrGroupField()),
+                          // POSITION TOGGLE SWITCH
+                          SizedBox(height: 20),
+                        customWidgets.customContainer(positionField()),
+                          
+                          // TextFormField(
+                          //   validator: (val) {
+                          //     return val!.isEmpty ? "Enter Position" : null;
+                          //   },
+
+                          //   decoration:
+                          //       InputDecoration(hintText: "Teacher or Student?"),
+                          //   onChanged: (val) {
+                          //     position = val;
+                          //   },
+                          // ),
+                          SizedBox(height: 20),
+                          // PASSWORD FIELD
+                        customWidgets.customContainer(passwordField()),
+                          SizedBox(height: 35),
+                          GestureDetector(
+                              onTap: () {
+                                signUp();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 20),
+                                decoration: BoxDecoration(
+                                    color: Colors.teal,
+                                    borderRadius: BorderRadius.circular(30)),
+                                alignment: Alignment.center,
+                                width: MediaQuery.of(context).size.width - 40,
+                                child: Text("Sign Up"),
+                              )),
+                          SizedBox(height: 25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Already made an account?  "),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              WelcomeScreen()));
+                                },
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 50)
+                        ])))),
+      ),
     );
   }
 }
