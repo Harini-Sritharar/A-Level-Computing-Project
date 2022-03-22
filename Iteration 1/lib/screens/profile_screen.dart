@@ -37,7 +37,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             SizedBox(height: 30),
             customWidgets.buildInfo(),
             SizedBox(height: 20),
-            CircleButton('Tutorial', () {
+
+            CircleButton('Walkthrough', () {
               pushNewScreenWithRouteSettings(context,
                   screen: WalkthroughScreen(),
                   settings: RouteSettings(),

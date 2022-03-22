@@ -75,7 +75,7 @@ class CircleButton extends StatelessWidget{
       child: ElevatedButton(
         child:  Text(
           text,
-          style: constants.nameStyle
+          style: TextStyle(color: Colors.white,fontSize: 18)
         ),
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
