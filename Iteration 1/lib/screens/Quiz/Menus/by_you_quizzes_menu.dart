@@ -12,39 +12,6 @@ class ByYouMenu extends StatefulWidget {
   _ByYouMenuState createState() => _ByYouMenuState();
 }
 class _ByYouMenuState extends State<ByYouMenu> {
-  Widget createCard(i) {
-    return GestureDetector(
-      child: Container(
-        height: 200,
-        width: 200,
-        //width: 150,
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-            //color: Colors.purple[100],
-            borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              colors: [Colors.purple,Colors.teal]) ),
-          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-                    Icon(Icons.quiz_outlined),
-                    Text(appUser.quizzes[i].quizTitle)
-            ],
-          ),
-        ),
-      ),
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => QuizNavigator(userQuizzes[i].questions)));
-      },
-    );
-  }
-  List<Quiz> userQuizzes = appUser.quizzes;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,13 +32,9 @@ class _ByYouMenuState extends State<ByYouMenu> {
               crossAxisCount: 2,
               ),
             children:  [
-                  //Spacer(),
-                  for (int i = 0; i < appUser.quizzes.length; i++) createCard(i),
-                  //Spacer()
+                  for (int i = 0; i < appUser.quizzes.length; i++) customWidgets.createCard(i,context,appUser.quizzes),
             ],
           ),
-      
-            
           ),
         );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nea_prototype_1/screens/Quiz/Create%20Quiz/create_quiz.dart';
 import 'package:nea_prototype_1/screens/home_screen.dart';
 import 'package:nea_prototype_1/services/database.dart';
 
@@ -37,96 +38,96 @@ class _AddQuizQuestionState extends State<AddQuizQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-        appBar: AppBar(centerTitle: true, title: Text("Add a question")),
-        body: _isLoading
-            ? Container(
-                child: Center(child: CircularProgressIndicator()),
-              )
-            : Form(
-              key: _formKey,
-                child: Center(
-                    child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      //question
-                      TextFormField(
-                        validator: (val) {
-                          return val!.isEmpty ? " ⚠️ Enter a question" : null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Enter Question",
+    return Container(
+     
+      child: Scaffold(
+        //backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
+          appBar: AppBar(centerTitle: true, title: Text("Add a question")),
+          body: _isLoading
+              ? Container(
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              : Form(
+                key: _formKey,
+                  child: Center(
+                      child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        //question
+                        TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? " ⚠️ Enter a question" : null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Enter Question",
+                          ),
+                          onChanged: (val) {
+                            q = val;
+                          },
                         ),
-                        onChanged: (val) {
-                          q = val;
-                        },
-                      ),
-                      //answer1
-                      TextFormField(
-                        validator: (val) {
-                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Correct Answer",
+                        //answer1
+                        TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "⚠️ Enter an answer" : null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Correct Answer",
+                          ),
+                          onChanged: (val) {
+                            ans1 = val;
+                          },
                         ),
-                        onChanged: (val) {
-                          ans1 = val;
-                        },
-                      ),
-                      //answer2
-                      TextFormField(
-                        validator: (val) {
-                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Incorrect Option 1",
+                        //answer2
+                        TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "⚠️ Enter an answer" : null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Incorrect Option 1",
+                          ),
+                          onChanged: (val) {
+                            ans2 = val;
+                          },
                         ),
-                        onChanged: (val) {
-                          ans2 = val;
-                        },
-                      ),
-                      //answer3
-                      TextFormField(
-                        validator: (val) {
-                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Incorrect Option 2",
+                        //answer3
+                        TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "⚠️ Enter an answer" : null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Incorrect Option 2",
+                          ),
+                          onChanged: (val) {
+                            ans3 = val;
+                          },
                         ),
-                        onChanged: (val) {
-                          ans3 = val;
-                        },
-                      ),
-                      //answer4
-                      TextFormField(
-                        validator: (val) {
-                          return val!.isEmpty ? "⚠️ Enter an answer" : null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Incorrect Option 3",
+                        //answer4
+                        TextFormField(
+                          validator: (val) {
+                            return val!.isEmpty ? "⚠️ Enter an answer" : null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Incorrect Option 3",
+                          ),
+                          onChanged: (val) {
+                            ans4 = val;
+                          },
                         ),
-                        onChanged: (val) {
-                          ans4 = val;
-                        },
-                      ),
-                        SizedBox(height: 20),
-                      GenericButton("Add Question", () {
-                          uploadQuestionData();
-            //               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            //                 content: Text('Successful added question 😁'),
-            // ));
-                        }),
-                      
-                      SizedBox(height: 35),
-                      GenericButton("Finish", () {
-                         Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()));
-                        }),
-                    ],
-                  ),
+                          SizedBox(height: 20),
+                        GenericButton("Add Question", () {
+                            uploadQuestionData();
+                          }),
+                        SizedBox(height: 35),
+                        GenericButton("Finish", () {
+                           Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => CreateQuiz()));
+                          }),
+                      ],
+                    ),
+                  )),
                 )),
-              ));
+    );
   }
 }
