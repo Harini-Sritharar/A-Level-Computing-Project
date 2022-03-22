@@ -7,7 +7,6 @@ import 'package:nea_prototype_1/models/quiz.dart';
 import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
 
 class ClassInfoScreen extends StatefulWidget {
-  //ClassInfoScreen(int value, { Key? key }) : super(key: key);
   int value;
   ClassInfoScreen(this.value);
   @override
@@ -70,9 +69,10 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
   Widget build(BuildContext context) {
     //i is the index of the class picked in appUser.classes
     ClassDetails chosenClass = appUser.classes[widget.value];
+    
 
     return Scaffold(
-        appBar: customWidgets.customAppBar('lib/assets/classes_screen_bg.jpg'),
+        appBar: customWidgets.customAppBar('lib/assets/classes_screen_bg.jpg',Text('${chosenClass.className}',style: constants.nameStyle,)),
         body: Center(
             child: Container(
               decoration: BoxDecoration(
@@ -105,7 +105,7 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
             GenericButton("Add Quiz", () {
               (appUser.position == "teacher")
                             ? addQuiz(context, chosenClass.classId)
-                            : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Student's cannot add quizzes")));
+                            : ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Students cannot add quizzes")));
             })
           ],
         ))));
