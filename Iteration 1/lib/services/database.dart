@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class DatabaseService {
+// ADDING DATA
   // adding quiz data
   Future<void> addQuizData(Map<String, String> quizData, String quizID) async {
     await Firestore.instance
@@ -49,6 +50,7 @@ class DatabaseService {
     });
   }
 
+// FETCHING CLASSES
   // adds the student to the class in Firebase
   Future<void> addStudentToClass(String classId) async {
     assert(appUser.position == "student");
@@ -78,6 +80,7 @@ class DatabaseService {
     print(appUser.classes);
   }
 
+  // retrieves teacher's classes from Firebase
   Future<void> getTeacherClasses() async {
     final groups = await Firestore.instance
         .collection('Classes')
@@ -90,7 +93,7 @@ class DatabaseService {
     appUser.classes = await convertToClassDetailsStructure(groupsFetched.toList());
     print(appUser.classes);
   }
-
+  // adds new class created by a teacher to Firebase
   Future<void> addNewClassToFirebase(Map<String, dynamic> classData) async {
     await Firestore.instance
         .collection("Classes")
@@ -104,6 +107,21 @@ class DatabaseService {
     appUser.classes.add(classDetails[0]);
     getTeacherClasses();
   }
+
+
+//FETCHING QUIZZES
+  //adding a quiz made by a teacher to a class
+  Future<void> addQuizToClass(String classId,String quizId) async {
+     await Firestore.instance
+        .collection("Classes")
+        .document(classId)
+        .updateData({
+      'quizzes': FieldValue.arrayUnion([quizId])})
+        .catchError((e) {
+      print("error" + e);
+    });
+  }
+
 
   // returns all the info about the quizzes that the current user has created
   Future<void> getUserQuizzes() async {
@@ -135,38 +153,19 @@ class DatabaseService {
     }
     print(appUser.quizzes);
   }
-  Future<String> fetchStudentName(String studentId) async {
-    final query = await Firestore.instance.collection('Users')
-    .document(studentId).get();
-    print("Query $query");
-    Map<String, dynamic> data = query.data;
-    print("Data $data");
-    String name = data['name'];
-    print("Name $name");
-    return name;
-  }
-  Future<void> addQuizToClass(String classId,String quizId) async {
-     await Firestore.instance
-        .collection("Classes")
-        .document(classId)
-        .updateData({
-      'quizzes': FieldValue.arrayUnion([quizId])})
-        .catchError((e) {
-      print("error" + e);
-    });
-  }
-  bool presetChecker = true;
+
+// reyrieves preset quizzes for the user
   Future<void> getPresetQuizzes()async{
     final query = await Firestore.instance
-        .collection("Quiz")
-        .where("preset", isEqualTo: presetChecker )
+        .collection("PresetQuizzes")
+        .where("difficulty", isEqualTo: appUser.yearGroup )
         .getDocuments();
   print("Query ${query.toString()}");
     final quizzesFetched = query.documents.map((doc) => doc.data);
     appUser.presetQuizzes = convertToQuizStructure(quizzesFetched.toList());
     for (int i = 0; i < appUser.presetQuizzes.length; i++) {
       final questionQuery = await Firestore.instance
-          .collection("Quiz")
+          .collection("PresetQuizzes")
           .document(appUser.presetQuizzes[i].quizId)
           .collection("q")
           .getDocuments();
@@ -185,5 +184,15 @@ class DatabaseService {
     }
     print(appUser.presetQuizzes);
   }
-  
+//FETCHING OTHER DATA
+  Future<String> fetchStudentName(String studentId) async {
+    final query = await Firestore.instance.collection('Users')
+    .document(studentId).get();
+    print("Query $query");
+    Map<String, dynamic> data = query.data;
+    print("Data $data");
+    String name = data['name'];
+    print("Name $name");
+    return name;
+  }
 }

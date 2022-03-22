@@ -56,8 +56,9 @@ class CustomWidgets {
               // building the profile picture
               child: CircleAvatar(
                 radius: 60,
-                backgroundImage: NetworkImage(
-                    'https://www.woolha.com/media/2020/03/eevee.png'),
+                backgroundImage: AssetImage('lib/assets/minion.webp')
+                // NetworkImage(
+                    //'https://www.woolha.com/media/2020/03/eevee.png'),
               ),
             ),
             Padding(

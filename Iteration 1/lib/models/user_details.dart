@@ -31,9 +31,9 @@ class UserDetails {
   Future<void> initialise() async {
     await fillBasicData();
     await databaseService.getUserQuizzes();
-    await databaseService.getPresetQuizzes();
     if (position == 'student') {
       await databaseService.getStudentClasses();
+      await databaseService.getPresetQuizzes();
     } else {
       await databaseService.getTeacherClasses();
     }

@@ -18,6 +18,5 @@ class Quiz{
     Quiz newQuiz = Quiz(quiz['quizTitle'],quiz['quizId'], []);
     quizzes.add(newQuiz);
   }
-
     return quizzes;
   }
