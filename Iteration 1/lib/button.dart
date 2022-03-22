@@ -63,6 +63,27 @@ class LoginButton extends StatelessWidget {
   }
 }
 
-// class TealButton extends StatelessWidget{
 
-// }
+class CircleButton extends StatelessWidget{
+  final String text;
+  final Function() onPressed;
+
+  const CircleButton(this.text, this.onPressed);
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: ElevatedButton(
+        child:  Text(
+          text,
+          style: constants.nameStyle
+        ),
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(100,100),
+          shape: const CircleBorder()
+        )
+        )
+    );
+  }
+
+}
