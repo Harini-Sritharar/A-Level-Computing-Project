@@ -22,32 +22,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
   TextEditingController subjectController = TextEditingController();
 
 
-  Widget buildCard(int i) {
-    int value = i;
-    return GestureDetector(
-        child: Container(
-          decoration: BoxDecoration(
-              color: Colors.red, borderRadius: BorderRadius.circular(15),
-              gradient: LinearGradient(
-                colors: [Colors.blueAccent,Colors.blue,Colors.lightBlueAccent]) ),
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          width: 200,
-          height: 200,
-          child: Center(
-              child: Column(
-            children: [
-              Spacer(),
-              Text(appUser.classes[i].className,style: nameStyle),
-              Text(appUser.classes[i].subject, style: fieldStyle),
-              Spacer(),
-            ],
-          )),
-        ),
-        onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ClassInfoScreen(value)));
-        });
-  }
+  
 
   void addClassCode(BuildContext context) async {
     final _formKey = GlobalKey<FormState>();
@@ -188,16 +163,20 @@ class _ClassesScreenState extends State<ClassesScreen> {
                 ),
                 SizedBox(height: 30),
                 Container(
-                  height: 200,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      for (int i = 0; i < appUser.classes.length; i++)
-                        buildCard(i)
-                    ],
-                  ),
-                ),
-              ],
-            )));
-  }
+                      height: 200,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          for (int i = 0; i < appUser.classes.length; i++)
+                            customWidgets.buildCard(
+                                context,
+                                i,
+                                appUser.classes,
+                                (){Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ClassInfoScreen(i)));}
+                    ),
+            ]))
+            ]))
+    );
+}
 }
