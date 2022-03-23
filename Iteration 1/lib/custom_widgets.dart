@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/quiz.dart';
+import 'package:nea_prototype_1/screens/Classes/classes_information_screen.dart';
 import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
 
 class CustomWidgets {
-  
   Widget greeting(line1, line2) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text("$line1", style: TextStyle(fontSize: 14, color: Colors.white)),
       Text("$line2", style: constants.nameStyle),
     ]);
   }
+
   // creates a custom app bar
   PreferredSizeWidget? customAppBar([imagePath, child]) {
     return AppBar(
-      centerTitle: true,
-      automaticallyImplyLeading: false,
-      flexibleSpace: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage('$imagePath')),
-              )),
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: Container(
-            padding: EdgeInsets.all(20),
-            alignment: Alignment.centerLeft,
-            child: child
-      ),
-    ));
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        flexibleSpace: Container(
+            decoration: BoxDecoration(
+          image: DecorationImage(
+              fit: BoxFit.cover, image: AssetImage('$imagePath')),
+        )),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: Container(
+              padding: EdgeInsets.all(20),
+              alignment: Alignment.centerLeft,
+              child: child),
+        ));
   }
+
   // creates an information card for use in the Profile Screen
   Widget infoCard(icon, title, color) {
     return Card(
@@ -40,10 +41,12 @@ class CustomWidgets {
           title: Text("$title", style: constants.fieldStyle)),
     );
   }
+
   // creates a divider
   Widget divider() {
     return Container(color: Colors.white, height: 30, width: 0.2);
   }
+
   // creates the widget on the Profile Screen with user statistics
   Widget buildInfo() {
     return Column(
@@ -55,11 +58,11 @@ class CustomWidgets {
               padding: const EdgeInsets.only(left: 8.0, top: 15),
               // building the profile picture
               child: CircleAvatar(
-                radius: 60,
-                backgroundImage: AssetImage('lib/assets/minion.webp')
-                // NetworkImage(
-                    //'https://www.woolha.com/media/2020/03/eevee.png'),
-              ),
+                  radius: 60,
+                  backgroundImage: AssetImage('lib/assets/minion.webp')
+                  // NetworkImage(
+                  //'https://www.woolha.com/media/2020/03/eevee.png'),
+                  ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20),
@@ -118,25 +121,26 @@ class CustomWidgets {
               constants.defaultCardColour)
         ]);
   }
+
   // Custom Container widget
   Widget customContainer(child) {
     return Container(
-      width: 500,
+        width: 500,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
             color: constants.defaultBlueColour,
             borderRadius: BorderRadius.circular(30)),
         child: child);
   }
-  InputDecoration whiteIconDecor(IconData icon, [String? hint]){
-    return InputDecoration(
-        icon: Icon(icon, color:  Colors.white),
-        hintText: "Your $hint",
-        );
-      
 
-}
-Widget createCard(i,BuildContext context, List<Quiz> quizzes) {
+  InputDecoration whiteIconDecor(IconData icon, [String? hint]) {
+    return InputDecoration(
+      icon: Icon(icon, color: Colors.white),
+      hintText: "Your $hint",
+    );
+  }
+
+  Widget createCard(i, BuildContext context, List<Quiz> quizzes) {
     return GestureDetector(
       child: Container(
         height: 200,
@@ -144,18 +148,22 @@ Widget createCard(i,BuildContext context, List<Quiz> quizzes) {
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              colors: [Colors.purple,Colors.teal]) ),
-          margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-
+            gradient: LinearGradient(colors: [Colors.purple, Colors.teal])),
+        margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
-                children: [Icon(Icons.quiz_outlined),
-                    Text(quizzes[i].quizTitle, style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white, fontSize: 20))],)
-                    
+                children: [
+                  Icon(Icons.quiz_outlined),
+                  Text(quizzes[i].quizTitle,
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          color: Colors.white,
+                          fontSize: 20))
+                ],
+              )
             ],
           ),
         ),
@@ -167,5 +175,29 @@ Widget createCard(i,BuildContext context, List<Quiz> quizzes) {
                 builder: (context) => QuizNavigator(quizzes[i].questions)));
       },
     );
+  }
+  Widget buildCard(BuildContext context,int i,List cardItem,  onTap) {
+    //int value = i;
+    return GestureDetector(
+        child: Container(
+          decoration: BoxDecoration(
+              //color: Colors.red, 
+              borderRadius: BorderRadius.circular(15),
+              gradient: LinearGradient(
+                colors: [Colors.blueAccent,Colors.blue,Colors.lightBlueAccent]) ),
+          margin: EdgeInsets.symmetric(horizontal: 5),
+          width: 200,
+          height: 200,
+          child: Center(
+              child: Column(
+            children: [
+              Spacer(),
+              Text(cardItem[i].className,style: constants.nameStyle),
+              Text(cardItem[i].subject, style: constants.fieldStyle),
+              Spacer(),
+            ],
+          )),
+        ),
+        onTap: onTap);
   }
 }

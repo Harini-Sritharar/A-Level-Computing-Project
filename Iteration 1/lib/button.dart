@@ -43,28 +43,28 @@ class LoginButton extends StatelessWidget {
   final String txt;
   final Function() onClick;
 
-  const LoginButton(this.txt,this.onClick);
+  const LoginButton(this.txt, this.onClick);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 20),
-        decoration: BoxDecoration(
-            color: Colors.cyan[400], borderRadius: BorderRadius.circular(30)),
-        alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width - 40,
-        child: Text(txt,
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-      ),
-      onTap: onClick
-    );
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          decoration: BoxDecoration(
+              color: Colors.cyan[400], borderRadius: BorderRadius.circular(30)),
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width - 40,
+          child: Text(txt,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+        ),
+        onTap: onClick);
   }
 }
 
-
-class CircleButton extends StatelessWidget{
+class CircleButton extends StatelessWidget {
   final String text;
   final Function() onPressed;
 
@@ -72,18 +72,11 @@ class CircleButton extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: ElevatedButton(
-        child:  Text(
-          text,
-          style: TextStyle(color: Colors.white,fontSize: 18)
-        ),
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          fixedSize: const Size(100,100),
-          shape: const CircleBorder()
-        )
-        )
-    );
+        child: ElevatedButton(
+            child:
+                Text(text, style: TextStyle(color: Colors.white, fontSize: 18)),
+            onPressed: onPressed,
+            style: ElevatedButton.styleFrom(
+                fixedSize: const Size(100, 100), shape: const CircleBorder())));
   }
-
 }

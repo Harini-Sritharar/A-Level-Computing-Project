@@ -37,7 +37,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       PersistentBottomNavBarItem(
           icon: Icon(Icons.add,color: Colors.white), title: "Create"),
       PersistentBottomNavBarItem(
-          icon: Icon(Icons.question_answer), title: "Preset"),
+          icon: Icon(Icons.quiz), title: "Preset"),
       PersistentBottomNavBarItem(
           icon: Icon(Icons.question_answer_outlined), title: "By You"),
     ];

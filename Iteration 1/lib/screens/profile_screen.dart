@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/custom_widgets.dart';
+import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
 import 'package:nea_prototype_1/screens/Walkthrough/walkthrough.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import '../main.dart';
@@ -36,18 +37,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: ListView(physics: BouncingScrollPhysics(), children: <Widget>[
             SizedBox(height: 30),
             customWidgets.buildInfo(),
-            SizedBox(height: 20),
-
+            SizedBox(height: 20), 
             CircleButton('Walkthrough', () {
               pushNewScreenWithRouteSettings(context,
                   screen: WalkthroughScreen(),
                   settings: RouteSettings(),
                   withNavBar: false);
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WalkthroughScreen(),
-                  ));
             })
           ]),
         ));
