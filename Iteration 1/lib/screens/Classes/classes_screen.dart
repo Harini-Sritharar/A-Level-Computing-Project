@@ -13,16 +13,9 @@ class ClassesScreen extends StatefulWidget {
 }
 
 class _ClassesScreenState extends State<ClassesScreen> {
-  TextStyle nameStyle =
-      TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white);
-    TextStyle fieldStyle =
-      TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white);
   TextEditingController classCodeController = TextEditingController();
   TextEditingController classNameController = TextEditingController();
   TextEditingController subjectController = TextEditingController();
-
-
-  
 
   void addClassCode(BuildContext context) async {
     final _formKey = GlobalKey<FormState>();
@@ -55,7 +48,10 @@ class _ClassesScreenState extends State<ClassesScreen> {
             actions: [
               GenericButton("Add", () {
                 if (_formKey.currentState!.validate()) {
+                  
                   databaseService.addStudentToClass(classCodeController.text);
+                  //appUser.initialise();
+                  //await databaseService.getStudentClasses();
                   classCodeController.text = "";
                   Navigator.pop(context);
                 }
@@ -172,7 +168,8 @@ class _ClassesScreenState extends State<ClassesScreen> {
                                 context,
                                 i,
                                 appUser.classes,
-                                (){Navigator.push(context,
+                                (){databaseService.getClassQuizzes(appUser.classes[i]);
+                                  Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ClassInfoScreen(i)));}
                     ),
             ]))

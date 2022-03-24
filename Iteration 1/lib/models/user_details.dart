@@ -37,9 +37,8 @@ class UserDetails {
     } else {
       await databaseService.getTeacherClasses();
     }
-      await databaseService.getClassQuizzes(appUser.classes[1]);
-
-    // for (int i = 0; i < appUser.classes.length; i++) {
-    // }
+     //for (int i = 0; i < appUser.classes.length; i++) {
+    // await databaseService.getClassQuizzes(appUser.classes[0]);
+    //  //}
   }
 }

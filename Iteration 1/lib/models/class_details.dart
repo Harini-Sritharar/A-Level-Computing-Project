@@ -29,6 +29,9 @@ class ClassDetails {
        String name = await databaseService.fetchStudentName(currentClass['studentIds'][i]);
         newClass.studentNames.add(name);
       }
+      // for (int i = 0; i < currentClass['quizIds']; i++){
+      //   newClass.quizzes.add()
+      // }
       // for (int i = 0; i < currentClass['quizzes'].length;i++ ){
       //  String name = await databaseService.fetchStudentName(currentClass['studentIds'][i]);
       //   newClass.studentNames.add(name);
