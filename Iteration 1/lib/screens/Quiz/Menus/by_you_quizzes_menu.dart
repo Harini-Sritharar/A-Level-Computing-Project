@@ -14,28 +14,41 @@ class ByYouMenu extends StatefulWidget {
 class _ByYouMenuState extends State<ByYouMenu> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("By You"),
-          centerTitle: true,
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.purple,Colors.blue],
-              )
-        ),
-          )),
-        body: Container(
-          height: 400,
-          child: GridView(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+    return Container(
+      decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('lib/assets/by_you_screen_bg.jpg'))),
+      
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            title: Text("By You"),
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.purple,Colors.blue],
+                )
+          ),
+            )),
+          body: Container(
+            child: Container(
+              //  decoration: BoxDecoration(
+              //   gradient:LinearGradient(colors: [Colors.teal,Colors.blue] ),),
+              height: 400,
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  ),
+                children:  [
+                      for (int i = 0; i < appUser.quizzes.length; i++) 
+                      customWidgets.createCard(i,context,appUser.quizzes),
+                ],
               ),
-            children:  [
-                  for (int i = 0; i < appUser.quizzes.length; i++) customWidgets.createCard(i,context,appUser.quizzes),
-            ],
+              ),
           ),
           ),
-        );
+    );
   }
 }

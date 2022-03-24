@@ -1,94 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/main.dart';
-import 'package:nea_prototype_1/models/questionInfo.dart';
-import 'package:nea_prototype_1/models/quiz.dart';
-import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
-import 'package:nea_prototype_1/screens/home_screen.dart';
-
-
-
 class PresetMenu extends StatelessWidget {
   PresetMenu({
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Pre Set Quizzes"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              for (int i = 0; i < appUser.presetQuizzes.length; i++)
-              customWidgets.createCard(i, context,appUser.presetQuizzes),
-              // GenericButton(
-              //   "Trigonometry Differentiation",
-              //   () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => QuizNavigator(
-              //           [
-              //             QuestionInfo(
-              //               "What is dy/dx of cos x?", "-sin x",
-              //               ["cos x", "sin x", "sec x"], 
-              //             ),
-              //             QuestionInfo(
-              //               "What is dy/dx of sin x?", "cos x",
-              //               ["cosec x", "tan x", "-cos x"],
-              //             ),
-              //             QuestionInfo(
-              //               "What is dy/dx of tan x?", "sec^2 x", 
-              //               ["cosec^2 x", "cot x", "-sec x"], 
-              //             ),
-              //             QuestionInfo(
-              //               "What is dy/dx of sec x?","sec x tan x",
-              //               ["tan x", "cos x sin x", "cos x"],
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     );
-              //   },
-              // ),
-              // SizedBox(height: 35),
-              // GenericButton(
-              //   "Probability A2",
-              //   () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => QuizNavigator(
-              //           [
-              //             QuestionInfo(
-              //               "If events A and B are independent: P(A and B)= ?","P(A) * P(B)",
-              //               ["P(A)", "P(B)", "P(A) + P(B)"]
-              //             ),
-              //             QuestionInfo(
-              //               "If events A and B are independent: P(A|B) = ?",  "P(A)", 
-              //               ["P(A) / P(B)", "P(B)","P(A) * P(B)"],
-              //             ),
-              //             QuestionInfo(
-              //               "If events A and B are mutually exclusive: P(A and B)= ?", "0",
-              //               ["P(A) * P(B)", "P(A) + P(B)", "1"], 
-              //             ),
-              //             QuestionInfo(
-              //               "If events A and B are mutually exclusive: P(A or B)= ?","P(A) + P(B)",
-              //               [ "P(A)", "P(B)", "P(A) - P(B)"], 
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     );
-              //   },
-              // ),
-              SizedBox(height: 35),
-            ],
+    return Container(
+      decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('lib/assets/preset_quizzes_screen_bg.jpg'))),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          backgroundColor: Colors.teal,
+          title: Text("Pre Set Quizzes"),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient:LinearGradient(colors: [Colors.teal,Colors.blue] ),),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                for (int i = 0; i < appUser.presetQuizzes.length; i++)
+                customWidgets.createCard(i, context,appUser.presetQuizzes),
+                SizedBox(height: 35),
+              ],
+            ),
           ),
         ),
       ),
