@@ -1,5 +1,4 @@
 //@dart=2.10
-//library globals;
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/constants.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
@@ -7,12 +6,18 @@ import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
 import 'package:nea_prototype_1/custom_widgets.dart';
 import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
-// creating an instance of the following classes allows me to use easily in my code
+
+//instance of the class that allows me to implement authorisation of users
 AuthService authService = new AuthService();
+//instance of the class that allows me to implement authorisation of users
 DatabaseService databaseService = new DatabaseService();
+//instance of the class that allows me to add, query and fetch data from the database
 UserDetails appUser = UserDetails("");
+//instance of the class that allows me to have a single appUser at a given time and store all the information about the current user
 CustomWidgets customWidgets = CustomWidgets();
+//instance of the class that allows me to utilise custom widgets that I have made in my CustomWidgets class
 Constants constants = Constants();
+//instance of the class that allows me to use constants without repeating them in multiple classes
 
 void main() {
   runApp(MyApp());
@@ -31,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      //this line of code means that the user is navigated to the WelcomeScreen upon opening the app
       home: WelcomeScreen(),
     );
   }
