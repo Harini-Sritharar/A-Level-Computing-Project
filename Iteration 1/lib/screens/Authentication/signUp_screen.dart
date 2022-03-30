@@ -120,6 +120,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget positionField() {
+    //String position = 'student';
     return ToggleSwitch(
         minHeight: 50,
         minWidth: 150,
@@ -128,8 +129,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
         totalSwitches: 2,
         labels: ['Student', 'Teacher'],
         onToggle: (index) {
-          position = (index == 0) ? "student" : "teacher";
-          print(position);
+          if (index == 0){
+            position = 'student';
+          }
+          else{
+            position = 'teacher';
+          }
+
+          // position = (index == 0) ? "student" : "teacher";
+          // return position;
+          // print('{Position position}');
         });
   }
 

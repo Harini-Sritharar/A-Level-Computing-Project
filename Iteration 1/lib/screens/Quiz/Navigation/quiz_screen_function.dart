@@ -3,25 +3,28 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:nea_prototype_1/main.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
 import 'package:nea_prototype_1/screens/Quiz/score_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:random_string/random_string.dart';
-
-// ignore: must_be_immutable
 class QuizScreen extends StatefulWidget {
   //int points = 0;
   final void Function() setNextQuestion;
   final void Function() returnPreviousQuestion;
   final Function() checkQuizEnd;
-  final Function(int newPoints) addPoints;
+  //final Function(int newPoints) addPoints;
   final Function() checkLenQuiz;
   final int seed;
-  
 
   final QuestionInfo questionInfo;
-  QuizScreen(this.questionInfo, this.setNextQuestion,
-      this.returnPreviousQuestion, this.checkQuizEnd, this.addPoints,this.seed,this.checkLenQuiz);
+  QuizScreen(
+      this.questionInfo,
+      this.setNextQuestion,
+      this.returnPreviousQuestion,
+      this.checkQuizEnd,
+     // this.addPoints,
+      this.seed,
+      this.checkLenQuiz);
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -41,6 +44,7 @@ class _QuizScreenState extends State<QuizScreen> {
     _checkBoxSelected = List.filled(numOfIncorrectOptions + 1, false);
     numOfQs = widget.checkLenQuiz();
   }
+
   int chosenAnswer = 0;
   checkAnswer(int chosenAns) {
     String message = "Correct";
@@ -66,16 +70,13 @@ class _QuizScreenState extends State<QuizScreen> {
                 title: Text(message),
               ),
             );
-          } 
-          else {
+          } else {
             return GestureDetector(
               child:
                   AlertDialog(backgroundColor: bgColour, title: Text(message)),
               onTap: () {
-                pushNewScreen(
-                    context,
-                    screen: ScoreScreen(points,numOfQs),
-                    withNavBar: true);
+                pushNewScreen(context,
+                    screen: ScoreScreen(points, numOfQs), withNavBar: true);
               },
             );
           }
@@ -119,8 +120,8 @@ class _QuizScreenState extends State<QuizScreen> {
     // a sequence of random numbers will be created, because I want the ssame sequence
     // to be generated each time, i shuffle it with Random(seed) where the seed is generated
     // once and not changed. It is needed because when then user clicks on a option
-    // the screen is reloaded with the chnage in effect but this also sreshuffles the optiosn
-    // i wnat to reshuffle the optiosn with the same seed so that the order doesn't change
+    // the screen is reloaded with the change in effect but this also reshuffles the options
+    // i wnat to reshuffle the options with the same seed so that the order doesn't change
     options.shuffle(Random(widget.seed));
     return options;
   }
@@ -129,7 +130,10 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: AutoSizeText(widget.questionInfo.questionName, maxLines: 1)),
+        title: AutoSizeText(widget.questionInfo.questionName, maxLines: 1),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
       body: (Stack(children: [
         // // countdown timer => not essential at the moment and so can be included once essential features are completed
         // SafeArea(
@@ -172,13 +176,17 @@ class _QuizScreenState extends State<QuizScreen> {
         //       ],
         //     ),)),
         // creating the radio buttons
-        Divider(height: 30, indent: 10),
+        //Divider(height: 30, indent: 10),
+        SizedBox(height: 70),
         Container(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.all(10),
           child: Column(
             children: [
-              for (Widget q in buildOptions())
-              q,
+              SizedBox(
+                height: 35,
+              ),
+              for (Widget answer in buildOptions())
+                customWidgets.customContainer(answer),
               QuizButton("Skip", widget.setNextQuestion),
               QuizButton("Submit", () {
                 checkAnswer(chosenAnswer);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
+
 class PresetMenu extends StatelessWidget {
   PresetMenu({
     Key? key,
@@ -8,9 +9,9 @@ class PresetMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('lib/assets/preset_quizzes_screen_bg.jpg'))),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('lib/assets/preset_quizzes_screen_bg.jpg'))),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -18,19 +19,20 @@ class PresetMenu extends StatelessWidget {
           title: Text("Pre Set Quizzes"),
           centerTitle: true,
         ),
-        body: Center(
+        body: Container(
+        
           child: Container(
-            decoration: BoxDecoration(
-              gradient:LinearGradient(colors: [Colors.teal,Colors.blue] ),),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                for (int i = 0; i < appUser.presetQuizzes.length; i++)
-                customWidgets.createCard(i, context,appUser.presetQuizzes),
-                SizedBox(height: 35),
-              ],
-            ),
-          ),
+              height: 500,
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                children: <Widget>[
+                  for (int i = 0; i < appUser.presetQuizzes.length; i++)
+                    customWidgets.createCard(i, context, appUser.presetQuizzes),
+                  SizedBox(height: 35),
+                ],
+              )),
         ),
       ),
     );

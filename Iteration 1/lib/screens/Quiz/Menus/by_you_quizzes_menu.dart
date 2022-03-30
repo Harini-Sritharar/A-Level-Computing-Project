@@ -34,8 +34,6 @@ class _ByYouMenuState extends State<ByYouMenu> {
             )),
           body: Container(
             child: Container(
-              //  decoration: BoxDecoration(
-              //   gradient:LinearGradient(colors: [Colors.teal,Colors.blue] ),),
               height: 400,
               child: GridView(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -231,7 +231,6 @@ class DatabaseService {
   //   }
   //  }
   // Future<void> getClassQuizzes(chosenClass)async{
-  //   List<String> quizIds =[];
   //   final query = await Firestore.instance
   //       .collection("Classes")
   //       .where('classId',isEqualTo: chosenClass.classId)
@@ -242,14 +241,9 @@ class DatabaseService {
 
   //   for (var snapshot in query.documents){
   //     Map<String,dynamic> data = snapshot.data;
-    
-  //     //final split = .split();
-  //     //for (int i = 0; i< data['quizzes'].length)
   //     chosenClass.quizIds.add(data['quizzes'].toString());
   //     var split= chosenClass.quizIds[0].split(',');
   //     print(split);
-  //     // var a = chosenClass.quizIds[0];
-  //     // chosenClass.quizIds = a;
   //   }
   //   // chosenClass.quizIds = chosenClass.quizIds[0];
   // print('QUIZIds ${chosenClass.quizIds}');
@@ -279,31 +273,31 @@ class DatabaseService {
   //   }
   //   }
     
-  //       // .document(chosenClass.classId)
-  //       // .get();
-  //              //.where("classId", isEqualTo: chosenClass.classId
-  // // print({query.toString()});
-  //   // final quizzesFetched = query.documents.map((doc) => doc.data);
-  //   // chosenClass.quizzes = convertToQuizStructure(quizzesFetched.toList());
-  //   // for (int i = 0; i < chosenClass.quizzes.length; i++) {
-  //   //   final questionQuery = await Firestore.instance
-  //   //       .collection("Quiz")
-  //   //       .document(chosenClass.quizzes[i].quizId)
-  //   //       .collection("q")
-  //   //       .getDocuments();
-  //   //   List<DocumentSnapshot> questionDetails = questionQuery.documents;
-  //   //   for (DocumentSnapshot question in questionDetails) {
-  //   //     Map<String, dynamic> optionsData =
-  //   //         question.data; // as  Map<String,dynamic>;
-  //   //     QuestionInfo questionInfo = QuestionInfo(
-  //   //         optionsData["question"], optionsData["correctAnswer"], [
-  //   //       optionsData["incorrectOption1"],
-  //   //       optionsData["incorrectOption2"],
-  //   //       optionsData["incorrectOption3"]
-  //   //     ]);
-  //   //     chosenClass.quizzes[i].questions.add(questionInfo);
-  //     // }
-  //   // }
+  // //       // .document(chosenClass.classId)
+  // //       // .get();
+  // //              //.where("classId", isEqualTo: chosenClass.classId
+  // // // print({query.toString()});
+  // //   // final quizzesFetched = query.documents.map((doc) => doc.data);
+  // //   // chosenClass.quizzes = convertToQuizStructure(quizzesFetched.toList());
+  // //   // for (int i = 0; i < chosenClass.quizzes.length; i++) {
+  // //   //   final questionQuery = await Firestore.instance
+  // //   //       .collection("Quiz")
+  // //   //       .document(chosenClass.quizzes[i].quizId)
+  // //   //       .collection("q")
+  // //   //       .getDocuments();
+  // //   //   List<DocumentSnapshot> questionDetails = questionQuery.documents;
+  // //   //   for (DocumentSnapshot question in questionDetails) {
+  // //   //     Map<String, dynamic> optionsData =
+  // //   //         question.data; // as  Map<String,dynamic>;
+  // //   //     QuestionInfo questionInfo = QuestionInfo(
+  // //   //         optionsData["question"], optionsData["correctAnswer"], [
+  // //   //       optionsData["incorrectOption1"],
+  // //   //       optionsData["incorrectOption2"],
+  // //   //       optionsData["incorrectOption3"]
+  // //   //     ]);
+  // //   //     chosenClass.quizzes[i].questions.add(questionInfo);
+  // //     // }
+  // //   // }
   // }
 //FETCHING OTHER DATA
   Future<String> fetchStudentName(String studentId) async {

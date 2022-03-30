@@ -123,14 +123,19 @@ class CustomWidgets {
   }
 
   // Custom Container widget
-  Widget customContainer(child) {
-    return Container(
-        width: 500,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        decoration: BoxDecoration(
-            color: constants.defaultBlueColour,
-            borderRadius: BorderRadius.circular(30)),
-        child: child);
+  Widget customContainer(child,) {
+    return Column(
+      children: [
+        Container(
+            width: 500,
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+                color: constants.defaultBlueColour,
+                borderRadius: BorderRadius.circular(30)),
+            child: child),
+        SizedBox(height:10)
+      ],
+    );
   }
 
   InputDecoration whiteIconDecor(IconData icon, [String? hint]) {
@@ -141,7 +146,7 @@ class CustomWidgets {
   }
 
   Widget createCard(i, BuildContext context, List<Quiz> quizzes) {
-    return GestureDetector(
+        return GestureDetector(
       child: Container(
         height: 200,
         width: 200,

@@ -21,12 +21,6 @@ class UserDetails {
     yearGroup = data['yearGroup'];
   }
 
-  Future addScore(quizId, points) async {
-    //adds to the scores list which will be uploaded onto Firebase
-    //scores[quizId] = points;
-    //print(scores);
-    //  Firestore.instance.collection("Quiz").document(quizId).updateData({{"scores": points})
-  }
 
   Future<void> initialise() async {
     await fillBasicData();

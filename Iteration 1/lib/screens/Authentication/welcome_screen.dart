@@ -12,11 +12,8 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  
-
   final _formKey = GlobalKey<FormState>();
   late String email, password;
-  // fixed late initialiseation error by giving email and password default vallues of empty strings.
   AuthService authService = new AuthService();
   bool _isLoading = false;
 
@@ -27,6 +24,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       });
       // email = 'student@gmail.com';
       // password = 'student';
+      // email = 'harinis@gmail.com';
+      // password = 'securepassword';
+      // email = 'teacher@gmail.com';
+      // password = 'teacherteacher';
       UserDetails? newUser =
           await authService.signInEmailAndPassword(email, password);
       if (newUser == null) {
@@ -56,15 +57,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget emailField() {
     return TextFormField(
       validator: (val) {
-        return val!.isEmpty ? "⚠️ Enter Email" : null;
+        return (val!.isEmpty || !val.contains('@')) ? "⚠️ Enter a valid email address": null;
       },
-      decoration: InputDecoration(
-        icon: Icon(
-          Icons.email,
-          color: Colors.white,
-        ),
-        hintText: "Your Email",
-      ),
+      
+      decoration: customWidgets.whiteIconDecor(Icons.email, 'Email'),
       onChanged: (val) {
         email = val;
       },
@@ -79,7 +75,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       },
       decoration: InputDecoration(
           icon: Icon(
-            Icons.password,
+            Icons.lock,
             color: Colors.white,
           ),
           hintText: "Your Password",

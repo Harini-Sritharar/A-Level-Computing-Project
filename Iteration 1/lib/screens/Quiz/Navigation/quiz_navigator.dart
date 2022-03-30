@@ -25,7 +25,7 @@ class _QuizNavigatorState extends State<QuizNavigator> {
     super.initState();
     for (int i = 0; i < widget.questionsAndOptions.length; i++) {
       questions.add(QuizScreen(widget.questionsAndOptions[i], setNextQuestion,
-          returnPreviousQuestion, checkQuizEnd, addPoints,randomBetween(1, 1000000),checkLenQuiz));
+          returnPreviousQuestion, checkQuizEnd,randomBetween(1, 1000000),checkLenQuiz));
     }
   }
 
