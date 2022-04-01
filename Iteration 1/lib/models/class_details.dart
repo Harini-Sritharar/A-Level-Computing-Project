@@ -10,7 +10,7 @@ class ClassDetails {
   List<String> studentNames = [];
   ClassDetails(this.classId);
 }
-  // function which converts the information fetched from Firebase into a structure which allows details from the class to be stored locally and easily read
+  // function which converts the information fetched from Firebase into the structure of Class Details
   Future<List<ClassDetails>> convertToClassDetailsStructure(
       List<Map<String, dynamic>> classesFetched) async {
         // empty list of classes

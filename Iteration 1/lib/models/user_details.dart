@@ -4,12 +4,14 @@ import 'package:nea_prototype_1/models/quiz.dart';
 import '../main.dart';
 
 class UserDetails {
+  // parameters for the class
   String uid, name = "", email = "", position = "", yearGroup = "";
   List<ClassDetails> classes = [];
   List<Quiz> quizzes = [];
   List<Quiz> presetQuizzes = [];
   UserDetails(this.uid);
 
+  // function which fetches the current user's information from Firebase
   Future<void> fillBasicData() async {
     DocumentSnapshot document =
         await Firestore.instance.collection("Users").document(uid).get();
@@ -21,7 +23,7 @@ class UserDetails {
     yearGroup = data['yearGroup'];
   }
 
-
+  // function which runs upon user logging in and and loads in all necessary data
   Future<void> initialise() async {
     await fillBasicData();
     await databaseService.getUserQuizzes();
@@ -31,8 +33,5 @@ class UserDetails {
     } else {
       await databaseService.getTeacherClasses();
     }
-     //for (int i = 0; i < appUser.classes.length; i++) {
-    // await databaseService.getClassQuizzes(appUser.classes[0]);
-    //  //}
   }
 }
