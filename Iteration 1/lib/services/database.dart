@@ -1,4 +1,3 @@
-// multidex is enabled so cloud firestore should work :)
 import 'dart:async';
 import 'package:nea_prototype_1/models/class_details.dart';
 import 'package:nea_prototype_1/models/questionInfo.dart';
@@ -11,7 +10,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 
 class DatabaseService {
 // ADDING DATA
-  // adding quiz data
+  // adding quiz data --> opens the document with the quizId provided and adds the Map quizData as the data inside
   Future<void> addQuizData(Map<String, String> quizData, String quizID) async {
     await Firestore.instance
         .collection("Quiz")
@@ -24,7 +23,8 @@ class DatabaseService {
     );
   }
 
-  // adding question data
+  // adding question data --> open the collection within the document with the quizId provided
+  // adds the Map questionData as the data inside the collection
   Future<void> addQuData(
       Map<String, dynamic> questionData, String quizID) async {
     await Firestore.instance
@@ -37,7 +37,7 @@ class DatabaseService {
     });
   }
 
-  // adding user data
+  // adding user data --> fetches the uid of the current user, adds the map userData to the document with the quizId
   Future<void> addUserData(Map<String, dynamic> userData) async {
     final FirebaseUser user = await auth.currentUser();
     final uid = user.uid;
@@ -124,28 +124,39 @@ class DatabaseService {
 
   // returns all the info about the quizzes that the current user has created
   Future<void> getUserQuizzes() async {
+    // queries the database to return all documents in which the userId field matches the appUser's uid
     final query = await Firestore.instance
         .collection("Quiz")
         .where("userId", isEqualTo: appUser.uid)
         .getDocuments();
+    // converts the data within the queries into a map
     final quizzesFetched = query.documents.map((doc) => doc.data);
+    // turns the map to a list, converts it to Quiz Structure and saves to appUser.quizzes
     appUser.quizzes = convertToQuizStructure(quizzesFetched.toList());
+
+    // iterates through each quiz in appUser.quizzes
     for (int i = 0; i < appUser.quizzes.length; i++) {
+      // fetches the documents in the collection of the document using the quizId provided
       final questionsQuery = await Firestore.instance
           .collection("Quiz")
           .document(appUser.quizzes[i].quizId)
           .collection("q")
           .getDocuments();
+      // converts the documents in the query into a list of Document Snapshots
       List<DocumentSnapshot> questionDetails = questionsQuery.documents;
+      // for each question stored as a Document Snapshot, obtain the data, 
       for (DocumentSnapshot question in questionDetails) {
         Map<String, dynamic> optionsData =
             question.data; // as  Map<String,dynamic>;
+        // instance of Question Info which holds all the information about a question
         QuestionInfo questionInfo = QuestionInfo(
+          // obtain the question data using key value pairs
             optionsData["question"], optionsData["correctAnswer"], [
           optionsData["incorrectOption1"],
           optionsData["incorrectOption2"],
           optionsData["incorrectOption3"]
         ]);
+        // add the question to the questions array for the quiz
         appUser.quizzes[i].questions.add(questionInfo);
       }
     }
@@ -153,33 +164,42 @@ class DatabaseService {
 
 // retrieves preset quizzes for the user
   Future<void> getPresetQuizzes()async{
+    // queries the database to return all documents in which the difficulty field matches the appUser's yrGroup
     final query = await Firestore.instance
         .collection("PresetQuizzes")
         .where("difficulty", isEqualTo: appUser.yearGroup )
         .getDocuments();
+    // converts the data within the queries into a map
     final quizzesFetched = query.documents.map((doc) => doc.data);
+    // turns the map to a list, converts it to Quiz Structure and saves to appUser.presetQuizzes
     appUser.presetQuizzes = convertToQuizStructure(quizzesFetched.toList());
     for (int i = 0; i < appUser.presetQuizzes.length; i++) {
+      // fetches the documents in the collection of the document using the quizId provided
       final questionQuery = await Firestore.instance
           .collection("PresetQuizzes")
           .document(appUser.presetQuizzes[i].quizId)
           .collection("q")
           .getDocuments();
+      // converts the documents in the query into a list of Document Snapshots
       List<DocumentSnapshot> questionDetails = questionQuery.documents;
+      // for each question stored as a Document Snapshot, obtain the data, 
       for (DocumentSnapshot question in questionDetails) {
         Map<String, dynamic> optionsData =
             question.data; // as  Map<String,dynamic>;
+        // instance of Question Info which holds all the information about a question
         QuestionInfo questionInfo = QuestionInfo(
+          // obtain the question data using key value pairs
             optionsData["question"], optionsData["correctAnswer"], [
           optionsData["incorrectOption1"],
           optionsData["incorrectOption2"],
           optionsData["incorrectOption3"]
         ]);
+        // add the question to the questions array for the quiz
         appUser.presetQuizzes[i].questions.add(questionInfo);
       }
     }
   }
-  // chosenClasses is of the form appUser.classes[i]
+// retrieves class quizzes for the user
    Future<void> getClassQuizzes(chosenClass) async {
      //gets all the quizIds of the class quizzes
      final query = await Firestore.instance
@@ -187,127 +207,53 @@ class DatabaseService {
      .document(chosenClass.classId)
      .collection('quizIds')
      .getDocuments();
-      print("QUERY ${query.toString()}");
-      //gets 
+     // converts the data within the queries into a map
      final quizzesFetched = query.documents.map((doc) => doc.data);
-      print("QFetched for ${chosenClass.classId} ${quizzesFetched.toString()}");
-      print('QFetched length ${quizzesFetched.length}');
-              for (int i = 0; i < quizzesFetched.length;i++){
-        //String quizId = quizzesFetched['quizId']as String;
+
+     // iterates through each quiz in appUser.quizzes
+     for (int i = 0; i < quizzesFetched.length;i++){
       chosenClass.quizzes = convertToQuizStructure(quizzesFetched.toList());
-      print('ChosenClass.quizzes ${chosenClass.quizzes}'
-      );
+      
     for (int i = 0; i < chosenClass.quizzes.length; i++) {
-      print('I = BANANANANANANANANANANANAANA $i');
       final titleQuery = await Firestore.instance
         .collection('Quiz')
         .document(chosenClass.quizzes[i].quizId)
         .get();
       final titlesFetched = titleQuery.data;
       final quizTitle = titlesFetched['quizTitle'];
-      print('Title Fetched $titlesFetched');
+      // fetches the documents in the collection of the document using the quizId provided
       final questionQuery = await Firestore.instance
           .collection("Quiz")
           .document(chosenClass.quizzes[i].quizId)
           .collection("q")
           .getDocuments();
+      // converts the documents in the query into a list of Document Snapshots
       List<DocumentSnapshot> questionDetails = questionQuery.documents;
+      // for each question stored as a Document Snapshot, obtain the data, 
       for (DocumentSnapshot question in questionDetails) {
         Map<String, dynamic> optionsData =
             question.data; // as  Map<String,dynamic>;
         QuestionInfo questionInfo = QuestionInfo(
+          // obtain the question data using key value pairs
             optionsData["question"], optionsData["correctAnswer"], [
           optionsData["incorrectOption1"],
           optionsData["incorrectOption2"],
           optionsData["incorrectOption3"]
         ]);
-        print('Question Info${chosenClass.classId} is $questionInfo}');
+        // set the quiz title fetched as the quizTitle for the quiz
       chosenClass.quizzes[i].quizTitle = quizTitle;
+      // add the question to the questions array for the quiz
       chosenClass.quizzes[i].questions.add(questionInfo);
-      print('QuizTitle for ${chosenClass.classId} ${chosenClass.quizzes[i].quizTitle}');
    }}}
    }
     
-  //   }
-  //  }
-  // Future<void> getClassQuizzes(chosenClass)async{
-  //   final query = await Firestore.instance
-  //       .collection("Classes")
-  //       .where('classId',isEqualTo: chosenClass.classId)
-  //       .getDocuments()
-  //       .catchError((e){
-  //         print(e.toString());
-  //       });
-
-  //   for (var snapshot in query.documents){
-  //     Map<String,dynamic> data = snapshot.data;
-  //     chosenClass.quizIds.add(data['quizzes'].toString());
-  //     var split= chosenClass.quizIds[0].split(',');
-  //     print(split);
-  //   }
-  //   // chosenClass.quizIds = chosenClass.quizIds[0];
-  // print('QUIZIds ${chosenClass.quizIds}');
-  //   for (int i = 0; i < chosenClass.quizIds.length; i++){
-  //     // gets the quiz info from Firebase
-  //     final questionQuery = await Firestore.instance
-  //         .collection("Quiz")
-  //         .document(chosenClass.quizIds[i])
-  //         .collection("q")
-  //         .getDocuments();
-  //         //gets all the questions in each quiz
-  //      List<DocumentSnapshot> questionDetails = questionQuery.documents;
-  //      //for each question in the quiz
-  //     for (DocumentSnapshot question in questionDetails) {
-  //       //gets the data
-  //       Map<String, dynamic> optionsData =
-  //           question.data; // as  Map<String,dynamic>;
-  //           //creates a QuestionInfo instance with all the required parame
-  //       QuestionInfo questionInfo = QuestionInfo(
-  //           optionsData["question"], optionsData["correctAnswer"], [
-  //         optionsData["incorrectOption1"],
-  //         optionsData["incorrectOption2"],
-  //         optionsData["incorrectOption3"]
-  //       ]);
-  //       chosenClass.quizzes[i].questions.add(questionInfo);
-
-  //   }
-  //   }
-    
-  // //       // .document(chosenClass.classId)
-  // //       // .get();
-  // //              //.where("classId", isEqualTo: chosenClass.classId
-  // // // print({query.toString()});
-  // //   // final quizzesFetched = query.documents.map((doc) => doc.data);
-  // //   // chosenClass.quizzes = convertToQuizStructure(quizzesFetched.toList());
-  // //   // for (int i = 0; i < chosenClass.quizzes.length; i++) {
-  // //   //   final questionQuery = await Firestore.instance
-  // //   //       .collection("Quiz")
-  // //   //       .document(chosenClass.quizzes[i].quizId)
-  // //   //       .collection("q")
-  // //   //       .getDocuments();
-  // //   //   List<DocumentSnapshot> questionDetails = questionQuery.documents;
-  // //   //   for (DocumentSnapshot question in questionDetails) {
-  // //   //     Map<String, dynamic> optionsData =
-  // //   //         question.data; // as  Map<String,dynamic>;
-  // //   //     QuestionInfo questionInfo = QuestionInfo(
-  // //   //         optionsData["question"], optionsData["correctAnswer"], [
-  // //   //       optionsData["incorrectOption1"],
-  // //   //       optionsData["incorrectOption2"],
-  // //   //       optionsData["incorrectOption3"]
-  // //   //     ]);
-  // //   //     chosenClass.quizzes[i].questions.add(questionInfo);
-  // //     // }
-  // //   // }
-  // }
 //FETCHING OTHER DATA
+  // fetches student's name using the parameter studentId
   Future<String> fetchStudentName(String studentId) async {
     final query = await Firestore.instance.collection('Users')
     .document(studentId).get();
-    //print("Query $query");
     Map<String, dynamic> data = query.data;
-    //print("Data $data");
     String name = data['name'];
-    //print("Name $name");
     return name;
   }
 }
