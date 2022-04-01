@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
 
 class GenericButton extends StatelessWidget {
+  // parameters for the Generic Button
   final String msg;
   final void Function() linkScreen;
+  // constructors for the Generic Button
   const GenericButton(this.msg, this.linkScreen, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,8 @@ class GenericButton extends StatelessWidget {
       child: Text(
         msg,
         textAlign: TextAlign.center,
-        style: constants.genericButtonStyle.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+        style: constants.genericButtonStyle
+            .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       autofocus: true,
       style: ButtonStyle(
@@ -25,8 +28,10 @@ class GenericButton extends StatelessWidget {
 }
 
 class QuizButton extends StatelessWidget {
+  // parameters for the Quiz Button
   final String txt;
   final a;
+  // constructors for the Quiz Button
   const QuizButton(this.txt, this.a);
   @override
   Widget build(BuildContext context) {
@@ -40,11 +45,11 @@ class QuizButton extends StatelessWidget {
 }
 
 class LoginButton extends StatelessWidget {
+  // parameters for the Login Button
   final String txt;
   final Function() onClick;
-
+  // constructor for the Login Button
   const LoginButton(this.txt, this.onClick);
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,9 +70,10 @@ class LoginButton extends StatelessWidget {
 }
 
 class CircleButton extends StatelessWidget {
+  // parameters for the Circle Button
   final String text;
   final Function() onPressed;
-
+  // constructor for the Circle Button
   const CircleButton(this.text, this.onPressed);
   @override
   Widget build(BuildContext context) {
