@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/main.dart';
-import 'package:nea_prototype_1/models/quiz.dart';
-import 'package:nea_prototype_1/screens/Quiz/Navigation/quiz_navigator.dart';
-import 'package:random_string/random_string.dart';
-
 class ByYouMenu extends StatefulWidget {
   ByYouMenu({
     Key? key,
@@ -18,10 +14,10 @@ class _ByYouMenuState extends State<ByYouMenu> {
       decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('lib/assets/by_you_screen_bg.jpg'))),
+                  image: AssetImage('lib/assets/by_you_screen_bg.jpg'))), // background image for this screen
       
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.transparent, // background colour must be transparent for the background image to be visible
           appBar: AppBar(
             title: Text("By You"),
             centerTitle: true,
@@ -35,13 +31,14 @@ class _ByYouMenuState extends State<ByYouMenu> {
           body: Container(
             child: Container(
               height: 400,
-              child: GridView(
+              // creates a vertically scrollable list of widgets
+              child: GridView( 
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   ),
                 children:  [
                       for (int i = 0; i < appUser.quizzes.length; i++) 
-                      customWidgets.createCard(i,context,appUser.quizzes),
+                      customWidgets.createCard(i,context,appUser.quizzes),// a custom widget is created for each quiz
                 ],
               ),
               ),
