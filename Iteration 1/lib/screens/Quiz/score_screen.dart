@@ -1,10 +1,11 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
 class ScoreScreen extends StatelessWidget {
+  // parameters
   final int points;
   final int numOfQs;
+  // constructor 
   ScoreScreen(this.points,this.numOfQs);
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class ScoreScreen extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             //UI code, creating the UI effect of stacked containers in the background of the screen
-          Container(
+          Container( 
             height: size.height * 0.45,
             decoration: BoxDecoration(
               color: Colors.deepPurple[300],
@@ -42,6 +43,7 @@ class ScoreScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             Center(
+              // shows the user's score out of total
               child: Text(("$points" + "/$total"),
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
