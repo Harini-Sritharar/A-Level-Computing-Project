@@ -19,34 +19,21 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-
+## the following lines of code state the dependenices of my code, different dependencies allow me to use different packages
 dependencies:
   flutter:
     sdk: flutter
-  auto_size_text: ^3.0.0
-  cached_network_image: ^2.0.0
-  cloud_firestore: ^0.13.3
-  firebase_auth: ^0.15.2
-  provider: ^3.2.0
-  google_sign_in: ^4.1.1
-  shared_preferences: ^0.5.6+3
-  random_string: ^2.0.1
-  persistent_bottom_nav_bar: ^4.0.2
-  custom_navigator: ^0.3.0
-  toggle_switch: ^1.4.0  # this allows handling of SvGs for Android,iOS and Web
-  walkthrough: ^0.0.3
-  #websafe_svg: ^1.1.4
-  #get: ^3.24.0
-  # cached_network_image: ^2.0.0
-  # cloud_firestore: ^0.17.0-1.0.nullsafety.0
-  # firebase_auth: ^0.21.0-nullsafety.0
-  # provider: ^3.2.0
-  # shared_preferences: ^0.5.6+3
-  # random_string: ^2.0.1
-  # firebase_core: ^0.8.0-nullsafety.1
-  # firebase_analytics: ^5.0.2
-
-
+  auto_size_text: ^3.0.0 # Resizes text to restrict it to a specific number of lines
+  cached_network_image: ^2.0.0 # Library which shows images from the Internet and keeps them in cache
+  cloud_firestore: ^0.13.3 # Flutter plugin to use the Cloud Firestore API
+  firebase_auth: ^0.15.2 # Flutter plugin to use the Firebase Authentication API
+  provider: ^3.2.0 # Wraps around InheritedWidget to make them easier to use
+  shared_preferences: ^0.5.6+3 # Used to save a collection of key-value pairs
+  random_string: ^2.0.1 # Libarry for generating random ascii strings
+  persistent_bottom_nav_bar: ^4.0.2 # Static/persistent bottom navigation bar for Flutter
+  custom_navigator: ^0.3.0 # Allows create of own navigator 
+  toggle_switch: ^1.4.0  # Allows use of the toggle swicth
+  walkthrough: ^0.0.3 # Allows use of the walkthrough packag
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
