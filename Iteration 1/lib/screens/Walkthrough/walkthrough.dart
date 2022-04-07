@@ -4,12 +4,13 @@ import 'package:walkthrough/flutterwalkthrough.dart';
 import 'package:walkthrough/walkthrough.dart';
 
 class WalkthroughScreen extends StatelessWidget {
+  // list of walkthrough screens
   final List<Walkthrough> list = [
     Walkthrough(
-      title: "VIEW YOUR PROFILE",
-      content:
+      title: "VIEW YOUR PROFILE", // title of the screen
+      content: // content of the screen
           "View all your details here and check regularly for updated statistics!",
-      imageIcon: Icons.person,
+      imageIcon: Icons.person, // icon to be shown on the screen
     ),
     Walkthrough(
         title: "JOIN CLASSES",
@@ -34,8 +35,10 @@ class WalkthroughScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // returns an Intro Screen for each screen 
     return IntroScreen(
       list,
+      // on the final screen, the next button takes the user to the Bottom Nav Bar
       MaterialPageRoute(builder: (context) => BottomNavBar()),
     );
   }
