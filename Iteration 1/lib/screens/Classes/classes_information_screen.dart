@@ -26,7 +26,8 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
         builder: (context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog( // returns a dialog in which the teacher can add a quiz
+            return AlertDialog(
+              // returns a dialog in which the teacher can add a quiz
               title: Text('Add Quiz'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -36,7 +37,8 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
                   for (int i = 0; i < (userQuizzes.length); i++)
                     TextButton(
                         onPressed: () {},
-                        child: new Card( // returns a new card for each quiz
+                        child: new Card(
+                            // returns a new card for each quiz
                             child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
@@ -52,7 +54,8 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
                                                 .green // when clicked, the card turns green
                                             : Colors
                                                 .grey)), // else the card is grey
-                                onTap: () { // responsible for the state of the card when clicked
+                                onTap: () {
+                                  // responsible for the state of the card when clicked
                                   setState(() {
                                     String _quizId = userQuizzes[i].quizId;
                                     quizId = _quizId;
@@ -101,10 +104,16 @@ class _ClassInfoScreenState extends State<ClassInfoScreen> {
                     SizedBox(
                       height: 15,
                     ),
-                    customWidgets.infoCard(Icons.subject_outlined, // shows an info card which shows the subject field of the class
-                        '${chosenClass.subject}', Colors.blue[700]),
-                    customWidgets.infoCard(Icons.class__rounded, // shows an info card which shows the class id field of the class
-                        'Class Id : ${chosenClass.classId}', Colors.blue[700]),
+                    customWidgets.infoCard(
+                        Icons
+                            .subject_outlined, // shows an info card which shows the subject field of the class
+                        '${chosenClass.subject}',
+                        Colors.blue[700]),
+                    customWidgets.infoCard(
+                        Icons
+                            .class__rounded, // shows an info card which shows the class id field of the class
+                        'Class Id : ${chosenClass.classId}',
+                        Colors.blue[700]),
                     Text(
                       'Members:',
                       style: TextStyle(fontSize: 20, color: Colors.white),

@@ -158,7 +158,7 @@ class _ClassesScreenState extends State<ClassesScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                     IconButton(
-                      icon: Icon(Icons.add),
+                      icon: Icon(Icons.add), // clickable icon
                       onPressed: () {
                         (appUser.position == "student")
                             ? addClassCode(
@@ -173,20 +173,20 @@ class _ClassesScreenState extends State<ClassesScreen> {
               SizedBox(height: 30),
               Container(
                   height: 200,
-                  child: ListView(scrollDirection: Axis.horizontal, children: [
-                    for (int i = 0;
-                        i < appUser.classes.length;
-                        i++) // a clickable card will represent each of the user's classes
-                      customWidgets.buildCard(context, i, appUser.classes, () {
-                        databaseService.getClassQuizzes(appUser.classes[
-                            i]); // the quizzes will be fetched for the current class
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ClassInfoScreen(i)));
-                      } // the class info screen for the current class will be navigated to
-                          ),
-                  ]))
+                  child: ListView(
+                      scrollDirection:
+                          Axis.horizontal, // horizontally scrolling list
+                      children: [
+                        for (int i = 0; i < appUser.classes.length; i++) // a clickable card will represent each of the user's classes
+                          customWidgets.buildCard(context, i, appUser.classes,
+                              () {
+                            databaseService.getClassQuizzes(appUser.classes[i]); // the quizzes will be fetched for the current class
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ClassInfoScreen(i)));} // the class info screen for the current class will be navigated to
+                              ),
+                      ]))
             ])));
   }
 }
