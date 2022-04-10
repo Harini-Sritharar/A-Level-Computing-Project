@@ -35,7 +35,6 @@ dependencies:
   toggle_switch: ^1.4.0  # Allows use of the toggle swicth
   walkthrough: ^0.0.3 # Allows use of the walkthrough packag
 
-  # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
@@ -48,18 +47,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  uses-material-design: true # allows use of the material icons class
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  assets:
+# To add assets to your application, add an assets section, like this:
+  assets: # defines the location of the assets folder
    - lib/assets/
-  #- lib/assets/profile_screen_bg.jpeg
-  #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
