@@ -1,10 +1,9 @@
+// imports
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nea_prototype_1/button.dart';
 import 'package:nea_prototype_1/models/user_details.dart';
 import 'package:nea_prototype_1/screens/Authentication/welcome_screen.dart';
-import 'package:nea_prototype_1/screens/BottomNavBar/bottom_nav_bar.dart';
-import 'package:nea_prototype_1/services/auth.dart';
 import 'package:nea_prototype_1/services/database.dart';
 import 'package:nea_prototype_1/screens/Walkthrough/walkthrough.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -18,9 +17,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  
   final _formKey = GlobalKey<FormState>();
-  AuthService authService = new AuthService();
-  DatabaseService databaseService = new DatabaseService();
+  // initialising these fields with default values
   late String name, email, password;
   String yrGroup = '7', position = 'student';
   bool _isLoading = false;
@@ -28,6 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String dropdownVal = "";
   final myController = TextEditingController();
 
+  // signUp function which is run when the user clicks the Sign Up button
   signUp() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
@@ -41,8 +41,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
               _isLoading = false;
             });
             appUser = newUser;
+            // fetches the details of the current user
             final FirebaseUser user = await auth.currentUser();
+            // fetches the uid of the current user
             final uid = user.uid;
+            // creates a map which stores the user's data as key-value pairs
             Map<String, dynamic> userData = {
               "name": name,
               "uid": uid,
@@ -51,8 +54,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               "position": position,
               "password": password
             };
+            // the addUserData function is called
             databaseService.addUserData(userData);
             await appUser.initialise();
+            // navigates the user to the walkthrough
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
@@ -63,35 +68,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
       );
     }
   }
-
+  // widget which creates the name field
   Widget nameField() {
     return TextFormField(
       validator: (val) {
         return val!.isEmpty ? "Enter Name" : null;
       },
+      // icon to be shown to highlight the purpose of the field
       decoration: customWidgets.whiteIconDecor(Icons.person, 'Name'),
       onChanged: (val) {
-        name = val;
+        name = val; // value entered will be stored in name 
       },
     );
   }
 
+  // widget which creates the email field
   Widget emailField() {
     return TextFormField(
       validator: (val) {
         return val!.isEmpty ? "Enter Email" : null;
       },
+      // icon to be shown to highlight the purpose of the field
       decoration: customWidgets.whiteIconDecor(Icons.email, 'Email'),
       onChanged: (val) {
-        email = val;
+        email = val; // value entered will be stored in email
       },
     );
   }
 
+  // widget which creates the password field
   Widget passwordField() {
     return TextFormField(
-      obscureText: isObscure,
-      validator: (val) {
+      obscureText: isObscure, // if true, the input will be obscured and not readable
+      validator: (val) { // validation to make sure the password is not blank or too short
         if (val!.isEmpty) {
           return ("Enter Password");
         }
@@ -100,12 +109,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
       },
       decoration: InputDecoration(
-          icon: Icon(
+          icon: Icon( // icon to be shown to highlight the purpose of the field
             Icons.lock,
             color: Colors.white,
           ),
           hintText: "Password",
-          suffixIcon: IconButton(
+          suffixIcon: IconButton( // visibility icon ('Show password' feature)
             icon: Icon(isObscure ? Icons.visibility : Icons.visibility_off),
             onPressed: () {
               setState(() {
@@ -114,34 +123,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
             },
           )),
       onChanged: (val) {
-        password = val;
+        password = val; // value entered will be stored in password
       },
     );
   }
 
+  // widget which creates the position field
   Widget positionField() {
-    //String position = 'student';
+    // creates a toggle button which has only two possible values
     return ToggleSwitch(
         minHeight: 50,
         minWidth: 150,
         activeBgColor: [Colors.blueAccent],
         initialLabelIndex: 0,
-        totalSwitches: 2,
+        totalSwitches: 2, // total number of switches
         labels: ['Student', 'Teacher'],
-        onToggle: (index) {
+        onToggle: (index) {// value entered will be stored in position
           if (index == 0){
-            position = 'student';
+            position = 'student'; 
           }
           else{
             position = 'teacher';
           }
-
-          // position = (index == 0) ? "student" : "teacher";
-          // return position;
-          // print('{Position position}');
         });
   }
 
+  // widget which creates the yrGroup field
   Widget yrGroupField() {
     return Row(
       children: [
@@ -163,14 +170,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           onChanged: (String? newValue) {
             setState(() {
-              //print(position);
               dropdownVal = newValue!;
-              print("DPV $dropdownVal");
-              position = newValue;
-
-              print("Position: $position");
+              yrGroup = newValue; // value entered will be stored in yrGroup
             });
           },
+          // items to be displayed in the dropdown list
           items: <String>[
             '',
             '7',
@@ -197,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-            fit: BoxFit.cover,
+            fit: BoxFit.cover, // makes sure that the image takes up all the space in the container
             image: AssetImage('lib/assets/welcome_screen_bg.jpg')),
       ),
       child: Scaffold(
@@ -210,7 +214,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               )
             : Form(
-                key: _formKey,
+                key: _formKey, // used for the
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 25),
                     child: Center(
@@ -218,19 +222,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                          // NAME FIELD
+                          // creating the name field using customContainer
                           customWidgets.customContainer(nameField()),
-                          // EMAIL FIELD
+                          // creating the email field using customContainer
                           SizedBox(height: 20),
                           customWidgets.customContainer(emailField()),
-                          // YEAR GROUP DROPDOWN LIST
+                          // creating the year group dropdown list using customContainer
                           SizedBox(height: 20),
                           customWidgets.customContainer(yrGroupField()),
-                          // POSITION TOGGLE SWITCH
+                          //creating the position toggle switch using customContainer
                           SizedBox(height: 20),
                           customWidgets.customContainer(positionField()),
                           SizedBox(height: 20),
-                          // PASSWORD FIELD
+                          //creating the password field using customContainer
                           customWidgets.customContainer(passwordField()),
                           SizedBox(height: 35),
                           LoginButton(
